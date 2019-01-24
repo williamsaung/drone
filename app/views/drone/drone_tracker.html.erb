@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: 400px;  /* The height is 400 pixels */
+      width: 100%;  /* The width is the width of the web page */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h3>Interactive Tracking System</h3>
+</div>
+
+<hr>
+
+<!--The div element for the map -->
+<div id="map"></div>
+<script>
+    // Initialize and add the map
+    function initMap() {
+
+        var navlogs = JSON.parse(
+            $.ajax({type: "GET", url: "/drone/nav_logs_json?drone=<%= @drone.id %>", async: false}).responseText
+        );
+
+        // var navlogs = request.responseText;
+        console.log(navlogs);
+
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // The location of Uluru
+        var ait = {lat: 14.0785, lng: 100.6140};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 15, center: ait,
+                styles: [
+                    {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                    {
+                        featureType: 'administrative.locality',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'poi',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'poi.park',
+                        elementType: 'geometry',
+                        stylers: [{color: '#263c3f'}]
+                    },
+                    {
+                        featureType: 'poi.park',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#6b9a76'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry',
+                        stylers: [{color: '#38414e'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#212a37'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#9ca5b3'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry',
+                        stylers: [{color: '#746855'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#1f2835'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#f3d19c'}]
+                    },
+                    {
+                        featureType: 'transit',
+                        elementType: 'geometry',
+                        stylers: [{color: '#2f3948'}]
+                    },
+                    {
+                        featureType: 'transit.station',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry',
+                        stylers: [{color: '#17263c'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#515c6d'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.stroke',
+                        stylers: [{color: '#17263c'}]
+                    }
+                ]});
+        // The marker, positioned at Uluru
+        // var marker = new google.maps.Marker({position: ait, map: map});
+
+        var locations = [];
+
+        var i;
+        for (i = 0; i < navlogs.length; i++) {
+            latlong = {lat: navlogs[i].gps_latitude, lng: navlogs[i].gps_longitude};
+
+            locations.push(latlong);
+        }
+
+        // var locations = [
+        //     {lat: 14.081012, lng: 100.612743},
+        //     {lat: 14.079269, lng: 100.609573},
+        //     {lat: 14.076557, lng: 100.613988}
+        // ];
+
+        var markers = locations.map(function(location, q) {
+            var marker = new google.maps.Marker({
+                position: location,
+                label: labels[q % labels.length],
+                map: map
+            });
+            return marker
+        });
+
+        // var markers = locations.map(function(location, q) {
+        //     return new google.maps.Marker({
+        //         position: location,
+        //         label: labels[q % labels.length],
+        //         map: map
+        //     });
+        // });
+    }
+</script>
+<!--Load the API from the specified URL
+* The async attribute allows the browser to render the page while the API loads
+* The key parameter will contain your own API key (which is not needed for this tutorial)
+* The callback parameter executes the initMap() function
+-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3R98Z8sYA3M0xDyps10H0pMIIoSpCZY&callback=initMap">
+</script>
+
+<hr>
+
+<div class="container">
+  <h3>Drone Details</h3>
+</div>
+
+<div class="container">
+  <table class="table">
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><%= @drone.name %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Status</strong></td>
+      <td><%= @drone.status %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Up Time</strong></td>
+      <% if @drone.status == "Offline" %>
+        <td>-</td>
+      <% else %>
+        <td><%= a= @up_time/60
+        a.round(2)
+        %> minutes</td>
+      <% end %>
+
+    </tr>
+  </table>
+</div>
+</body>
+</html>

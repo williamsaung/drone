@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mission.name %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @mission.location %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @mission.weight %>
+</p>
+
+<p>
+  <strong>Drone:</strong>
+  <%= @mission.drone.id %>
+</p>
+
+<%= link_to 'Edit', edit_mission_path(@mission) %> |
+<%= link_to 'Back', missions_path %>

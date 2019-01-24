@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  altitude: 1.5
+  gps_latitude: 1.5
+  gps_longitude: 1.5
+  log_datetime: 2018-12-01 00:46:26
+  drone: one
+
+two:
+  altitude: 1.5
+  gps_latitude: 1.5
+  gps_longitude: 1.5
+  log_datetime: 2018-12-01 00:46:26
+  drone: two

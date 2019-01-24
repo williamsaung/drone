@@ -1,0 +1,66 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<!--<div class="container"><p class="text-success" id="notice"><%#= notice %></p>-->
+<!--</div>-->
+
+<div class="container">
+  <h1>Users Management Interface</h1>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Registration Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at.in_time_zone("Asia/Bangkok") %></td>
+        <% if user.banned %>
+          <td>
+            <p>Banned<span class="glyphicon glyphicon-remove" style="color: red"></span></p>
+          </td>
+          <td><%= link_to 'Unban', drone_ban_user_path(:id => user.id, :banned => false), method: :put %></td>
+        <% else %>
+          <td>
+            <span class="glyphicon glyphicon-ok" style="color: green"></span>
+          </td>
+          <td><%= link_to 'Ban', drone_ban_user_path(:id => user.id, :banned => true), method: :put %></td>
+        <% end %>
+        <!--        <td>-->
+        <%# if user.banned %>
+        <!--            <p>Banned<span class="glyphicon glyphicon-remove" style="color: red"></span></p>-->
+        <%# else %>
+        <!--            <span class="glyphicon glyphicon-ok" style="color: green"></span>-->
+        <%# end %>
+        <!--        </td>-->
+
+        <!--        <td><%#= drone.status %></td>-->
+        <!--        <td><%#= link_to 'Show', drone %></td>-->
+        <!--      <td><%#= link_to 'Edit', edit_drone_path(drone) %></td>-->
+        <!--      <td><%#= link_to 'Destroy', drone, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!--<br>-->
+
+<%#= link_to 'New Drone', new_drone_path %>

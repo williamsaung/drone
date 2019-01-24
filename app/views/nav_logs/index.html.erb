@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Nav Logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Altitude</th>
+      <th>Gps latitude</th>
+      <th>Gps longitude</th>
+      <th>Drone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nav_logs.each do |nav_log| %>
+      <tr>
+        <td><%= nav_log.altitude %></td>
+        <td><%= nav_log.gps_latitude %></td>
+        <td><%= nav_log.gps_longitude %></td>
+        <td><%= nav_log.drone %></td>
+        <td><%= link_to 'Show', nav_log %></td>
+        <td><%= link_to 'Edit', edit_nav_log_path(nav_log) %></td>
+        <td><%= link_to 'Destroy', nav_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nav Log', new_nav_log_path %>

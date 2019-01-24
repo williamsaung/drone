@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<title>Index</title>
+<body>
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Problem Set 5</h1>
+</div>
+
+
+
+</body>
+
+<!--    <h1>Problem Set 1</h1>-->
+
+<hr>
+
+<% if user_signed_in? %>
+  <div class="container">
+    <a href="drone/drone_registration" class="btn btn-primary" role="button">Drone Registration</a>
+  </div>
+
+  <hr>
+
+  <div class="container">
+    <a href="drone/drone_list" class="btn btn-primary" role="button">Drone List</a>
+  </div>
+<% else %>
+  <div class="container">
+    Please sign in to access drone registration
+  </div>
+  <hr>
+<% end %>
+
+

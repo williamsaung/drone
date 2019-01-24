@@ -1,0 +1,37 @@
+<%= form_with(model: nav_log, local: true) do |form| %>
+  <% if nav_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nav_log.errors.count, "error") %> prohibited this nav_log from being saved:</h2>
+
+      <ul>
+      <% nav_log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :altitude %>
+    <%= form.text_field :altitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gps_latitude %>
+    <%= form.text_field :gps_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gps_longitude %>
+    <%= form.text_field :gps_longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :drone_id %>
+    <%= form.text_field :drone_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

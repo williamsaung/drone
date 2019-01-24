@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Altitude:</strong>
+  <%= @nav_log.altitude %>
+</p>
+
+<p>
+  <strong>Gps latitude:</strong>
+  <%= @nav_log.gps_latitude %>
+</p>
+
+<p>
+  <strong>Gps longitude:</strong>
+  <%= @nav_log.gps_longitude %>
+</p>
+
+<p>
+  <strong>Drone:</strong>
+  <%= @nav_log.drone %>
+</p>
+
+<%= link_to 'Edit', edit_nav_log_path(@nav_log) %> |
+<%= link_to 'Back', nav_logs_path %>

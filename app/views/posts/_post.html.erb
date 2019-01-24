@@ -1,0 +1,14 @@
+
+<div class="col-sm-6 col-lg-4">
+
+  <div class="card">
+
+    <div class="card-block">
+
+
+      <h4 class="card-title"><%= link_to post.title, post %></h4>
+      <p class="card-text"> <%= truncate(post.content, length: 10) %>  </p>
+      <%= link_to 'Read', post, class: 'btn btn-read' %>
+    </div>
+  </div>
+</div>

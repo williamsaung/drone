@@ -1,0 +1,52 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<!--<p id="notice"><%#= notice %></p>-->
+
+<div class="container">
+  <h1>Drones</h1>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+<!--  <table class="table">-->
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @drones.each do |drone| %>
+      <tr>
+        <td><%= drone.id %></td>
+        <td><%= drone.name %></td>
+        <td><%= drone.status %>
+        <% if drone.status == 'Offline'  %>
+          <%= link_to 'Go online', drone_status_change_path(:id => drone.id, :status => "Online"), method: :put %>
+          <% else %>
+            <span class="glyphicon glyphicon-ok" style="color: green"></span><%= link_to 'Go offline', drone_status_change_path(:id => drone.id, :status => "Offline"), method: :put %>
+            <%end %>
+        </td>
+        <td><%= link_to 'Tracking', drone_drone_tracker_path(drone: drone.id) %></td>
+        <!--      <td><%#= link_to 'Edit', edit_drone_path(drone) %></td>-->
+        <!--      <td><%#= link_to 'Destroy', drone, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        <td><%= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!--<br>-->
+
+<%#= link_to 'New Drone', new_drone_path %>
