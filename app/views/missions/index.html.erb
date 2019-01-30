@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<div class="container">
 <h1>Missions</h1>
+</div>
 
-<table>
+<div class="container">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -20,14 +23,15 @@
         <td><%= mission.location.name %></td>
         <td><%= mission.weight %></td>
         <td><%= mission.drone.id %></td>
-        <td><%= link_to 'Show', mission %></td>
-        <td><%= link_to 'Edit', edit_mission_path(mission) %></td>
-        <td><%= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<!--        <td><%#= link_to 'Show', mission %></td>-->
+<!--        <td><%#= link_to 'Edit', edit_mission_path(mission) %></td>-->
+<!--        <td><%#= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>
 </table>
 
+  <%= link_to 'Drone List', drone_drone_list_path %>
+</div>
 <br>
 
-<%= link_to 'New Mission', new_mission_path %>
