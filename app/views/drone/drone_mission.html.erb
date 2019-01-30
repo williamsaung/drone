@@ -11,19 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :item_name %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="container">
+
 
   <div class="field">
-    <%= form.label :location %>
-    <%= collection_select( :mission, :location_id, Location.all, :id, :name, {}, { :multiple => false} ) %>
+    <%= form.label :Item_Name, class:'control-label' %>
+    <input type="text" class="form-control" id="mission_name" placeholder="Item name" name="mission[name]">
+    <%#= form.label :item_name %>
+    <%#= form.text_field :name %>
   </div>
 
+
+<hr>
+    <div class="form-group ">
+      <%= form.label :Location, class:'control-label' %>
+      <%= collection_select( :mission, :location_id, Location.all, :id, :name,{include_blank: false}, {class: 'form-control '})%></div>
+
+
+<!--  <div class="field">-->
+    <%#= form.label :location %>
+    <%#= collection_select( :mission, :location_id, Location.all, :id, :name, {}, { :multiple => false}  ) %>
+<!--  </div>-->
+<hr>
   <div class="field">
-    <%= form.label :weight %>
-    <%= form.text_field :weight %>
+    <%= form.label :Item_Weight, class:'control-label' %>
+    <input type="text" class="form-control" id="mission_weight" placeholder="Item weight" name="mission[weight]">
+    <%#= form.label :weight %>
+    <%#= form.text_field :weight %>
   </div>
 
   <%= form.hidden_field :drone_id %>
@@ -32,8 +46,12 @@
   <%#= form.label :drone_id %>
   <%#= form.text_field :drone_id %>
   <!--  </div>-->
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <br>
+    <button type="submit" class="btn btn-default">Submit</button>
+<!--  <div class="actions">-->
+    <%#= form.submit %>
+<!--  </div>-->
 <% end %>
+
+
+</div>
