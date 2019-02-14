@@ -23,6 +23,15 @@ class NavLogsController < ApplicationController
 
   # POST /nav_logs
   # POST /nav_logs.json
+  #
+  def test
+
+  end
+
+  def test_post
+
+  end
+
   def create
     @nav_log = NavLog.new(nav_log_params)
 

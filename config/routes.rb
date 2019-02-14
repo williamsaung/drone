@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   put 'drone/status_change'
 
   get 'drone/nav_logs_json'
-
-
+  get 'nav_logs/test' => 'nav_logs#test'
+  post 'nav_logs/test' => 'nav_logs#test_post'
   post 'drone/drone_create'
   put 'drone/ban_user'
   devise_scope :user do
