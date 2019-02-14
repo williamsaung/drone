@@ -76,6 +76,21 @@ class DroneController < ApplicationController
     end
   end
 
+  def mission_status_change
+
+    @drone = Mission.find(params[:id])
+    @drone.status = params[ :status]
+
+    respond_to do |format|
+      if @drone.update(drone_params)
+        format.html { redirect_to missions_path, notice: 'Drone status has been updated.' }
+        format.json { render :show, status: :ok, location: @drone }
+      else
+        format.html { render :edit }
+        format.json { render json: @drone.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def drone_list
     user = current_user

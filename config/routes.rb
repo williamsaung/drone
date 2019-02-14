@@ -15,12 +15,14 @@ Rails.application.routes.draw do
   get 'drone/drone_tracker'
   get 'drone/drone_mission'
   put 'drone/status_change'
+  put 'drone/mission_status_change'
 
   get 'drone/nav_logs_json'
   get 'nav_logs/test' => 'nav_logs#test'
   post 'nav_logs/test' => 'nav_logs#test_post'
   post 'drone/drone_create'
   put 'drone/ban_user'
+
   devise_scope :user do
     authenticated :user do
       root to: 'drone#drone_list'

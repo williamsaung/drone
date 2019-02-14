@@ -29,6 +29,7 @@ class MissionsController < ApplicationController
   # POST /missions.json
   def create
     @mission = Mission.new(mission_params)
+    @mission.status = "Saved"
 
     respond_to do |format|
       if @mission.save
@@ -39,6 +40,27 @@ class MissionsController < ApplicationController
         format.json { render json: @mission.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def status_change
+    @drone = Drone.find(params[:id])
+    @drone.status = params[:status]
+
+    mis_status = StatusLog.new
+    mis_status.mission = @drone
+    mis_status.status = @drone.status
+    mis_status.save
+
+    respond_to do |format|
+      if @drone.update(drone_params)
+        format.html { redirect_to missions_path, notice: 'Mission status has been updated.' }
+        format.json { render :show, status: :ok, location: @drone}
+      else
+        format.html { render :edit }
+        format.json { render json: @drone.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   # PATCH/PUT /missions/1
@@ -73,6 +95,10 @@ class MissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mission_params
-      params.require(:mission).permit(:name, :location_id, :weight, :drone_id)
+      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id)
     end
+end
+
+def drone_params
+  params.permit(:name, :status)
 end

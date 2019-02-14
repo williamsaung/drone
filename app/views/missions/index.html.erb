@@ -12,6 +12,7 @@
       <th>Location</th>
       <th>Weight</th>
       <th>Drone</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,6 +24,12 @@
         <td><%= mission.location.name %></td>
         <td><%= mission.weight %></td>
         <td><%= mission.drone.id %></td>
+        <td><%= mission.status %></td>
+        <% if mission.status == 'Saved'  %>
+
+        <%end %>
+
+        <td><%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :status => "Busy"), method: :put  %></td>
 <!--        <td><%#= link_to 'Show', mission %></td>-->
 <!--        <td><%#= link_to 'Edit', edit_mission_path(mission) %></td>-->
 <!--        <td><%#= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
