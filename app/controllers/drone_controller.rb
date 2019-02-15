@@ -57,6 +57,7 @@ class DroneController < ApplicationController
 
   def status_change
     @drone = Drone.find(params[:id])
+
     @drone.status = params[:status]
 
     status = StatusLog.new
@@ -78,16 +79,20 @@ class DroneController < ApplicationController
 
   def mission_status_change
 
-    @drone = Mission.find(params[:id])
-    @drone.status = params[ :status]
+    @mission = Mission.find(params[:id])
+    @drone = Drone.find(@mission.drone.id)
+    @drone.status = "Ongoing"
+    @drone.save
+
+    @mission.status = params[ :status]
 
     respond_to do |format|
-      if @drone.update(drone_params)
+      if @mission.update(drone_params)
         format.html { redirect_to missions_path, notice: 'Drone status has been updated.' }
-        format.json { render :show, status: :ok, location: @drone }
+        format.json { render :show, status: :ok, location: @mission }
       else
         format.html { render :edit }
-        format.json { render json: @drone.errors, status: :unprocessable_entity }
+        format.json { render json: @mission.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -32,11 +32,11 @@
         <td><%= drone.id %></td>
         <td><%= drone.name %></td>
         <td><%= drone.status %>
-        <% if drone.status == 'Offline'  %>
-          <%= link_to 'Go online', drone_status_change_path(:id => drone.id, :status => "Online"), method: :put %>
-          <% else %>
-            <span class="glyphicon glyphicon-ok" style="color: green"></span><%= link_to 'Go offline', drone_status_change_path(:id => drone.id, :status => "Offline"), method: :put %>
-            <%end %>
+        <%# if drone.status == 'Offline'  %>
+          <%#= link_to 'Go online', drone_status_change_path(:id => drone.id, :status => "Online"), method: :put %>
+          <%# else %>
+<!--            <span class="glyphicon glyphicon-ok" style="color: green"></span><%#= link_to 'Go offline', drone_status_change_path(:id => drone.id, :status => "Offline"), method: :put %>-->
+            <%#end %>
         </td>
         <td><%= link_to 'Tracking', drone_drone_tracker_path(drone: drone.id) %></td>
         <!--      <td><%#= link_to 'Edit', edit_drone_path(drone) %></td>-->
