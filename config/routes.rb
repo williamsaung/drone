@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   resources :posts
   resources :nav_logs
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :nav_logs
+    end
+  end
+
   get 'index/index'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
