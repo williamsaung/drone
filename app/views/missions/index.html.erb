@@ -25,10 +25,18 @@
         <td><%= mission.weight %></td>
         <td><%= mission.drone.id %></td>
         <td><%= mission.status %></td>
-        <% if mission.status == 'Saved'  %>
-          <td><%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
+        <%# if mission.status == 'Saved'  %>
+<!--          <td><%#= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>-->
 
-        </td>
+<!--        </td>-->
+        <%#end %>
+        <td>
+        <% if mission.drone.status == 'Busy'  %>
+          "Drone is currently on a mission"
+          <% else %>
+         <%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
+
+          </td>
         <%end %>
 
         <td> <% if mission.status == "Ongoing" %>

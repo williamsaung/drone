@@ -86,7 +86,10 @@ class DroneController < ApplicationController
     @drone.status = params[:drone_status]
     @drone.save
 
+
     @mission.status = params[ :mission_status]
+    @mission.save
+
 
 
     respond_to do |format|
