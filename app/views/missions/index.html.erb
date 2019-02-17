@@ -26,10 +26,23 @@
         <td><%= mission.drone.id %></td>
         <td><%= mission.status %></td>
         <% if mission.status == 'Saved'  %>
+          <td><%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
 
+        </td>
         <%end %>
 
-        <td><%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :status => "Busy"), method: :put  %></td>
+        <td> <% if mission.status == "Ongoing" %>
+            <%= link_to "done", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
+          <%end %>
+        </td>
+
+
+<!--        <td><%# if drone.status == 'Available'  %>-->
+            <%#= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id) %>
+          <%# else %>
+<!--            Drone is currently on a mission.-->
+          <%#end %>
+<!--        </td>-->
 <!--        <td><%#= link_to 'Show', mission %></td>-->
 <!--        <td><%#= link_to 'Edit', edit_mission_path(mission) %></td>-->
 <!--        <td><%#= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->

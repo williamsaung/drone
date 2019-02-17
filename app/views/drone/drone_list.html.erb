@@ -41,12 +41,13 @@
         <td><%= link_to 'Tracking', drone_drone_tracker_path(drone: drone.id) %></td>
         <!--      <td><%#= link_to 'Edit', edit_drone_path(drone) %></td>-->
         <!--      <td><%#= link_to 'Destroy', drone, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-        <td><% if drone.status == 'Offline'  %>
-          <%= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id) %>
-          <% else %>
-           Drone is currently on a mission.
-          <%end %>
-            </td>
+<!--        <td><%# if drone.status == 'Available'  %>-->
+          <%#= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id) %>
+          <%# else %>
+<!--           Drone is currently on a mission.-->
+          <%#end %>
+<!--            </td>-->
+<td><%= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id) %></td>
 
       </tr>
     <% end %>

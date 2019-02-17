@@ -60,6 +60,8 @@ class DroneController < ApplicationController
 
     @drone.status = params[:status]
 
+
+
     status = StatusLog.new
     status.drone = @drone
     status.status = @drone.status
@@ -81,10 +83,11 @@ class DroneController < ApplicationController
 
     @mission = Mission.find(params[:id])
     @drone = Drone.find(@mission.drone.id)
-    @drone.status = "Ongoing"
+    @drone.status = params[:drone_status]
     @drone.save
 
-    @mission.status = params[ :status]
+    @mission.status = params[ :mission_status]
+
 
     respond_to do |format|
       if @mission.update(drone_params)
@@ -114,7 +117,7 @@ class DroneController < ApplicationController
   def drone_create
     @drone = Drone.new(drone_params)
     @drone.user = current_user
-    @drone.status = "Offline"
+    @drone.status = "Available"
 
     if @drone.save
       redirect_to drone_drone_list_path, alert: "Drone created successfully."
