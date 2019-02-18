@@ -29,8 +29,18 @@ class NavLogsController < ApplicationController
   end
 
   def test_post
+    @nav_log = NavLog.new
+    @nav_log.gps_latitude = params[:gps_latitude]
+    @nav_log.gps_longitude = params[:gps_longitude]
+    @nav_log.altitude = params[:altitude]
+
+    @nav_log.drone_id = 1
+    @nav_log.save
+
 
   end
+
+
 
   def create
     @nav_log = NavLog.new(nav_log_params)
