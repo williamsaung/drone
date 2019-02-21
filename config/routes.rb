@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'drone/drone_mission'
   put 'drone/status_change'
   put 'drone/mission_status_change'
-
+  get '/drone/nav_logs_json' => 'drone#nav_logs_json'
   post 'drone/drone_create'
   put 'drone/ban_user'
 
