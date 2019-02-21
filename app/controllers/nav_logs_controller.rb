@@ -24,21 +24,6 @@ class NavLogsController < ApplicationController
   # POST /nav_logs
   # POST /nav_logs.json
   #
-  def test
-
-  end
-
-  def test_post
-    @nav_log = NavLog.new
-    @nav_log.gps_latitude = params[:gps_latitude]
-    @nav_log.gps_longitude = params[:gps_longitude]
-    @nav_log.altitude = params[:altitude]
-
-    @nav_log.drone_id = 1
-    @nav_log.save
-
-
-  end
 
 
 
