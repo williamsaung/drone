@@ -4,7 +4,8 @@ class MissionsController < ApplicationController
   # GET /missions
   # GET /missions.json
   def index
-     @missions = Mission.all
+      @missions = Mission.all
+
     # respond_to do |format|
     #   format.html
     #   format.json { render json: @missions}

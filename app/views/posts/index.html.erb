@@ -2,6 +2,8 @@
 <h1>Posts</h1>
 </div>
 
+
+
 <div class="container">
   <table class="table table-striped">
   <thead>
@@ -22,11 +24,11 @@
         <td><%= post.title %></td>
         <td><%= post.content %></td>
         <td><%= post.user.email %></td>
-<!--        <td><%#= post.comment.comment %></td>-->
+
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<!--        <td><%#= link_to 'Comment', new_comment_path(:post => post.id) %></td>-->
+
         <td><a class="btn btn-primary" href="/comments/new" role="button">Submit Answer</a> </td>
       </tr>
     <% end %>

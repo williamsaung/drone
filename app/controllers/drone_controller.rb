@@ -3,6 +3,7 @@ class DroneController < ApplicationController
   before_action :check_ban
 
   def index
+
   end
 
   def nav_logs_json
@@ -140,7 +141,7 @@ class DroneController < ApplicationController
   end
 
   def drone_params
-    params.permit(:name, :status)
+    params.permit(:name, :status, )
   end
 
   def user_params

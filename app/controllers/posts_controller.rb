@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+
      # render json: {status: "SUCCESS", message: 'loaded comments', data:@posts}, status: :ok
   end
 

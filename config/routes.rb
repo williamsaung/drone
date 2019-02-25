@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticated :user do
-      root to: 'drone#drone_list'
+      root to: 'index#index'
     end
 
     unauthenticated do

@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-<title>Index</title>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,35 +5,75 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
+<!--<p id="notice"><%#= notice %></p>-->
+<style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
 <body>
 
-<div class="jumbotron text-center">
-  <h1>Problem Sets Basics</h1>
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="/drone/drone_list"><img src="https://images.wallpaperscraft.com/image/quadrocopter_sunset_sky_flight_drone_114847_2560x1440.jpg" alt="Los Angeles" width="1100" height="500">
+        <div class="carousel-caption">
+          <h3>Drone List</h3>
+          <p>We'd love to view some drones.</p>
+        </div>
+      </a>
+    </div>
+    <div class="carousel-item">
+      <a href="/missions"><img src="https://images.wallpaperscraft.com/image/quadrocopter_sunset_sky_flight_drone_114847_2560x1440.jpg" alt="Chicago" width="1100" height="500">
+        <div class="carousel-caption">
+          <h3>Mission List</h3>
+          <p>Let's create some missions.</p>
+        </div>
+      </a>
+    </div>
+    <div class="carousel-item">
+      <a href="/posts"> <img src="https://images.wallpaperscraft.com/image/quadrocopter_sunset_sky_flight_drone_114847_2560x1440.jpg" alt="New York" width="1100" height="500">
+        <div class="carousel-caption">
+          <h3>Forum</h3>
+          <p>Ask me anything</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
 </div>
-
-
-
-
-
-<!--    <h1>Problem Set 1</h1>-->
-
-
 <hr>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Web App For Drone</h1>
+    <p>Presented by Wai Yan Aung(Drone Team).</p>
+  </div>
+</div>
 
 <div class="container">
-  <a href="drone" class="btn btn-primary" role="button">drone</a>
+  <p>This is the web app for drone, currently you can create mission, register drone and post in the forum. </p>
+  <p>Upcoming features: Test with real drone after calibration.</p>
 </div>
-
-<hr>
-
-
-<div class="jumbotron text-center" style="margin-bottom:0; height: 190px">
-  <h4><strong>Web Application Enginnering Web-16</strong></h4>
-  <hr>
-  <li>Htoo Lwin (st20001129)</li>
-  <li>Wai Yan Aung (st20001131)</li>
-  <li>Han Htoo Zaw (st20001128)</li>
-</div>
-
 </body>
-</html>
+
+
+</div>
+
+<!--<br>-->
+
+<%#= link_to 'New Drone', new_drone_path %>
