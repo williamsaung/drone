@@ -1,7 +1,7 @@
 class DroneController < ApplicationController
   before_action :authenticate_user!, only: [:drone_registration, :drone_list, :drone_create, :users_list, :ban_user]
   before_action :check_ban
-
+  layout false, only: [:drone_list]
   def index
 
   end
@@ -17,6 +17,7 @@ class DroneController < ApplicationController
   end
 
   def drone_tracker
+
     @drone = Drone.find(params[:drone])
 
     online_status_logs = StatusLog.where(status: "Online")
@@ -105,6 +106,7 @@ class DroneController < ApplicationController
   end
 
   def drone_list
+
     user = current_user
     if user.admin
       @drones = Drone.all
