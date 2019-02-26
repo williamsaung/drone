@@ -11,7 +11,7 @@
   }
 
   .ex1 {
-    padding-right: 500px;
+    padding-right: 1000px;
     padding-top: 150px;
   }
 
@@ -24,33 +24,137 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
 <div class="ex1">
+  <body class="bg-gradient-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+      <div class="col-lg-6">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+            <form class="user">
+              <div class="form-group">
+                <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">
+              </div>
+              <% if devise_mapping.rememberable? -%>
+                <div class="custom-control custom-checkbox small">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+                  </div>
+              <% end -%>
 
-  <div class="field" align="middle" class="rounded">
-    <h2>Log in</h2>
-  </div>
-  <div class="field" align="middle">
-
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field" align="middle">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field" align="middle">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+              <div class="submit" align="middle">
+                <%#= f.submit "Log in" %>
+                <%=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
+              </div>
+              <hr>
+              <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions" align="middle">
-    <%= f.submit "Log in" %>
+    </div>
   </div>
+  </body>
+
+
+
+
+<!--  <div class="field" align="middle" class="rounded">-->
+<!--    <h2>Log in</h2>-->
+<!--  </div>-->
+<!--  <div class="field" align="middle">-->
+<!--    <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">-->
+<!--    <%#= f.label :email %><br />-->
+    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!--  </div>-->
+
+<!--  <div class="field" align="middle">-->
+<!--    <%#= f.label :password %><br />-->
+    <%#= f.password_field :password, autocomplete: "current-password" %>
+<!--    <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">-->
+<!--  </div>-->
+
+  <%# if devise_mapping.rememberable? -%>
+<!--    <div class="field" align="middle">-->
+      <%#= f.check_box :remember_me %>
+      <%#= f.label :remember_me %>
+<!--    </div>-->
+  <%# end -%>
+
+<!--  <div class="btn btn-primary btn-user btn-block" name="commit" type="submit" value="log in" align="middle">-->
+<!--  <div class="submit" align="middle">-->
+    <%#= f.submit "Log in" %>
+    <%#=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
+<!--  </div>-->
 <% end %>
 
-<%= render "devise/shared/links" %>
+
 
 </div>
+
+
+
+
+
+
+
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+
+
+<!--<div class="container">-->
+
+<!--          <div class="row">-->
+<!--            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
+<!--            <div class="col-lg-6">-->
+<!--              <div class="p-5">-->
+<!--                <div class="text-center">-->
+<!--                  <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>-->
+<!--                </div>-->
+<!--                <form class="user">-->
+<!--                  <div class="form-group">-->
+<!--                    <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">-->
+<!--                  </div>-->
+<!--                  <div class="form-group">-->
+<!--                    <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">-->
+<!--                  </div>-->
+<!--                  <div class="form-group">-->
+<!--                    <div class="custom-control custom-checkbox small">-->
+<!--                      <input type="checkbox" class="custom-control-input" id="customCheck">-->
+<!--                      <label class="custom-control-label" for="customCheck">Remember Me</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="btn btn-primary btn-user btn-block" name="commit" type="submit" value="Log in" align="middle">-->
+<!--                    Login-->
+<!--                  </div>-->
+<!--                  <hr>-->
+<!--                  <a href="index.html" class="btn btn-google btn-user btn-block">-->
+<!--                    <i class="fab fa-google fa-fw"></i> Login with Google-->
+<!--                  </a>-->
+<!--                  <a href="index.html" class="btn btn-facebook btn-user btn-block">-->
+<!--                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook-->
+<!--                  </a>-->
+<!--                </form>-->
+<!--                <hr>-->
+<!--                <div class="text-center">-->
+<!--                  <a class="small" href="forgot-password.html">Forgot Password?</a>-->
+<!--                </div>-->
+<!--                <div class="text-center">-->
+<!--                  <a class="small" href="register.html">Create an Account!</a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
