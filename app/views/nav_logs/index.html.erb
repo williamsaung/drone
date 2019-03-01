@@ -19,7 +19,7 @@
         <td><%= nav_log.altitude %></td>
         <td><%= nav_log.gps_latitude %></td>
         <td><%= nav_log.gps_longitude %></td>
-        <td><%= nav_log.drone %></td>
+        <td><%= nav_log.drone.id %></td>
         <td><%= link_to 'Show', nav_log %></td>
         <td><%= link_to 'Edit', edit_nav_log_path(nav_log) %></td>
         <td><%= link_to 'Destroy', nav_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
