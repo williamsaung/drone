@@ -180,17 +180,6 @@
       <td><%= @drone.status %></td>
     </tr>
 
-    <tr>
-      <td><strong>Up Time</strong></td>
-      <% if @drone.status == "Offline" %>
-        <td>-</td>
-      <% else %>
-        <td><%= a= @up_time/60
-        a.round(2)
-        %> minutes</td>
-      <% end %>
-
-    </tr>
   </table>
 </div>
 </body>

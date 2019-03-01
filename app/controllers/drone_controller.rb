@@ -20,12 +20,6 @@ class DroneController < ApplicationController
 
     @drone = Drone.find(params[:drone])
 
-    online_status_logs = StatusLog.where(status: "Online")
-    online_status_logs = online_status_logs.order(:created_at)
-
-    @up_time = Time.now - online_status_logs.last.created_at
-
-
     logger.debug(@drone.name)
   end
 
