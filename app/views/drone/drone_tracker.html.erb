@@ -20,6 +20,7 @@
 <!--The div element for the map -->
 <div id="map"></div>
 <script>
+
     // Initialize and add the map
     function initMap() {
 
@@ -144,6 +145,7 @@
             return marker
         });
 
+
         // var markers = locations.map(function(location, q) {
         //     return new google.maps.Marker({
         //         position: location,
@@ -152,6 +154,12 @@
         //     });
         // });
     }
+    
+    setInterval(function(){
+        while (true){
+            initMap().reload();
+        }
+    }, 5000);
 </script>
 <!--Load the API from the specified URL
 * The async attribute allows the browser to render the page while the API loads
@@ -161,6 +169,8 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3R98Z8sYA3M0xDyps10H0pMIIoSpCZY&callback=initMap">
 </script>
+
+
 
 <hr>
 
