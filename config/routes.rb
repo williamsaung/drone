@@ -8,8 +8,15 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :nav_logs
+      resources :users
     end
   end
+
+
+
+  post '/auth/login', to: 'api/v1/authentication#login'
+
+
 
   get 'index/index'
   devise_for :users
