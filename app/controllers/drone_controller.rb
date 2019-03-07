@@ -78,15 +78,15 @@ class DroneController < ApplicationController
   def mission_status_change
 
     @mission = Mission.find(params[:id])
+    gps_latitude = @mission.location.latitude
+    gps_longitude = @mission.location.longitude
+
     @drone = Drone.find(@mission.drone.id)
     @drone.status = params[:drone_status]
     @drone.save
 
-
-    @mission.status = params[ :mission_status]
+    @mission.status = params[:mission_status]
     @mission.save
-
-
 
     respond_to do |format|
       if @mission.update(drone_params)
