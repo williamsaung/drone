@@ -11,10 +11,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
   <script>
       $(document).ready(function() {
           $(".dropdown-toggle").dropdown();
@@ -31,24 +28,32 @@
       <a class="navbar-brand" href="/">DroneTracker</a>
     </div>
     <ul class="nav navbar-nav">
+<div class="container">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Drone
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/drone/drone_list">Drone List</a>
+      <a class="dropdown-item" href="/drone/drone_registration">Register a Drone</a>
+    </div>
+  </div>
+  <a href="/missions" class="btn btn-primary" role="button">Mission List</a>
+      <a href="/" class="btn btn-info" role="button">Home</a>
+      <a href="https://validator.w3.org" class="btn btn-info" role="button">Validate this Site</a>
+      <a href="/posts" class="btn btn-info" role="button">Forum</a>
+      <% if user_signed_in? %>
+      <% if current_user.admin %>
+      <a href="/drone/users_lists" class="btn btn-info" role="button">User Management</a>
+      <% end %>
 
-      <li><%= link_to "Home", root_path %></li>
-      <li> <a href="https://validator.w3.org">Validate this Site</a></li>
-      <li> <a href="/posts">FAQ</a></li>
-
+</div>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <% if current_user.admin %>
-          <li><a href="/drone/users_list">User Management</a></li>
-        <% end %>
+      <div class="container">
+
         <!--        <li><a href="/ps5/drone_list">Drone List</a></li>-->
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Drones<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/drone/drone_list">Drones List</a></li>
-            <li><a href="/drone/drone_registration">Register a drone</a></li>
-          </ul>
-        </li>
+
         <li><p class="navbar-text">Signed in as <%= current_user.email %></p></li>
         <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
       <% else %>
@@ -56,6 +61,7 @@
         <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       <% end %>
     </ul>
+  </div>
   </div>
 </nav>
 
