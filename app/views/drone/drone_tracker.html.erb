@@ -135,6 +135,8 @@
             locations.push(latlong);
         }
 
+        var last_element = locations[locations.length - 1];
+
         // var locations = [
         //     {lat: 14.081012, lng: 100.612743},
         //     {lat: 14.079269, lng: 100.609573},
@@ -143,8 +145,8 @@
 
         var markers = locations.map(function(location, q) {
             var marker = new google.maps.Marker({
-                position: location,
-                label: labels[q % labels.length],
+                position: last_element,
+                // label: labels[q % last_element.length],
                 map: map
             });
             return marker

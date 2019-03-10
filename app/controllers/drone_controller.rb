@@ -9,6 +9,7 @@ class DroneController < ApplicationController
   def nav_logs_json
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone).order(:created_at)
+
     render :json => @nav_logs
   end
 
