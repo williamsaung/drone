@@ -20,6 +20,9 @@ class DroneController < ApplicationController
   def drone_tracker
 
     @drone = Drone.find(params[:drone])
+    @nav_logs = NavLog.where(drone:@drone)
+    @gps_latitude= @nav_logs.last.gps_latitude
+    @gps_longitude= @nav_logs.last.gps_longitude
 
     logger.debug(@drone.name)
   end
