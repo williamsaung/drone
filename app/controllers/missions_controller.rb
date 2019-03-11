@@ -26,6 +26,14 @@ class MissionsController < ApplicationController
   def edit
   end
 
+  def search
+    if params[:search].blank?
+      @missions = Mission.all
+    else
+      @missions = Mission.search(params)
+    end
+  end
+
   # POST /missions
   # POST /missions.json
   def create

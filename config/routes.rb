@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  resources :missions
+  resources :missions do
+    collection do
+      get :search
+    end
+  end
   resources :locations
   resources :comments
   resources :posts
   resources :nav_logs
+
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do

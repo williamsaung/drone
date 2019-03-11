@@ -57,24 +57,27 @@
 
         </div>
         </ul>
-  </div>
+        </div>
 </nav>
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-<h1>Missions</h1>
+  <h1>Missions</h1>
 </div>
+
+
+
 
 <div class="container">
   <div class="form-incline mt-2 mt-md-0">
-  <%= form_tag search_missions_path, method: :get do %>
-    <%= text_field_tag :search, nil, placeholder: "Search by Mission Name", class: "form-control mr-sm-2" %>
+    <%= form_tag search_missions_path, method: :get do %>
+      <%= text_field_tag :search, nil, placeholder: "search", class: "form-control mr-sm-2" %>
       <br>
-    <%= submit_tag "Search", class: "btn btn-light my-2 my-sm-0" %>
+      <%= submit_tag "Search", class: "btn btn-light my-2 my-sm-0" %>
     <% end %>
   </div>
-<table class="table table-striped">
-  <thead>
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th>Name</th>
       <th>Location</th>
@@ -83,9 +86,9 @@
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @missions.each do |mission| %>
       <tr>
         <td><%= mission.name %></td>
@@ -94,30 +97,30 @@
         <td><%= mission.drone.id %></td>
         <td><%= mission.status %></td>
         <%# if mission.status == 'Saved'  %>
-<!--          <td><%#= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>-->
+        <!--          <td><%#= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>-->
 
-<!--        </td>-->
+        <!--        </td>-->
         <%#end %>
         <td>
-        <% if mission.drone.status == 'Busy'  %>
-          "Drone is currently on a mission"
+          <% if mission.drone.status == 'Busy'  %>
+            "Drone is currently on a mission"
           <% else %>
-         <%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
+            <%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
 
-          </td>
-        <%end %>
-
-        <td> <% if mission.status == "Ongoing" %>
-            <%= link_to "done", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
+            </td>
           <%end %>
-        </td>
+
+          <td> <% if mission.status == "Ongoing" %>
+              <%= link_to "done", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
+            <%end %>
+          </td>
 
 
 
-      </tr>
+          </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
   <%= link_to 'Drone List', drone_drone_list_path %>
 </div>
