@@ -1,0 +1,87 @@
+
+
+<style>
+  body  {
+    width: auto;
+    height: auto;
+    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/hMGJ0I-/professional-modern-rc-uav-drone-quadcopter-with-camera-flying-on-a-clear-sunny-sky-sunset-background-with-nice-lens-flare_ejlpsk-mx__F0000.png");
+    background-color: #adddee;
+  }
+
+  .login-holder{
+    padding-top: 5%;
+  }
+
+  .login-screen {
+    width: 30%;
+    padding-top: 1%;
+    background:rgba(97, 153, 232,0.5);
+    border: 1px solid black;
+    border-radius: 15px;
+    padding-bottom: 1%;
+  }
+
+</style>
+
+
+<body class="bg-gradient-primary">
+
+<div>
+
+</div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  <div class="row login-holder">
+    <div class="container login-screen">
+      <div class="row">
+        <div class="container text-center">
+          <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+          <form class="user">
+            <div class="form-group">
+              <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">
+            </div>
+            <% if devise_mapping.rememberable? -%>
+              <div class="custom-control custom-checkbox small">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end -%>
+
+            <div class="submit" align="middle">
+              <%#= f.submit "Log in" %>
+              <%=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
+            </div>
+            <hr>
+            <%= render "devise/shared/links" %>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+</body>
+
+
+
+
+
+
+
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+
+
+

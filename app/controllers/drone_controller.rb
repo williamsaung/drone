@@ -1,7 +1,7 @@
 class DroneController < ApplicationController
   before_action :authenticate_user!, only: [:drone_registration, :drone_list, :drone_create, :users_list, :ban_user]
   before_action :check_ban
-  layout false, only: [:drone_list]
+
   def index
 
   end

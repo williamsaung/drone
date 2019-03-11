@@ -1,203 +1,147 @@
 
-<!--<div class="field" align="middle" class="rounded">-->
-<!--<h2>Log in</h2>-->
-<!--</div>-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
 
 <style>
-  body  {
-    width: auto;
+  :root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: 0.75rem;
+  }
+
+  .login,
+  .image {
+    min-height: 100vh;
+  }
+
+  .bg-image {
+    background-image: url('https://www.fonewalls.com/wp-content/uploads/1440x2880-Background-HD-Wallpaper-062-600x1200.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .login-heading {
+    font-weight: 300;
+  }
+
+  .btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+  }
+
+  .form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .form-label-group>input,
+  .form-label-group>label {
+    padding: var(--input-padding-y) var(--input-padding-x);
     height: auto;
-    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/hMGJ0I-/professional-modern-rc-uav-drone-quadcopter-with-camera-flying-on-a-clear-sunny-sky-sunset-background-with-nice-lens-flare_ejlpsk-mx__F0000.png");
-    background-color: #adddee;
+    border-radius: 2rem;
   }
 
-  .login-holder{
-    padding-top: 5%;
+  .form-label-group>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    cursor: text;
+    /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
   }
 
-  .login-screen {
-    width: 30%;
-    padding-top: 1%;
-    background:rgba(97, 153, 232,0.5);
-    border: 1px solid black;
-    border-radius: 15px;
-    padding-bottom: 1%;
+  .form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+  .form-label-group input:-ms-input-placeholder {
+    color: transparent;
+  }
+
+  .form-label-group input::-ms-input-placeholder {
+    color: transparent;
+  }
+
+  .form-label-group input::-moz-placeholder {
+    color: transparent;
+  }
+
+  .form-label-group input::placeholder {
+    color: transparent;
+  }
+
+  .form-label-group input:not(:placeholder-shown) {
+    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+    padding-bottom: calc(var(--input-padding-y) / 3);
+  }
+
+  .form-label-group input:not(:placeholder-shown)~label {
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    font-size: 12px;
+    color: #777;
   }
 
 </style>
 
-
-<body class="bg-gradient-primary">
-
-<div>
-
-</div>
+<body>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-  <div class="row login-holder">
-      <div class="container login-screen">
-        <div class="row">
-          <div class="container text-center">
-            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-            <form class="user">
-              <div class="form-group">
-                <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">
-              </div>
-              <% if devise_mapping.rememberable? -%>
-                <div class="custom-control custom-checkbox small">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">Welcome back!</h3>
+              <form>
+                <div class="form-label-group">
+                  <input type="email" id="user_email" name="user[email]" class="form-control" placeholder="Email address" required autofocus>
+                  <label for="inputEmail">Email address</label>
                 </div>
-              <% end -%>
 
-              <div class="submit" align="middle">
-                <%#= f.submit "Log in" %>
-                <%=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
-              </div>
-              <hr>
-              <%= render "devise/shared/links" %>
-            </form>
+                <div class="form-label-group">
+                  <input type="password" id="user_password" name="user[password]" class="form-control" placeholder="Password" required>
+                  <label for="inputPassword">Password</label>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Remember password</label>
+                </div>
+<!--                <div class="submit">-->
+<!--                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" name="commit" type="submit">Sign in</button>-->
+<!--                </div>-->
+                <div class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" align="middle">
+                  <%#= f.submit "Log in" %>
+                  <%=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
+                </div>
+                <div class="text-center">
+                  <a class="small" href="/users/password/new">Forgot password?</a></div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
+</div>
 
-
-
-
-  <!--<div class="ex1">-->
-<!--  <body class="bg-gradient-primary">-->
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-<!--      <div class="col d-none d-lg-block bg-login-image"></div>-->
-<!--        <div class="col d-none d-lg-block bg-login-image">-->
-<!--          <div class="text-center">-->
-<!--            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>-->
-<!--            <form class="user">-->
-<!--              <div class="form-group">-->
-<!--                <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">-->
-<!--              </div>-->
-              <%# if devise_mapping.rememberable? -%>
-<!--                <div class="custom-control custom-checkbox small">-->
-              <%#= f.check_box :remember_me %>
-              <%#= f.label :remember_me %>
-<!--                  </div>-->
-              <%# end -%>
-
-<!--              <div class="submit" align="middle">-->
-                <%#= f.submit "Log in" %>
-                <%#=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
-<!--              </div>-->
-<!--              <hr>-->
-              <%#= render "devise/shared/links" %>
-<!--            </form>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    </div>-->
-<!--  </body>-->
-<!--  </div>-->
-
-
-
-
-
-<!--  <div class="field" align="middle" class="rounded">-->
-<!--    <h2>Log in</h2>-->
-<!--  </div>-->
-<!--  <div class="field" align="middle">-->
-<!--    <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">-->
-<!--    <%#= f.label :email %><br />-->
-    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
-<!--  </div>-->
-
-<!--  <div class="field" align="middle">-->
-<!--    <%#= f.label :password %><br />-->
-    <%#= f.password_field :password, autocomplete: "current-password" %>
-<!--    <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">-->
-<!--  </div>-->
-
-  <%# if devise_mapping.rememberable? -%>
-<!--    <div class="field" align="middle">-->
-      <%#= f.check_box :remember_me %>
-      <%#= f.label :remember_me %>
-<!--    </div>-->
-  <%# end -%>
-
-<!--  <div class="btn btn-primary btn-user btn-block" name="commit" type="submit" value="log in" align="middle">-->
-<!--  <div class="submit" align="middle">-->
-    <%#= f.submit "Log in" %>
-    <%#=f.submit :Submit, class: 'btn btn-primary btn-user btn-block' %>
-<!--  </div>-->
-<% end %>
-
+<%end %>
 </body>
-
-
-
-
-
-
-
-
-<!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-</head>
-
-
-
-<!--<div class="container">-->
-
-<!--          <div class="row">-->
-<!--            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
-<!--            <div class="col-lg-6">-->
-<!--              <div class="p-5">-->
-<!--                <div class="text-center">-->
-<!--                  <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>-->
-<!--                </div>-->
-<!--                <form class="user">-->
-<!--                  <div class="form-group">-->
-<!--                    <input type="email" class="form-control form-control-user" id="user_email" aria-describedby="emailHelp" name="user[email]" placeholder="Enter Email Address...">-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <input type="password" class="form-control form-control-user" id="user_password" name="user[password]" placeholder="Password">-->
-<!--                  </div>-->
-<!--                  <div class="form-group">-->
-<!--                    <div class="custom-control custom-checkbox small">-->
-<!--                      <input type="checkbox" class="custom-control-input" id="customCheck">-->
-<!--                      <label class="custom-control-label" for="customCheck">Remember Me</label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="btn btn-primary btn-user btn-block" name="commit" type="submit" value="Log in" align="middle">-->
-<!--                    Login-->
-<!--                  </div>-->
-<!--                  <hr>-->
-<!--                  <a href="index.html" class="btn btn-google btn-user btn-block">-->
-<!--                    <i class="fab fa-google fa-fw"></i> Login with Google-->
-<!--                  </a>-->
-<!--                  <a href="index.html" class="btn btn-facebook btn-user btn-block">-->
-<!--                    <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook-->
-<!--                  </a>-->
-<!--                </form>-->
-<!--                <hr>-->
-<!--                <div class="text-center">-->
-<!--                  <a class="small" href="forgot-password.html">Forgot Password?</a>-->
-<!--                </div>-->
-<!--                <div class="text-center">-->
-<!--                  <a class="small" href="register.html">Create an Account!</a>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
