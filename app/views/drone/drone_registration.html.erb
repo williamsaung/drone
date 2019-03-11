@@ -12,44 +12,135 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
+<style>
+  form_main {
+    width: 100%;
+  }
+  .form_main h4 {
+    font-family: roboto;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+  .heading {
+    border-bottom: 1px solid #fcab0e;
+    padding-bottom: 9px;
+    position: relative;
+  }
+  .heading span {
+    background: #9e6600 none repeat scroll 0 0;
+    bottom: -2px;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 75px;
+  }
+  .form {
+    border-radius: 7px;
+    padding: 6px;
+  }
+  .txt[type="text"] {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+  }
+  .txt_3[type="text"] {
+    margin: 10px 0 0;
+    padding: 10px 0 10px 5px;
+    width: 100%;
+  }
+  .txt2[type="submit"] {
+    background: #242424 none repeat scroll 0 0;
+    border: 1px solid #4f5c04;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 35px;
+    margin: 10px 0;
+    padding: 0;
+    text-transform: uppercase;
+    width: 30%;
+  }
+  .txt2:hover {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #5793ef;
+    transition: all 0.5s ease 0s;
+  }
+</style>
+
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">DroneTracker</a>
+    </div>
+    <ul class="nav navbar-nav ">
+      <div class="container">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Drone
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/drone/drone_list">Drone List</a>
+            <a class="dropdown-item" href="/drone/drone_registration">Register a Drone</a>
+          </div>
+        </div>
+        <a href="/missions" class="btn btn-primary" role="button">Mission List</a>
+        <a href="/" class="btn btn-info" role="button">Home</a>
+        <a href="https://validator.w3.org" class="btn btn-info" role="button">Validate this Site</a>
+        <a href="/posts" class="btn btn-info" role="button">Forum</a>
+        <% if user_signed_in? %>
+          <% if current_user.admin %>
+            <a href="/drone/users_lists" class="btn btn-info" role="button">User Management</a>
+          <% end %>
 
-<div class="jumbotron text-center">
-  <h1>Drone Registration</h1>
-</div>
+          </div>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <div class="container">
 
 
 
+              <li><p class="navbar-text">Signed in as <%= current_user.email %></p></li>
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <% end %>
+
+        </div>
+        </ul>
+        </div>
+</nav>
 </body>
 
-<!--    <h1>Problem Set 1</h1>-->
-<%= form_tag("/drone/drone_create", method: "post", class: 'registration_form') do %>
-  <div class="container">
-    <%= label_tag(:name, "Name:") %>
-    <%= text_field_tag(:name) %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form_main">
+        <h4 class="heading"><strong>Quick </strong> Contact <span></span></h4>
+        <div class="form">
+          <%= form_tag("/drone/drone_create", method: "post", class: 'registration_form') do  %>
+          <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+            <input type="text" id="name" required="" placeholder="Please input Drone's Name" value="" name="name" class="txt">
+            <input type="text" id="description" required="" placeholder="Please input Drone's Description" value="" name="description" class="txt">
+            <input type="text" id="connection_string" required="" placeholder="Please input Connection String" value="" name="connection_string" class="txt">
+            <small id="emailHelp" class="form-text text-muted">Explanation for connection string.</small>
+            <hr>
+            <input type="submit" value="Register" name="commit" class="txt2">
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+<%end %>
 
-  <br>
-
-  <div class="container">
-    <%= label_tag(:description, "Description:") %>
-    <%= text_field_tag(:description) %>
-  </div>
-
-  <br>
-
-  <div class="container">
-    <%= label_tag(:connection_string, "Connection String:") %>
-    <%= text_field_tag(:connection_string) %>
-    <small id="emailHelp" class="form-text text-muted">Explanation for connection string.</small>
-  </div>
-
-  <hr>
-
-  <div class="container">
-    <%= submit_tag("Register") %>
-  </div>
-<% end %>
 
 
 </body>

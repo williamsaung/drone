@@ -141,7 +141,7 @@ class DroneController < ApplicationController
   end
 
   def drone_params
-    params.permit(:name, :status, )
+    params.permit(:name, :status, :description, :connection_string )
   end
 
   def user_params

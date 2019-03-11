@@ -1,9 +1,27 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+
+<!--<style>-->
+<!--  body {-->
+<!--    background: #BFFFFE;-->
+<!--    background: linear-gradient(to right, #BFFFFE, #BFFFFE);-->
+<!--  }-->
+<!--</style>-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">DroneTracker</a>
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav ">
       <div class="container">
         <div class="btn-group">
           <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,8 +54,9 @@
           <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <% end %>
-        </ul>
+
         </div>
+        </ul>
   </div>
 </nav>
 <p id="notice"><%= notice %></p>
@@ -90,15 +109,7 @@
         </td>
 
 
-<!--        <td><%# if drone.status == 'Available'  %>-->
-            <%#= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id) %>
-          <%# else %>
-<!--            Drone is currently on a mission.-->
-          <%#end %>
-<!--        </td>-->
-<!--        <td><%#= link_to 'Show', mission %></td>-->
-<!--        <td><%#= link_to 'Edit', edit_mission_path(mission) %></td>-->
-<!--        <td><%#= link_to 'Destroy', mission, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+
       </tr>
     <% end %>
   </tbody>
