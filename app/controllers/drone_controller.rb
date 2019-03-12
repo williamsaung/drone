@@ -104,10 +104,9 @@ class DroneController < ApplicationController
     # @drones = Drone.order("created_at")
     user = current_user
     if user.admin
-      a = Drone.all
-      @drones = a.order("created_at")
+      @drones = Drone.all
     else
-      @drones = a.where(:user => user)
+      @drones = Drone.where(:user => user)
     end
 
   end
