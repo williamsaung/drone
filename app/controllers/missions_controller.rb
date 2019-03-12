@@ -4,7 +4,7 @@ class MissionsController < ApplicationController
   # GET /missions
   # GET /missions.json
   def index
-      @missions = Mission.all
+      @missions = Mission.order("drone_id")
 
     # respond_to do |format|
     #   format.html
