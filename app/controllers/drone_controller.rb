@@ -101,13 +101,14 @@ class DroneController < ApplicationController
   end
 
   def drone_list
-    # @drones = Drone.order("created_at")
-    user = current_user
-    if user.admin
-      @drones = Drone.all
-    else
-      @drones = Drone.where(:user => user)
-    end
+     @drones = Drone.order("created_at")
+    # user = current_user
+    # if user.admin
+
+      # @drones = Drone.all
+    # else
+    #   @drones = Drone.where(:user => user)
+    # end
 
   end
 
