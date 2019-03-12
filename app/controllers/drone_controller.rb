@@ -1,10 +1,12 @@
 class DroneController < ApplicationController
-  before_action :authenticate_user!, only: [:drone_registration, :drone_list, :drone_create, :users_list, :ban_user]
+  before_action :authenticate_user!, only: [:index ,:drone_registration, :drone_list, :drone_create, :users_list, :ban_user]
   before_action :check_ban
 
   def index
 
   end
+
+
 
   def nav_logs_json
     @drone = Drone.find(params[:drone])
@@ -49,11 +51,6 @@ class DroneController < ApplicationController
       end
     end
   end
-
-  # def new
-  #   @drone = Drone.find(params[:id])
-  #   # @mission = Mission.new(drone: params[:drone_id])
-  # end
 
   def status_change
     @drone = Drone.find(params[:id])
@@ -104,12 +101,13 @@ class DroneController < ApplicationController
   end
 
   def drone_list
-
+    # @drones = Drone.order("created_at")
     user = current_user
     if user.admin
-      @drones = Drone.all
+      a = Drone.all
+      @drones = a.order("created_at")
     else
-      @drones = Drone.where(:user => user)
+      @drones = a.where(:user => user)
     end
 
   end
