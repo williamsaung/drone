@@ -59,7 +59,7 @@
 
         </div>
         </ul>
-  </div>
+        </div>
 </nav>
 
 <div id="demo" class="carousel slide" data-ride="carousel">
@@ -103,118 +103,18 @@
 </div>
 <hr>
 
-<div class="container">
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <strong class="card-title">Drone Overview</strong>
-        <hr>
-        <p class="card-text">Total Drones: <%= @drone_count%></p>
-        <p class="card-text">Last Created Drone Name: <%= @last_drone%></p>
-        <p class="card-text">Status: <%= @last_status%></p>
-        <p class="card-text">Last known Location: Latitude :<%= @last_latitude%> & Longitude: <%= @last_longitude %></p>
-        <%= link_to 'Track this drone', drone_drone_tracker_path(drone: Drone.last), class: "btn btn-primary" %>
-
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <strong class="card-title">Mission Overview</strong>
-        <hr>
-        <p class="card-text">Total Missions: <%= @mission_count%></p>
-        <p class="card-text">Last Created Mission Name: <%= @last_mission%></p>
-        <p class="card-text">Last Created Mission Destined Location: <%= @last_location%></p>
-        <a href="/missions" class="btn btn-primary">Show all mission</a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- Footer -->
-<!-- Footer -->
-<footer class="page-footer font-small indigo">
-
-  <!-- Footer Links -->
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
-
-    <!-- Grid row-->
-    <div class="row text-center d-flex justify-content-center pt-5 mb-3">
-
-      <!-- Grid column -->
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a href="/index/about">About</a>
-        </h6>
-      </div>
-      <!-- Grid column -->
-
-
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a href="#!">Help</a>
-        </h6>
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 mb-3">
-        <h6 class="text-uppercase font-weight-bold">
-          <a href="https://www.facebook.com/waiyan.aung.1884">Contact</a>
-        </h6>
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row-->
-    <hr class="rgba-white-light" style="margin: 0 15%;">
-
-    <!-- Grid row-->
-    <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
-
-      <!-- Grid column -->
-      <div class="col-md-8 col-12 mt-5">
-        <p style="line-height: 1.7rem">This is the final capstone project for Wai Yan Aung@DroneTeam.</p>
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row-->
-    <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
-
-    <!-- Grid row-->
-    <div class="row pb-3">
-
-      <!-- Grid column -->
-
-
-
-        </div>
-
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row-->
-
+    <h1>Web App For Drone</h1>
+    <p>Presented by Wai Yan Aung(Drone Team).</p>
   </div>
-  <!-- Footer Links -->
+</div>
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2019 Copyright:
-    <a href="https://teamdronex.com"> teamdronex.com</a> (last_updated:3/12)
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-<!-- Footer -->
+<div class="container">
+  <p>This is the web app for drone delivery, currently you can create mission, register drone and post in the forum. </p>
+  <p>Goal: Delivering mail with drone from one place to another using this web app.</p>
+  <p>Upcoming features: Test with real drone after calibration.</p>
+</div>
 </body>
 
 
