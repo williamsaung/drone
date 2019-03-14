@@ -114,6 +114,10 @@ class DroneController < ApplicationController
 
   end
 
+  def drone_edit
+    @drone = Drone.find(params[:id])
+  end
+
   def drone_registration
     @drone = Drone.new
   end

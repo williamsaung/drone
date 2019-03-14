@@ -1,0 +1,35 @@
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<h1>Editing Drone Settings</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form_main">
+        <h4 class="heading"><strong>Quick </strong> Contact <span></span></h4>
+        <div class="form">
+          <%= form_tag("/drone/drone_create", method: "post", class: 'registration_form') do  %>
+            <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+              <input type="text" id="name" required="" placeholder="Please input Drone's Name" value="" name="name" class="txt">
+              <input type="text" id="description" required="" placeholder="Please input Drone's Description" value="" name="description" class="txt">
+              <input type="text" id="connection_string" required="" placeholder="Please input Connection String" value="" name="connection_string" class="txt">
+              <small id="emailHelp" class="form-text text-muted">Explanation for connection string.</small>
+              <hr>
+              <input type="submit" value="Register" name="commit" class="txt2">
+            </form>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+          <%end %>
+
+<%= link_to 'Drone List', drone_drone_list_path %>

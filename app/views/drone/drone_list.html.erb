@@ -82,6 +82,7 @@
           <p>Drone ID:<%= drone.id %></p>
           <p>Connection String:<%= drone.connection_string %></p>
           <p>Description:<%= drone.description %></p>
+          <p><%= link_to 'Settings', drone_drone_edit_path(drone) %></p>
         </div>
         <ul class="list-group list-group-flush">
         </ul>
