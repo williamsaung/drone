@@ -126,6 +126,7 @@ class DroneController < ApplicationController
     @drone = Drone.new(drone_params)
     @drone.user = current_user
     @drone.status = "Available"
+    @drone.simulator = false
 
     if @drone.save
       redirect_to drone_drone_list_path, alert: "Drone created successfully."
