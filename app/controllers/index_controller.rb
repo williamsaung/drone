@@ -5,8 +5,13 @@ class IndexController < ApplicationController
     @last_drone = last_drone.name
     @last_status = last_drone.status
     @nav_logs = NavLog.where(drone:last_drone)
-    @last_latitude= @nav_logs.last.gps_latitude
-    @last_longitude= @nav_logs.last.gps_longitude
+    if @nav_logs.blank?
+      @last_latitude
+      @last_longitude
+    else
+      @last_latitude= @nav_logs.last.gps_latitude
+      @last_longitude= @nav_logs.last.gps_longitude
+    end
 
 
     @mission_count = Mission.count

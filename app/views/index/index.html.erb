@@ -115,7 +115,7 @@
         <p class="card-text">Total Drones: <%= @drone_count%></p>
         <p class="card-text">Last Created Drone Name: <%= @last_drone%></p>
         <p class="card-text">Status: <%= @last_status%></p>
-        <p class="card-text">Last known Location: Latitude :<%= @last_latitude%> & Longitude: <%= @last_longitude %></p>
+        <p class="card-text">Last known Location: Latitude :<%= @last_latitude.blank? ? "Not Available" : @last_latitude %> & Longitude: <%= @last_longitude.blank? ? "Not Available" : @last_longitude  %></p>
         <%= link_to 'Track this drone', drone_drone_tracker_path(drone: Drone.last), class: "btn btn-primary" %>
 
       </div>
@@ -210,7 +210,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2019 Copyright:
-    <a href="https://teamdronex.com"> teamdronex.com</a> (last_updated:3/12)
+    <a href="https://teamdronex.com"> teamdronex.com</a> (last_updated:3/15)
   </div>
   <!-- Copyright -->
 

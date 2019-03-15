@@ -257,7 +257,7 @@
 
     <tr>
       <td><strong>Last Location</strong></td>
-      <td><strong>LATITUDE: </strong> <%= @gps_latitude%> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude%> </td>
+      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> </td>
     </tr>
 
   </table>
