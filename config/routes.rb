@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get '/drone/nav_logs_json' => 'drone#nav_logs_json'
   post 'drone/drone_create'
   put 'drone/ban_user'
+  get 'drone/:id/drone_edit' => 'drone#drone_edit', :as => :drone_drone_edit
 
   devise_scope :user do
     authenticated :user do
