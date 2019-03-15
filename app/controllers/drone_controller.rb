@@ -66,9 +66,6 @@ class DroneController < ApplicationController
     @drone = Drone.find(params[:id])
 
     @drone.status = params[:status]
-
-
-
     status = StatusLog.new
     status.drone = @drone
     status.status = @drone.status
