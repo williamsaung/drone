@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :nav_logs
       resources :users
       resources :drone
+      put 'drone/mission_status_change', to: '/api/v1/drone#mission_status_change'
       resources :missions
     end
   end
