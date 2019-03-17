@@ -8,6 +8,18 @@ module Api
       def index
         respond_with Mission.all
       end
+
+      def update
+        respond_to do |format|
+          if @mission.update(mission_params)
+            format.html { redirect_to @mission, notice: 'Mission was successfully updated.' }
+            format.json { render :show, status: :ok, location: @mission }
+          else
+            format.html { render :edit }
+            format.json { render json: @mission.errors, status: :unprocessable_entity }
+          end
+        end
+      end
     end
   end
 end
