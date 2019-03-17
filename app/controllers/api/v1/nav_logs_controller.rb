@@ -8,6 +8,10 @@ module Api
         respond_with NavLog.all
       end
 
+      def last_navlog
+        respond_with NavLog.last
+      end
+
       def create
         # respond_with NavLog.create(params[:nav_log])
 
