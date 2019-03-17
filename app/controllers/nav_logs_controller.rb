@@ -1,6 +1,6 @@
 class NavLogsController < ApplicationController
   before_action :set_nav_log, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, only: [:index]
   # GET /nav_logs
   # GET /nav_logs.json
   def index
