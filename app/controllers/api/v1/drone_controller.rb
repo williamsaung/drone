@@ -21,7 +21,6 @@ module Api
         @mission.status = params[:mission_status]
          @mission.save
 
-      end
 
       def update
         respond_to do |format|
@@ -33,16 +32,17 @@ module Api
             format.json { render json: @mission.errors, status: :unprocessable_entity }
           end
         end
-          respond_to do |format|
-            if @drone.update(mission_params)
-              format.html { redirect_to @drone, notice: 'Mission was successfully updated.' }
-              format.json { render :show, status: :ok, location: @drone }
-            else
-              format.html { render :edit }
-              format.json { render json: @drone.errors, status: :unprocessable_entity }
-            end
+        respond_to do |format|
+          if @drone.update(mission_params)
+            format.html { redirect_to @drone, notice: 'Mission was successfully updated.' }
+            format.json { render :show, status: :ok, location: @drone }
+          else
+            format.html { render :edit }
+            format.json { render json: @drone.errors, status: :unprocessable_entity }
           end
-  end
+        end
+      end
+      end
+      end
     end
-  end
   end
