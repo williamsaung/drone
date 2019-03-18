@@ -1,7 +1,8 @@
 module Api
   module V1
     class MissionsController < ApplicationController
-      before_action :authorize_request, except: :create
+      # TODO
+      before_action :authorize_request, except: [:create, :update]
       before_action :find_user, except: %i[create index]
       protect_from_forgery with: :null_session
       respond_to :json
