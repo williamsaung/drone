@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/drone" => 'drone#index'
   get 'drone/drone_registration'
-  get 'drone/drone_list'
+  get 'drone/drone_list' => "drone#drone_list"
   get 'drone/users_list'
   get 'drone/drone_tracker'
   get 'drone/drone_mission'
@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   post 'drone/drone_create'
   put 'drone/ban_user'
   get 'drone/:id/drone_edit' => 'drone#drone_edit', :as => :drone_drone_edit
+
+  patch 'drone/:id/drone_edit' => 'drone#drone_update'
+  put 'drone/:id'=> 'drone#drone_update'
 
   devise_scope :user do
     authenticated :user do

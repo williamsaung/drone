@@ -1,10 +1,16 @@
 class DroneController < ApplicationController
-  before_action :authenticate_user!, only: [:index ,:drone_registration, :drone_list, :drone_create, :users_list, :ban_user]
+  before_action :authenticate_user!, only: [:index ,:drone_registration, :drone_list, :drone_create, :users_list, :ban_user, :drone_edit, :drone_update]
   before_action :check_ban
 
   def index
 
   end
+
+
+def update
+
+end
+
 
 
 
@@ -131,7 +137,22 @@ class DroneController < ApplicationController
 
   def drone_edit
     @drone = Drone.find(params[:id])
+    # @droneupdate= @drone.update(drone_params)
   end
+
+  def drone_update
+    @drone = Drone.find(params[:id])
+    respond_to do |format|
+      if @drone.update(drone_params)
+        format.html { redirect_to drone_drone_list_path, notice: 'Drone was successfully updated.' }
+        format.json { render :show, status: :ok, location: @drone }
+      else
+        format.html { render :edit }
+        format.json { render json: @drone.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   def drone_registration
     @drone = Drone.new
@@ -153,6 +174,8 @@ class DroneController < ApplicationController
 
 
   private
+
+
   def check_ban
     if current_user.banned
       flash[:error] = "Oh no! You've been banned. Please contact an admin for assistance."

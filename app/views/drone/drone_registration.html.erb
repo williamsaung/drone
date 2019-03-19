@@ -123,14 +123,14 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form_main">
-        <h4 class="heading"><strong>Quick </strong> Contact <span></span></h4>
+        <h4 class="heading"><strong>Drone </strong> Registration <span></span></h4>
         <div class="form">
           <%= form_tag("/drone/drone_create", method: "post", class: 'registration_form') do  %>
           <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
             <input type="text" id="name" required="" placeholder="Please input Drone's Name" value="" name="name" class="txt">
             <input type="text" id="description" required="" placeholder="Please input Drone's Description" value="" name="description" class="txt">
             <input type="text" id="connection_string" required="" placeholder="Please input Connection String" value="" name="connection_string" class="txt">
-            <small id="emailHelp" class="form-text text-muted">Explanation for connection string.</small>
+            <small id="emailHelp" class="form-text text-muted">The connection to use when connecting to the drone instance</small>
             <hr>
             <input type="submit" value="Register" name="commit" class="txt2">
           </form>
