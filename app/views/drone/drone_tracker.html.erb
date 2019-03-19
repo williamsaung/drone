@@ -91,14 +91,44 @@
 
     // Initialize and add the map
     function initMap() {
+        var navlogs = callNavLogs();
+
+        console.log(navlogs);
+
+        var locations = [];
+
+        var i;
+        for (i = 0; i < navlogs.length; i++) {
+            latlong = {lat: navlogs[i].gps_latitude, lng: navlogs[i].gps_longitude};
+
+            locations.push(latlong);
+        }
+
+        var last_element = locations[locations.length - 1];
+
+        console.log(last_element);
+
+        // var map_center = last_element;
 
         var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         // The location of AIT
         var ait = {lat: 14.0785, lng: 100.6140};
-        // The map, centered at AIT
+
+        // If no last location center at AIT
+        var map_center;
+        var map_zoom;
+        if (!last_element){
+            map_center = ait;
+            map_zoom = 16;
+        } else {
+            map_center = last_element;
+            map_zoom = 17;
+        }
+
+        // The map, centered at last location
         var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 15, center: ait,
+            document.getElementById('map'), {zoom: map_zoom, center: map_center,
                 styles: [
                     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
                     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -179,21 +209,6 @@
                         stylers: [{color: '#17263c'}]
                     }
                 ]});
-
-        var navlogs = callNavLogs();
-
-        console.log(navlogs);
-
-        var locations = [];
-
-        var i;
-        for (i = 0; i < navlogs.length; i++) {
-            latlong = {lat: navlogs[i].gps_latitude, lng: navlogs[i].gps_longitude};
-
-            locations.push(latlong);
-        }
-
-        var last_element = locations[locations.length - 1];
 
         // var locations = [
         //     {lat: 14.081012, lng: 100.612743},

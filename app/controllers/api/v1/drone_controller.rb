@@ -9,8 +9,6 @@ module Api
         respond_with Drone.all
       end
 
-
-
       def mission_status_change
         @mission = Mission.find(params[:id])
 
@@ -19,7 +17,7 @@ module Api
         @drone.save
 
         @mission.status = params[:mission_status]
-         @mission.save
+        @mission.save
 
 
       def update
