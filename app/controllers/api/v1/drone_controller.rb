@@ -6,7 +6,8 @@ module Api
       protect_from_forgery with: :null_session
       respond_to :json
       def index
-        respond_with Drone.all
+        @drone= Drone.find(params[:id])
+        respond_with @drone
       end
 
       def update
