@@ -14,6 +14,7 @@ module Api
         @drone.update(drone_params)
       end
 
+
       def drone_params
         params.permit(:status)
       end

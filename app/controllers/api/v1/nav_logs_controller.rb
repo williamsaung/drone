@@ -9,8 +9,13 @@ module Api
       end
 
       def last_navlog
-        respond_with NavLog.last
+        # respond_with NavLog.last
+        @drone= Drone.find(params[:id])
+        @nav_logs = NavLog.where(drone:@drone)
+        respond_with @nav_logs.last
       end
+
+
 
       def create
         # respond_with NavLog.create(params[:nav_log])
