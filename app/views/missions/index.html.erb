@@ -104,6 +104,12 @@
             <%= link_to "done", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
           <%end %>
         </td>
+
+          <td> <% if mission.status == "Ongoing" %>
+              <%= link_to "tracking", drone_drone_tracker_path(drone: mission.drone.id) %>
+            <%end %>
+          </td>
+
           <td><% if mission.status == "Ongoing" %>
             <%= link_to "terminate", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "terminated"), method: :put%></td>
               <%end %>
