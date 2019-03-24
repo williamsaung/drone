@@ -25,7 +25,7 @@ module Api
       end
 
       def mission_params
-        params.permit(:status, :name, :location_id, :weight, :drone_id, :mission_id)
+        params.permit(:status, :name, :location_id, :weight, :drone_id)
       end
     end
   end
