@@ -2,8 +2,16 @@ class IndexController < ApplicationController
   def index
     @drone_count = Drone.count
     last_drone = Drone.order("created_at").last
-    @last_drone = last_drone.name
-    @last_status = last_drone.status
+    if last_drone.blank?
+      @last_drone
+      @last_status
+    else
+      @last_drone = last_drone.name
+      @last_status = last_drone.status
+    end
+
+
+
     @nav_logs = NavLog.where(drone:last_drone)
     if @nav_logs.blank?
       @last_latitude
@@ -16,7 +24,14 @@ class IndexController < ApplicationController
 
     @mission_count = Mission.count
     last_mission = Mission.order("created_at").last
-    @last_mission = last_mission.name
-    @last_location = last_mission.location.name
+    if last_mission.blank?
+      @last_mission
+      @last_location
+    else
+      @last_mission = last_mission.name
+      @last_location = last_mission.location.name
+    end
+
+    end
   end
-end
+
