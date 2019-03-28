@@ -31,7 +31,7 @@ end
     @nav_logs = NavLog.where(drone:@drone)
 
     connection_string = @drone.connection_string
-    puts "Executing command 'python ~/drone-comms/drone/status.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
+    puts "Executing command 'python ~/drone-comms/drone/status.py #{connection_string}'"
 
     # For simulators
     if @drone.simulator?
