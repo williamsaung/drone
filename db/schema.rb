@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_155653) do
+ActiveRecord::Schema.define(version: 2019_03_28_145641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 2019_03_21_155653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "battery_voltage"
+    t.integer "battery_level"
+    t.float "battery_current"
+    t.boolean "ekf_ok"
+    t.boolean "is_armable"
+    t.string "system_status"
+    t.string "mode"
+    t.boolean "armed"
     t.index ["drone_id"], name: "index_nav_logs_on_drone_id"
   end
 
