@@ -25,6 +25,7 @@ module Api
         @nav_log.gps_latitude = params[:gps_latitude]
         @nav_log.gps_longitude = params[:gps_longitude]
         @nav_log.altitude = params[:altitude]
+        @nav_log.battery_voltage = params[:battery_voltage]
 
         @nav_log.drone_id = params[:drone_id]
         @nav_log.save
