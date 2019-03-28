@@ -29,34 +29,18 @@ end
 
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
-    redirect_to drone_drone_tracker_path(drone: @drone.id)
-    if @nav_logs.blank?
-      @gps_latitude
-      @gps_longitude
-      @altitude
-      @battery_voltage
-      @battery_level
-      @battery_current
-      @ekf_ok
-      @is_armable
-      @system_status
-      @mode
-      @armed
 
-    else
-      @gps_latitude= @nav_logs.last.gps_latitude
-      @gps_longitude= @nav_logs.last.gps_longitude
-      @altitude= @nav_logs.last.altitude
-      @battery_voltage= @nav_logs.last.battery_voltage
-      @battery_level= @nav_logs.last.battery_level
-      @battery_current= @nav_logs.last.battery_current
-      @ekf_ok= @nav_logs.last.ekf_ok
-      @is_armable= @nav_logs.last.is_armable
-      @system_status=@nav_logs.last.system_status
-      @mode = @nav_logs.last.mode
-      @armed = @nav_logs.last.armed
+    connection_string = @drone.connection_string
+    puts "Executing command 'python ~/drone-comms/drone/status.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
+
+    # For simulators
+    if @drone.simulator?
+      child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/status.py #{connection_string} --drone_id #{@drone.id}")
+      # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+      Process.detach(child_pid)
     end
-    logger.debug(@drone.name)
+
+    redirect_to drone_drone_tracker_path(drone: @drone.id)
 
   end
 
