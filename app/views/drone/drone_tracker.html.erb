@@ -255,7 +255,8 @@
 <hr>
 
 <div class="container">
-  <h3>Drone Details</h3>
+  <h3>Drone Details <%= link_to 'Check Status', drone_drone_tracker_path(drone: @drone.id), class: "btn btn-primary" %></h3>
+
 </div>
 
 <div class="container">
