@@ -255,7 +255,7 @@
 <hr>
 
 <div class="container">
-  <h3>Drone Details <%= link_to 'Check Status', drone_drone_tracker_path(drone: @drone.id), class: "btn btn-primary" %></h3>
+  <h3>Drone Details <%= link_to 'Check Status', drone_check_status_path(drone: @drone.id), class: "btn btn-primary" %></h3>
 
 </div>
 
@@ -276,6 +276,50 @@
       <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> </td>
     </tr>
 
+    <tr>
+      <td><strong>Alititude</strong></td>
+      <td><%= @altitude.blank? ? "Not Available" : @altitude %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>Battery Voltage</strong></td>
+      <td><%= @battery_voltage.blank? ? "Not Available" : @battery_voltage %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>Battery Level</strong></td>
+      <td><%= @battery_level.blank? ? "Not Available" : @battery_level %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>Battery Current</strong></td>
+      <td><%= @battery_current.blank? ? "Not Available" : @battery_current %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>EKF</strong></td>
+      <td><%= @ekf_ok.blank? ? "Not Available" : @ekf_ok %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>Armable?</strong></td>
+      <td><%= @is_armable.blank? ? "Not Available" : @is_armable %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>System Status</strong></td>
+      <td><%= @system_status.blank? ? "Not Available" : @system_status %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>Mode</strong></td>
+      <td><%= @mode.blank? ? "Not Available" : @mode %> </td>
+    </tr>
+
+    <tr>
+      <td><strong>Armed</strong></td>
+      <td><%= @armed.blank? ? "Not Available" : @armed %> </td>
+    </tr>
   </table>
 </div>
 </body>

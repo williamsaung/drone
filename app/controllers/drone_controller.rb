@@ -25,23 +25,70 @@ end
     @mission = Mission.new(drone_id: params[:drone_id])
   end
 
-  def drone_tracker
+  def check_status
 
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
-
+    redirect_to drone_drone_tracker_path(drone: @drone.id)
     if @nav_logs.blank?
       @gps_latitude
       @gps_longitude
+      @altitude
+      @battery_voltage
+      @battery_level
+      @battery_current
+      @ekf_ok
+      @is_armable
+      @system_status
+      @mode
+      @armed
+
     else
       @gps_latitude= @nav_logs.last.gps_latitude
       @gps_longitude= @nav_logs.last.gps_longitude
+      @altitude= @nav_logs.last.altitude
+      @battery_voltage= @nav_logs.last.battery_voltage
+      @battery_level= @nav_logs.last.battery_level
+      @battery_current= @nav_logs.last.battery_current
+      @ekf_ok= @nav_logs.last.ekf_ok
+      @is_armable= @nav_logs.last.is_armable
+      @system_status=@nav_logs.last.system_status
+      @mode = @nav_logs.last.mode
+      @armed = @nav_logs.last.armed
     end
+    logger.debug(@drone.name)
 
+  end
 
+  def drone_tracker
+    @drone = Drone.find(params[:drone])
+    @nav_logs = NavLog.where(drone:@drone)
+    if @nav_logs.blank?
+      @gps_latitude
+      @gps_longitude
+      @altitude
+      @battery_voltage
+      @battery_level
+      @battery_current
+      @ekf_ok
+      @is_armable
+      @system_status
+      @mode
+      @armed
 
-
-
+    else
+      @gps_latitude= @nav_logs.last.gps_latitude
+      @gps_longitude= @nav_logs.last.gps_longitude
+      @altitude= @nav_logs.last.altitude
+      @battery_voltage= @nav_logs.last.battery_voltage
+      @battery_level= @nav_logs.last.battery_level
+      @battery_current= @nav_logs.last.battery_current
+      @ekf_ok= @nav_logs.last.ekf_ok
+      @is_armable= @nav_logs.last.is_armable
+      @system_status=@nav_logs.last.system_status
+      @mode = @nav_logs.last.mode
+      @armed = @nav_logs.last.armed
+    end
     logger.debug(@drone.name)
   end
 
