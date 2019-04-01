@@ -33,7 +33,7 @@
         <a href="/posts" class="btn btn-info" role="button">Forum</a>
         <% if user_signed_in? %>
           <% if current_user.admin %>
-            <a href="/drone/users_lists" class="btn btn-info" role="button">User Management</a>
+            <a href="/drone/users_list" class="btn btn-info" role="button">User Management</a>
           <% end %>
 
           </div>
@@ -84,7 +84,7 @@
         <ul class="list-group list-group-flush">
         </ul>
         <div class="card-body">
-        <%= link_to 'Tracking', drone_drone_tracker_path(drone: drone.id), class: "btn btn-primary" %> <%= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id), class: "btn btn-primary" %>
+        <%= link_to 'Tracking', drone_drone_tracker_path(drone: drone.id), class: "btn btn-primary" %> <%= link_to "Create Mission", drone_drone_mission_path(drone_id: drone.id, user_id: current_user.id), class: "btn btn-primary" %>
         </div>
       </div>
 

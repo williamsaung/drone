@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_145641) do
+ActiveRecord::Schema.define(version: 2019_04_01_034405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,9 @@ ActiveRecord::Schema.define(version: 2019_03_28_145641) do
     t.integer "location_id"
     t.string "status"
     t.integer "mission_id"
+    t.bigint "user_id"
     t.index ["drone_id"], name: "index_missions_on_drone_id"
+    t.index ["user_id"], name: "index_missions_on_user_id"
   end
 
   create_table "nav_logs", force: :cascade do |t|
@@ -112,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_03_28_145641) do
   add_foreign_key "comments", "users"
   add_foreign_key "drones", "users"
   add_foreign_key "missions", "drones"
+  add_foreign_key "missions", "users"
   add_foreign_key "nav_logs", "drones"
   add_foreign_key "posts", "users"
   add_foreign_key "status_logs", "drones"

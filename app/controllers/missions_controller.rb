@@ -4,12 +4,18 @@ class MissionsController < ApplicationController
   # GET /missions
   # GET /missions.json
   def index
-      @missions = Mission.order("drone_id")
 
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: @missions}
-    # end
+    @missions = Mission.order("drone_id")
+
+    user = current_user
+    if user.admin
+
+      @missions = Mission.all
+    else
+      @missions = Mission.where(:user => user)
+    end
+
+
   end
 
   # GET /missions/1
@@ -37,7 +43,7 @@ class MissionsController < ApplicationController
   # POST /missions
   # POST /missions.json
   def create
-    @mission = Mission.new(mission_params)
+    @mission = Mission.new(mission_params.merge(user_id: current_user.id))
     @mission.status = "Saved"
 
     respond_to do |format|
@@ -104,7 +110,7 @@ class MissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mission_params
-      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id)
+      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id, :user_id)
     end
 end
 

@@ -174,8 +174,8 @@ end
      @drones = Drone.order("created_at")
     # user = current_user
     # if user.admin
-
-      # @drones = Drone.all
+    #
+    #   @drones = Drone.all
     # else
     #   @drones = Drone.where(:user => user)
     # end
