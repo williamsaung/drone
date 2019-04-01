@@ -1,0 +1,106 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+
+<!--<style>-->
+<!--  body {-->
+<!--    background: #BFFFFE;-->
+<!--    background: linear-gradient(to right, #BFFFFE, #BFFFFE);-->
+<!--  }-->
+<!--</style>-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">DroneTracker</a>
+    </div>
+    <ul class="nav navbar-nav ">
+      <div class="container">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Drone
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/drone/drone_list">Drone List</a>
+            <a class="dropdown-item" href="/drone/drone_registration">Register a Drone</a>
+          </div>
+        </div>
+        <a href="/missions" class="btn btn-primary" role="button">Mission List</a>
+        <a href="/" class="btn btn-info" role="button">Home</a>
+        <a href="https://validator.w3.org" class="btn btn-info" role="button">Validate this Site</a>
+        <a href="/posts" class="btn btn-info" role="button">Forum</a>
+        <% if user_signed_in? %>
+          <% if current_user.admin %>
+            <a href="/drone/users_list" class="btn btn-info" role="button">User Management</a>
+          <% end %>
+
+          </div>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <div class="container">
+
+
+
+              <li><p class="navbar-text">Signed in as <%= current_user.email %></p></li>
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <% end %>
+
+        </div>
+        </ul>
+        </div>
+</nav>
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h1>Missions</h1>
+</div>
+
+<div class="container">
+  <div class="form-incline mt-2 mt-md-0">
+    <%= form_tag search_missions_path, method: :get do %>
+      <%= text_field_tag :search, nil, placeholder: "Search by Mission Name", class: "form-control mr-sm-2" %>
+      <br>
+      <%= submit_tag "Search", class: "btn btn-light my-2 my-sm-0" %>
+    <% end %>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Weight</th>
+      <th>Drone</th>
+
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @missions.each do |mission| %>
+      <tr>
+        <td><%= mission.name %></td>
+        <td><%= mission.location.name %></td>
+        <td><%= mission.weight %></td>
+        <td><%= mission.drone.id %></td>
+
+
+            </tr>
+
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Drone List', drone_drone_list_path %>
+</div>
+<br>
+

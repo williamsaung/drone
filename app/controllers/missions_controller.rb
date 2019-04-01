@@ -4,9 +4,7 @@ class MissionsController < ApplicationController
   # GET /missions
   # GET /missions.json
   def index
-
     @missions = Mission.order("drone_id")
-
     user = current_user
     if user.admin
 
@@ -14,8 +12,6 @@ class MissionsController < ApplicationController
     else
       @missions = Mission.where(:user => user)
     end
-
-
   end
 
   # GET /missions/1

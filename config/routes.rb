@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get 'drone/drone_registration'
   get 'drone/drone_list' => "drone#drone_list"
   get 'drone/users_list'
+  get 'drone/users_mission'
   get 'drone/drone_tracker'
   get 'drone/drone_mission'
   # get 'drone/drone_tracker' => 'drone#check_status'

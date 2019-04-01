@@ -84,6 +84,11 @@ end
     end
   end
 
+  def users_mission
+  @user = User.find(params[:id])
+  @missions = Mission.where(:user => @user)
+  end
+
   def ban_user
     @user = User.find(params[:id])
      @user.banned = true

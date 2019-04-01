@@ -42,6 +42,7 @@
             <span class="glyphicon glyphicon-ok" style="color: green"></span>
           </td>
           <td><%= link_to 'Ban', drone_ban_user_path(:id => user.id, :banned => true), method: :put %></td>
+          <td><%= link_to 'Show Missions', drone_users_mission_path(:id => user.id) %></td>
         <% end %>
         <!--        <td>-->
         <%# if user.banned %>
