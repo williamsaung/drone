@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<style>
+  /*pointer hover*/
+
+  .pointer {
+    cursor: pointer;
+
+  &:hover {
+     color: lightslategray;
+   }
+  }
+
+  /*date and day*/
+
+  .date {
+    font-size: 27px;
+    margin-left: 45px;
+  }
+
+  .day {
+    margin-left: 60px;
+  }
+
+  .text_position {
+    text-align: center;
+    margin-top: 2px;
+  /*//font-size: 35px;*/
+  /*//font-weight: 500;*/
+  /*//line-height: 1.7em;*/
+  /*//white-space: pre-line;*/
+  /*//color: black;*/
+  }
+
+  .daily_summary {
+    font-size: 25px;
+    font-weight: 300;
+    color: black;
+  }
+</style>
+
+<script>
+    function myFunction(number) {
+        var detail_no = [1, 2, 3, 4, 5, 6, 7];
+        var i;
+
+        var x = document.getElementById(`detail${number}`);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+        // else {
+        //     x.style.display = "none";
+        // }
+
+        for (i = 1; i <= detail_no.length; i++) {
+            if (i === number) {
+                var btn = document.getElementById(`btn${i}`);
+                btn.style.color = "lightslategray";
+                continue;
+            }
+            else {
+                var btn = document.getElementById(`btn${i}`);
+                btn.style.color = "black";
+                var y = document.getElementById(`detail${i}`);
+                y.style.display = "none";
+            }
+
+        }
+
+    }
+</script>
+<body>
+
+<div class="font_type">
+  <table>
+    <tr>
+      <% b = 1 %>
+      <% @daily_weather.each do |day| %>
+        <td id="btn<%= b %>" class="pointer" onclick="myFunction(<%= b %>)">
+          <span class="date"> <%= Time.at(day.time).strftime('%A') %> </span><br>
+          <span class="day"> <%= Time.at(day.time).strftime('%D') %> </span>
+        </td>
+        <% b = b + 1 %>
+      <% end %>
+    </tr>
+  </table>
+  <hr>
+  <br>
+
+  <% a = 1 %>
+  <% @daily_weather.each do |day| %>
+    <p class="text_position" id="detail<%= a %>"
+       <% if Time.at(day.time).strftime('%A') == Time.now.strftime('%A') %>
+       style="display: block"
+       <% else %>
+       style="display: none"
+       <% end %>
+       >
+
+      <span class="daily_summary"> <%= day.summary %> </span><br>
+      <span class="container1"> High: <%= day.apparentTemperatureMax %> | Low: <%= day.apparentTemperatureMin %><br>
+      Windspeed: <%= day.windSpeed %> </span> <br>
+    </p>
+
+    <% a = a + 1 %>
+  <% end %>
+  <% i = 1 %>
+  <%#= Time.now.getlocal('-09:00') %>
+  <% @hourly_weather.each do |hour| %>
+    <%= Time.at(hour.time).strftime("%I:%M %p") %><br>
+    <%= i %>
+    <%= hour.summary %><br>
+    <% i = i + 1 %>
+  <% end %></div>
+<br>
+<!--<%#= Time.at(@day.time).strftime('%A') %><br>-->
+
+<!--<p class="pointer" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Click Me!</p>-->
+<!--<p id="demo">JavaScript can change HTML content.</p>-->
+
+</body>
+</html>
