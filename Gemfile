@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
+gem 'net-ssh'
 gem 'forecast_io'
 gem 'figaro'
 gem 'bootstrap-sass', '3.3.7'
