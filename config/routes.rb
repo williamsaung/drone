@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'forecasts/show'
   get 'forecasts/details'
+  put 'base/open_door'
+
   resources :missions do
     collection do
       get :search
