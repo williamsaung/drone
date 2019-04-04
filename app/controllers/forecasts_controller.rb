@@ -1,9 +1,9 @@
 class ForecastsController < ApplicationController
   def show
-    @forecast = Forecast.new(:lat => 14.0754804, :lng => 100.6100677)
-    @forecast.save
-    @weather = @forecast.get_weather_data
-    @current_weather = @weather.currently
+    # @forecast = Forecast.new(:lat => 14.0754804, :lng => 100.6100677)
+    # @forecast.save
+    # @weather = @forecast.get_weather_data
+    # @current_weather = @weather.currently
   end
 
   def details

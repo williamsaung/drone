@@ -216,30 +216,31 @@
     /*margin-right: 200px;*/
   /*}*/
 </style>
-<div class="font_type">
-  <div class="middle">
-    <%= image_tag "partly_cloudly.png", :size => "120x100" %> <span class="temp"><%= @current_weather.temperature %> °F</span>
-    <div class="summary"> <%= @current_weather.summary %></div>
-    <div class="container1">
-      Wind:
-      <%= @current_weather.windSpeed %> mph
+<!--<div class="font_type">-->
+<!--  <div class="middle">-->
+<!--    <%#= image_tag "partly_cloudly.png", :size => "120x100" %> <span class="temp"><%#= @current_weather.temperature %> °F</span>-->
+<!--    <div class="summary"> <%#= @current_weather.summary %></div>-->
+<!--    <div class="container1">-->
+<!--      Wind:-->
+<!--      <%#= @current_weather.windSpeed %> mph-->
 
-      <span class="pressure">
-          Pressure:
-        <%= @current_weather.pressure %> mb
-        </span>
+<!--      <span class="pressure">-->
+<!--          Pressure:-->
+<!--        <%#= @current_weather.pressure %> mb-->
+<!--        </span>-->
 
-      <span class="humidity">
-          Humidity:
-        <%= @current_weather.humidity * 100 %> %
-        </span>
+<!--      <span class="humidity">-->
+<!--          Humidity:-->
+<!--        <%#= @current_weather.humidity * 100 %> %-->
+<!--        </span>-->
 
-      <span class="visibility">
-          Visibility:
-        <%= @current_weather.visibility %> km
-        </span>
+<!--      <span class="visibility">-->
+<!--          Visibility:-->
+<!--        <%#= @current_weather.visibility %> km-->
+<!--        </span>-->
       <%= link_to 'Open Door', base_open_door_path, method: :put %>
-    </div>
-    <hr>
-  </div>
-</div>
+      <%= link_to 'Close Door', base_close_door_path, method: :put %>
+<!--    </div>-->
+<!--    <hr>-->
+<!--  </div>-->
+<!--</div>-->
