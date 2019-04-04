@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @mission = Mission.new(mission_params)
+        @mission = Mission.new(mission_params).merge(user_id: current_user.id)
         if @mission.save
           render json: @mission, status: :created
         else
