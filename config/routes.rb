@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'last_navlog', to: '/api/v1/nav_logs#last_navlog'
       resources :users
       resources :drone
+      patch 'mission_status_change', to: 'drone#mission_status_change'
       resources :missions
       get 'users_mission', to: 'missions#users_mission'
       resources :drone_availables

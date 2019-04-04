@@ -15,6 +15,18 @@ module Api
         @drone.update(drone_params)
       end
 
+      def mission_status_change
+
+        @mission = Mission.find(params[:id])
+
+        @drone = Drone.find(@mission.drone.id)
+        @drone.status = params[:drone_status]
+        @drone.save
+
+        @mission.status = params[:mission_status]
+        @mission.save
+        end
+
 
       def drone_params
         params.permit(:status)
