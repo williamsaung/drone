@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'forecasts/show'
+  get 'forecasts/details'
+  put 'base/open_door'
+
   resources :missions do
     collection do
       get :search
@@ -18,9 +22,10 @@ Rails.application.routes.draw do
       resources :drone
       resources :missions
       get 'users_mission', to: 'missions#users_mission'
+      resources :drone_availables
+
     end
   end
-
 
 
   post '/auth/login', to: 'api/v1/authentication#login'
