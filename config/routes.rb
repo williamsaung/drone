@@ -21,7 +21,9 @@ Rails.application.routes.draw do
       resources :users
       resources :drone
       resources :missions
+      get 'users_mission', to: 'missions#users_mission'
       resources :drone_availables
+
     end
   end
 
