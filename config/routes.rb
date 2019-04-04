@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       patch 'mission_status_change', to: 'drone#mission_status_change'
       resources :missions
       get 'users_mission', to: 'missions#users_mission'
+      get 'users_mission_last', to: 'missions#users_mission_last'
       resources :drone_availables
 
     end

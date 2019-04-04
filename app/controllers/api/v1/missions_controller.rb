@@ -15,6 +15,12 @@ module Api
         respond_with @missions
       end
 
+      def users_mission_last
+        @user = User.find(params[:id])
+        @missions = Mission.where(:user => @user)
+        respond_with @missions.last
+      end
+
       def create
         @mission = Mission.new(mission_params)
         if @mission.save
