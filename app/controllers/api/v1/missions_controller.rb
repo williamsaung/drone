@@ -9,6 +9,12 @@ module Api
         respond_with Mission.all
       end
 
+      def ongoing_mission
+        @user = User.find(params[:id])
+        @missions = Mission.where(:status => "Ongoing")
+        respond_with @missions
+      end
+
       def users_mission
         @user = User.find(params[:id])
         @missions = Mission.where(:user => @user)
