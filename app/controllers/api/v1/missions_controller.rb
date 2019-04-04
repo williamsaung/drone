@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        @mission = Mission.new(mission_params).merge(user_id: current_user.id)
+        @mission = Mission.new(mission_params)
         if @mission.save
           render json: @mission, status: :created
         else
@@ -31,7 +31,7 @@ module Api
       end
 
       def mission_params
-        params.permit(:status, :name, :location_id, :weight, :drone_id)
+        params.permit(:status, :name, :location_id, :weight, :drone_id, :user_id)
       end
     end
   end
