@@ -29,9 +29,9 @@ module Api
 
 
       def emergency_mission_sim
-        @location = Location.create(:name => "Emergency", :gps_latitude => params[:latitude], :gps_longitude => params[:longitude])
+        @location = Location.create(:name => "Emergency", :latitude => params[:latitude], :longitude => params[:longitude])
         @drone = Drone.find(1) # sim
-        @mission = Mission.create(:name => "Emergency", :weight => 25, :type => "Emergency", :location_id => @location.id, :drone_id => @drone.id)
+        @mission = Mission.create(:name => "Emergency", :weight => 25, :status => "Ongoing", :user_id => 1, :mission_type => "Emergency", :location_id => @location.id, :drone_id => @drone.id)
 
         connection_string = @drone.connection_string
 
