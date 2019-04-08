@@ -125,18 +125,6 @@ end
     end
   end
 
-  def emergency_mission_sim
-    @location = Location.create(:name => "Emergency", :gps_latitude => params[:latitude], :gps_longitude => params[:longitude])
-    @drone = Drone.find(1) # sim
-    @mission = Mission.create(:name => "Emergency", :weight => 25, :location_id => @location.id, :drone_id => @drone.id)
-
-    connection_string = @drone.connection_string
-
-    child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/mission.py #{connection_string} #{params[:latitude]} #{params[:longitude]} #{@mission.id} --drone_id #{@drone.id}")
-    # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
-    Process.detach(child_pid)
-  end
-
   def mission_status_change
 
     @mission = Mission.find(params[:id])

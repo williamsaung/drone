@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       get 'users_mission', to: 'missions#users_mission'
       get 'users_mission_last', to: 'missions#users_mission_last'
       get 'ongoing_mission', to: 'missions#ongoing_mission'
+      post 'emergency_mission_sim', to: 'drone#emergency_mission_sim'
+
       resources :drone_availables
 
     end
