@@ -11,13 +11,13 @@ class ForecastsController < ApplicationController
 
   def http
     require 'net/http'
-
+    require 'json'
     url = URI.parse('http://cryptic-cove-44054.herokuapp.com/api/v1/show')
     req = Net::HTTP::Get.new(url.to_s)
-    @res = Net::HTTP.start(url.host, url.port) {|http|
+    res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)
     }
-
+    @aa = JSON.parse(res.body)
   end
 
   def details
