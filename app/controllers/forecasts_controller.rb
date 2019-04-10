@@ -1,9 +1,23 @@
 class ForecastsController < ApplicationController
+
+
   def show
     @forecast = Forecast.new(:lat => 14.0754804, :lng => 100.6100677)
     @forecast.save
     @weather = @forecast.get_weather_data
     @current_weather = @weather.currently
+
+  end
+
+  def http
+    require 'net/http'
+
+    url = URI.parse('http://cryptic-cove-44054.herokuapp.com/api/v1/show')
+    req = Net::HTTP::Get.new(url.to_s)
+    @res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
+
   end
 
   def details

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'forecasts/show'
   get 'forecasts/details'
+  get 'forecasts/http'
   put 'base/open_door'
   put 'base/close_door'
 
