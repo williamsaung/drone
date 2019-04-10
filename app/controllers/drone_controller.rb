@@ -161,19 +161,10 @@ end
 
   def drone_list
      @drones = Drone.order("created_at")
-    # user = current_user
-    # if user.admin
-    #
-    #   @drones = Drone.all
-    # else
-    #   @drones = Drone.where(:user => user)
-    # end
-
   end
 
   def drone_edit
     @drone = Drone.find(params[:id])
-    # @droneupdate= @drone.update(drone_params)
   end
 
   def drone_update
