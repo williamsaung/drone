@@ -19,6 +19,8 @@ module Api
       def mission_status_change
 
         @mission = Mission.find(params[:id])
+        gps_latitude = @mission.location.latitude
+        gps_longitude = @mission.location.longitude
 
         @drone = Drone.find(@mission.drone.id)
         @drone.status = params[:drone_status]
