@@ -78,21 +78,24 @@
 <!--The div element for the map -->
 <div id="map"></div>
 <script>
+    var map;
+    var navlog;
+    var marker;
 
-    function callNavLogs() {
-        var navlogs = JSON.parse(
+    function callNavLog() {
+        var response = JSON.parse(
             $.ajax({type: "GET", url: "/drone/nav_logs_json?drone=<%= @drone.id %>", async: false}).responseText
         );
 
-        console.log(navlogs);
+        console.log(response);
 
-        return navlogs;
+        return response;
     }
 
     // Initialize and add the map
     function initMap() {
-        var response = callNavLogs();
-        var navlog = {lat: response.gps_latitude, lng:response.gps_longitude};
+        var response = callNavLog();
+        navlog = {lat: response.gps_latitude, lng:response.gps_longitude};
 
         console.log(navlog);
         //
@@ -126,7 +129,7 @@
         }
 
         // The map, centered at last location
-        var map = new google.maps.Map(
+        map = new google.maps.Map(
             document.getElementById('map'), {zoom: map_zoom, center: map_center,
                 styles: [
                     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -215,12 +218,9 @@
         //     {lat: 14.076557, lng: 100.613988}
         // ];
 
-        var marker = new google.maps.Marker({
-            position: navlog,
-            // label: labels[q % last_element.length],
-            map: map
-        });
+        setMarker(map, navlog);
 
+        // return [map, navlog];
 
         // var markers = locations.map(function(location, q) {
         //     var marker = new google.maps.Marker({
@@ -230,11 +230,32 @@
         //     });
         //     return marker
         // });
+    };
+
+    function setMarker(map, navlog){
+        console.log("Setting markers");
+        marker = new google.maps.Marker({
+            position: navlog,
+            // label: labels[q % last_element.length],
+            map: map,
+            animation: google.maps.Animation.DROP,
+        });
+    }
+
+    function reloadMarker() {
+        console.log("Reloading markers");
+
+        var response = callNavLog();
+        navlog = {lat: response.gps_latitude, lng:response.gps_longitude};
+
+        marker.setMap(null);
+
+        setMarker(map, navlog);
     }
 
     setInterval(function(){
         while (true){
-            initMap().reload();
+            reloadMarker().reload();
         }
     }, 5000);
 </script>
