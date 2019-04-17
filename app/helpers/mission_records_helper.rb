@@ -1,0 +1,2 @@
+module MissionRecordsHelper
+end

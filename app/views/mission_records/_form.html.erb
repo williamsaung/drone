@@ -1,0 +1,32 @@
+<%= form_with(model: mission_record, local: true) do |form| %>
+  <% if mission_record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mission_record.errors.count, "error") %> prohibited this mission_record from being saved:</h2>
+
+      <ul>
+      <% mission_record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :drone_id %>
+    <%= form.text_field :drone_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

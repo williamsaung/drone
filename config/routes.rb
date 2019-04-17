@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :mission_records
+  get 'mission_records/index'
+  get 'polygon/polygon'
+  get 'welcome/index'
   get 'forecasts/show'
   get 'forecasts/details'
   put 'base/open_door'
