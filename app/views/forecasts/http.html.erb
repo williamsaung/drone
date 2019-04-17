@@ -1,0 +1,463 @@
+<!--<style>-->
+<!--  body {-->
+<!--    padding-top: 60px;-->
+<!--  }-->
+
+<!--  section {-->
+<!--    overflow: auto;-->
+<!--  }-->
+
+<!--  textarea {-->
+<!--    resize: vertical;-->
+<!--  }-->
+
+<!--  hr {-->
+<!--    display: block;-->
+<!--    margin-top: 0.5em;-->
+<!--    margin-bottom: 0.5em;-->
+<!--    margin-left: auto;-->
+<!--    margin-right: auto;-->
+<!--    border-style: inset;-->
+<!--    border-width: 1px;-->
+<!--  }-->
+
+<!--  .center {-->
+<!--    text-align: center;-->
+<!--  }-->
+
+<!--  .center h1 {-->
+<!--    margin-bottom: 10px;-->
+<!--  }-->
+
+<!--  /* typography */-->
+
+<!--  h1, h2, h3, h4, h5, h6 {-->
+<!--    line-height: 1;-->
+<!--  }-->
+
+<!--  h1 {-->
+<!--    font-size: 2em;-->
+<!--    letter-spacing: -2px;-->
+<!--  //margin-bottom: 5px;-->
+<!--  //text-align: center;-->
+<!--  }-->
+
+<!--  h2 {-->
+<!--    font-size: 1.2em;-->
+<!--    letter-spacing: -1px;-->
+<!--    margin-bottom: 30px;-->
+<!--    text-align: center;-->
+<!--    font-weight: normal;-->
+<!--    color: #777;-->
+<!--  }-->
+
+<!--  //p {-->
+<!--    //  font-size: 1.1em;-->
+<!--    //  line-height: 1.7em;-->
+<!--    //  white-space: pre-line;-->
+<!--    //}-->
+
+
+<!--  /* header */-->
+
+<!--  #logo {-->
+<!--    float: left;-->
+<!--    margin-right: 10px;-->
+<!--    font-size: 1.7em;-->
+<!--    color: #fff;-->
+<!--    letter-spacing: -1px;-->
+<!--    padding-top: 9px;-->
+<!--    font-weight: bold;-->
+<!--  }-->
+
+<!--  #logo:hover {-->
+<!--    color: #fff;-->
+<!--    text-decoration: none;-->
+<!--  }-->
+<!--  /* footer */-->
+
+<!--  footer {-->
+<!--    margin-top: 200px;-->
+<!--    padding-top: 5px;-->
+<!--    border-top: 1px solid #eaeaea;-->
+<!--    color: #777;-->
+<!--  }-->
+
+<!--  footer a {-->
+<!--    color: #555;-->
+<!--  }-->
+
+<!--  footer a:hover {-->
+<!--    color: #222;-->
+<!--  }-->
+
+<!--  footer small {-->
+<!--    float: left;-->
+<!--  }-->
+
+<!--  footer ul {-->
+<!--    float: right;-->
+<!--    list-style: none;-->
+<!--  }-->
+
+<!--  footer ul li {-->
+<!--    float: left;-->
+<!--    margin-left: 15px;-->
+<!--  }-->
+
+<!--  /*weather*/-->
+<!--  .middle {-->
+<!--    text-align: center;-->
+<!--  }-->
+
+<!--  .font_type {-->
+<!--    font-family: Times;-->
+<!--  }-->
+
+<!--  .summary {-->
+<!--    margin-top: 7px;-->
+<!--    font-size: 40px;-->
+<!--    font-weight: 500;-->
+<!--  //line-height: 1.7em;-->
+<!--    white-space: pre-line;-->
+<!--    color: black;-->
+<!--  }-->
+<!--  //.container1 {-->
+<!--    //  font-family: Arial;-->
+<!--    //}-->
+
+<!--  .temp {-->
+<!--    margin-left: 10px;-->
+<!--    font-size: 40px;-->
+<!--    font-weight: 500;-->
+<!--  //line-height: 1.7em;-->
+<!--    color: black;-->
+<!--  }-->
+
+<!--  .container1 {-->
+<!--    color: #777;-->
+<!--    font-weight: normal;-->
+<!--  }-->
+
+<!--  //.weather_value {-->
+<!--    //  color: #777;-->
+<!--    //  //font-size: 1.1em;-->
+<!--    //  font-weight: normal;-->
+<!--    //}-->
+<!--  //-->
+<!--  //.weather_label {-->
+<!--    //  color: #777;-->
+<!--    //  //font-size: 1.1em;-->
+<!--    //  font-weight: normal;-->
+<!--    //}-->
+
+<!--  .pressure {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  .humidity {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  .visibility {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  .pressure {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  //.btn {-->
+<!--    //position: absolute;-->
+<!--    //top: 50%;-->
+<!--    //left: 50%;-->
+<!--    //transform: translate(-50%, -50%);-->
+<!--    //-ms-transform: translate(-50%, -50%);-->
+<!--    //background-color: #f1f1f1;-->
+<!--    //color: white;-->
+<!--    //background-color: black;-->
+<!--    //font-size: 16px;-->
+<!--    //padding: 16px 30px;-->
+<!--    //border: none;-->
+<!--    //cursor: pointer;-->
+<!--    //border-radius: 5px;-->
+<!--    //text-align: center;-->
+
+<!--  //  &:hover {-->
+<!--       //    background-color: white;-->
+<!--       //    color: black;-->
+<!--       //  }-->
+<!--  //}-->
+
+<!--  .example_e {body {-->
+<!--                padding-top: 60px;-->
+<!--              }-->
+
+<!--  section {-->
+<!--    overflow: auto;-->
+<!--  }-->
+
+<!--  textarea {-->
+<!--    resize: vertical;-->
+<!--  }-->
+
+<!--  hr {-->
+<!--    display: block;-->
+<!--    margin-top: 0.5em;-->
+<!--    margin-bottom: 0.5em;-->
+<!--    margin-left: auto;-->
+<!--    margin-right: auto;-->
+<!--    border-style: inset;-->
+<!--    border-width: 1px;-->
+<!--  }-->
+
+<!--  .center {-->
+<!--    text-align: center;-->
+<!--  }-->
+
+<!--  .center h1 {-->
+<!--    margin-bottom: 10px;-->
+<!--  }-->
+
+<!--  /* typography */-->
+
+<!--  h1, h2, h3, h4, h5, h6 {-->
+<!--    line-height: 1;-->
+<!--  }-->
+
+<!--  h1 {-->
+<!--    font-size: 2em;-->
+<!--    letter-spacing: -2px;-->
+<!--  //margin-bottom: 5px;-->
+<!--  //text-align: center;-->
+<!--  }-->
+
+<!--  h2 {-->
+<!--    font-size: 1.2em;-->
+<!--    letter-spacing: -1px;-->
+<!--    margin-bottom: 30px;-->
+<!--    text-align: center;-->
+<!--    font-weight: normal;-->
+<!--    color: #777;-->
+<!--  }-->
+
+<!--  //p {-->
+<!--    //  font-size: 1.1em;-->
+<!--    //  line-height: 1.7em;-->
+<!--    //  white-space: pre-line;-->
+<!--    //}-->
+
+
+<!--  /* header */-->
+
+<!--  #logo {-->
+<!--    float: left;-->
+<!--    margin-right: 10px;-->
+<!--    font-size: 1.7em;-->
+<!--    color: #fff;-->
+<!--    letter-spacing: -1px;-->
+<!--    padding-top: 9px;-->
+<!--    font-weight: bold;-->
+<!--  }-->
+
+<!--  #logo:hover {-->
+<!--    color: #fff;-->
+<!--    text-decoration: none;-->
+<!--  }-->
+<!--  /* footer */-->
+
+<!--  footer {-->
+<!--    margin-top: 200px;-->
+<!--    padding-top: 5px;-->
+<!--    border-top: 1px solid #eaeaea;-->
+<!--    color: #777;-->
+<!--  }-->
+
+<!--  footer a {-->
+<!--    color: #555;-->
+<!--  }-->
+
+<!--  footer a:hover {-->
+<!--    color: #222;-->
+<!--  }-->
+
+<!--  footer small {-->
+<!--    float: left;-->
+<!--  }-->
+
+<!--  footer ul {-->
+<!--    float: right;-->
+<!--    list-style: none;-->
+<!--  }-->
+
+<!--  footer ul li {-->
+<!--    float: left;-->
+<!--    margin-left: 15px;-->
+<!--  }-->
+
+<!--  /*weather*/-->
+<!--  .middle {-->
+<!--    text-align: center;-->
+<!--  }-->
+
+<!--  .font_type {-->
+<!--    font-family: Times;-->
+<!--  }-->
+
+<!--  .summary {-->
+<!--    margin-top: 7px;-->
+<!--    font-size: 40px;-->
+<!--    font-weight: 500;-->
+<!--  //line-height: 1.7em;-->
+<!--    white-space: pre-line;-->
+<!--    color: black;-->
+<!--  }-->
+<!--  //.container1 {-->
+<!--    //  font-family: Arial;-->
+<!--    //}-->
+
+<!--  .temp {-->
+<!--    margin-left: 10px;-->
+<!--    font-size: 40px;-->
+<!--    font-weight: 500;-->
+<!--  //line-height: 1.7em;-->
+<!--    color: black;-->
+<!--  }-->
+
+<!--  .container1 {-->
+<!--    color: #777;-->
+<!--    font-weight: normal;-->
+<!--  }-->
+
+<!--  //.weather_value {-->
+<!--    //  color: #777;-->
+<!--    //  //font-size: 1.1em;-->
+<!--    //  font-weight: normal;-->
+<!--    //}-->
+<!--  //-->
+<!--  //.weather_label {-->
+<!--    //  color: #777;-->
+<!--    //  //font-size: 1.1em;-->
+<!--    //  font-weight: normal;-->
+<!--    //}-->
+
+<!--  .pressure {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  .humidity {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  .visibility {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  .pressure {-->
+<!--    margin-left: 30px;-->
+<!--  }-->
+
+<!--  //.btn {-->
+<!--    //position: absolute;-->
+<!--    //top: 50%;-->
+<!--    //left: 50%;-->
+<!--    //transform: translate(-50%, -50%);-->
+<!--    //-ms-transform: translate(-50%, -50%);-->
+<!--    //background-color: #f1f1f1;-->
+<!--    //color: white;-->
+<!--    //background-color: black;-->
+<!--    //font-size: 16px;-->
+<!--    //padding: 16px 30px;-->
+<!--    //border: none;-->
+<!--    //cursor: pointer;-->
+<!--    //border-radius: 5px;-->
+<!--    //text-align: center;-->
+
+<!--  //  &:hover {-->
+<!--       //    background-color: white;-->
+<!--       //    color: black;-->
+<!--       //  }-->
+<!--  //}-->
+
+<!--  .example_e {-->
+<!--    margin-top: 20px;-->
+<!--    border: solid;-->
+<!--    background: #404040;-->
+<!--    color: #ffffff !important;-->
+<!--    font-weight: 100;-->
+<!--    padding: 20px;-->
+<!--    text-transform: uppercase;-->
+<!--    border-radius: 6px;-->
+<!--    display: inline-block;-->
+<!--  }-->
+
+<!--  .example_e:hover {-->
+<!--    color: #404040 !important;-->
+<!--    font-weight: 700 !important;-->
+<!--    letter-spacing: 3px;-->
+<!--    background: none;-->
+<!--    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);-->
+<!--    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);-->
+<!--    transition: all 0.3s ease 0s;-->
+<!--  }-->
+
+<!--  .package_left {-->
+<!--    margin-right: 200px;-->
+<!--  }-->
+<!--  margin-top: 20px;-->
+<!--  border: solid;-->
+<!--  background: #404040;-->
+<!--  color: #ffffff !important;-->
+<!--  font-weight: 100;-->
+<!--  padding: 20px;-->
+<!--  text-transform: uppercase;-->
+<!--  border-radius: 6px;-->
+<!--  display: inline-block;-->
+<!--  }-->
+
+<!--  .example_e:hover {-->
+<!--    color: #404040 !important;-->
+<!--    font-weight: 700 !important;-->
+<!--    letter-spacing: 3px;-->
+<!--    background: none;-->
+<!--    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);-->
+<!--    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);-->
+<!--    transition: all 0.3s ease 0s;-->
+<!--  }-->
+
+<!--  .package_left {-->
+<!--    margin-right: 200px;-->
+<!--  }-->
+
+
+<img src="/partly_cloudly.png">
+<!--    <%#= image_tag "partly_cloudly.png", :size => "120x100" %> <span class="temp"><%#= @aa['temperature'] %> °F</span>-->
+    <div class="summary"> <%= @aa['summary'] %></div>
+    <div class="container1">
+      Wind:
+      <%= @aa['windSpeed'] %> mph
+
+      <span class="pressure">
+          Pressure:
+        <%= @aa['pressure'] %> mb
+        </span>
+
+      <span class="humidity">
+          Humidity:
+        <%= @aa['humidity'] * 100 %> %
+        </span>
+
+      <span class="visibility">
+          Visibility:
+        <%= @aa['visibility'] %> km
+        </span>
+    </div>
+    <hr>
+<!--    <h1 class="mission">Choose Mission</h1>-->
+
+<!--<div class="button_cont" align="center">-->
+<!--  <span class="package_left"> <a class="example_e" href="add-website-here" target="_blank" rel="nofollow noopener">package delivery</a>-->
+<!--    </span>-->
+<!--  <span class="farm_right"> <a class="example_e" href="add-website-here" target="_blank" rel="nofollow noopener">farm observation</a>-->
+<!--  </span>-->
+<!--</div>-->

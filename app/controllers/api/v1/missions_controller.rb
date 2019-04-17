@@ -9,6 +9,24 @@ module Api
         respond_with Mission.all
       end
 
+      def ongoing_mission
+        @user = User.find(params[:id])
+        @missions = Mission.where(:status => "Ongoing")
+        respond_with @missions
+      end
+
+      def users_mission
+        @user = User.find(params[:id])
+        @missions = Mission.where(:user => @user)
+        respond_with @missions
+      end
+
+      def users_mission_last
+        @user = User.find(params[:id])
+        @missions = Mission.where(:user => @user)
+        respond_with @missions.last
+      end
+
       def create
         @mission = Mission.new(mission_params)
         if @mission.save
@@ -25,7 +43,7 @@ module Api
       end
 
       def mission_params
-        params.permit(:status, :name, :location_id, :weight, :drone_id)
+        params.permit(:status, :name, :location_id, :weight, :drone_id, :user_id)
       end
     end
   end

@@ -41,6 +41,7 @@ class MissionsController < ApplicationController
   def create
     @mission = Mission.new(mission_params.merge(user_id: current_user.id))
     @mission.status = "Saved"
+    @mission.mission_type = "Delivery"
 
     respond_to do |format|
       if @mission.save

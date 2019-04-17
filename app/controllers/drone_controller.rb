@@ -7,18 +7,16 @@ class DroneController < ApplicationController
   end
 
 
-def update
+  def update
 
-end
-
-
+  end
 
 
   def nav_logs_json
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone).order(:created_at)
 
-    render :json => @nav_logs
+    render :json => @nav_logs.last
   end
 
   def drone_mission
@@ -47,20 +45,20 @@ end
   def drone_tracker
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
-    if @nav_logs.blank?
-      @gps_latitude
-      @gps_longitude
-      @altitude
-      @battery_voltage
-      @battery_level
-      @battery_current
-      @ekf_ok
-      @is_armable
-      @system_status
-      @mode
-      @armed
-
-    else
+    # if @nav_logs.blank?
+    #   @gps_latitude
+    #   @gps_longitude
+    #   @altitude
+    #   @battery_voltage
+    #   @battery_level
+    #   @battery_current
+    #   @ekf_ok
+    #   @is_armable
+    #   @system_status
+    #   @mode
+    #   @armed
+    #
+    # else
       @gps_latitude= @nav_logs.last.gps_latitude
       @gps_longitude= @nav_logs.last.gps_longitude
       @altitude= @nav_logs.last.altitude
@@ -72,7 +70,7 @@ end
       @system_status=@nav_logs.last.system_status
       @mode = @nav_logs.last.mode
       @armed = @nav_logs.last.armed
-    end
+
     logger.debug(@drone.name)
   end
 
@@ -146,6 +144,10 @@ end
       child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
       # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
       Process.detach(child_pid)
+    else
+      child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 5 #{@mission.id} --drone_id #{@drone.id} --port 9091")
+      # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+      Process.detach(child_pid)
     end
 
     respond_to do |format|
@@ -161,19 +163,10 @@ end
 
   def drone_list
      @drones = Drone.order("created_at")
-    # user = current_user
-    # if user.admin
-    #
-    #   @drones = Drone.all
-    # else
-    #   @drones = Drone.where(:user => user)
-    # end
-
   end
 
   def drone_edit
     @drone = Drone.find(params[:id])
-    # @droneupdate= @drone.update(drone_params)
   end
 
   def drone_update

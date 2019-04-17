@@ -100,9 +100,9 @@
          <%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
             </td>
         <%end %>
-          <td> <% if mission.status == "Ongoing" %>
-            <%= link_to "done", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
-          <%end %>
+<!--          <td> <%# if mission.status == "Ongoing" %>-->
+            <%#= link_to "done", drone_mission_status_change_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
+          <%#end %>
         </td>
 
           <td> <% if mission.status == "Ongoing" %>
