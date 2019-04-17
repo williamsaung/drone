@@ -1,0 +1,167 @@
+<div class="navbar">
+  <%= link_to 'Home', index_index_path%>
+  <%= link_to 'New Mission', polygon_polygon_url %>
+
+</div>
+<div id="map"></div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB20MjR8dMVfD8qj8Z435dPb0pm4yAdeAE&callback=initMap"
+        async defer>
+</script>
+
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height:100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+  }
+</style>
+
+<script> //Get My Location
+// Note: This example requires that you consent to location sharing when
+// prompted by your browser. If you see the error "The Geolocation service
+// failed.", it means you probably did not give permission for the browser to
+// locate you.
+var map, infoWindow;
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 14.08003, lng: 100.60951},// Add base Latitude and Longitude here
+        zoom: 16
+        ,
+        mapTypeId: 'satellite'
+    });
+    infoWindow = new google.maps.InfoWindow;
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                // lat: position.coords.latitude,
+                // lng: position.coords.longitude
+                lat: 14.08003,
+                lng: 100.60951
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('BASE');
+            infoWindow.open(map);
+            map.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+}
+</script>
+
+
+<div class="navbar">
+
+
+</div>
+
+<style>
+  /*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+  * {
+
+    box-sizing: border-box;
+
+  }
+
+
+
+  /* Style the body */
+
+  body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    margin: 0;
+
+  }
+
+
+
+  /* Header/logo Title */
+
+  .header {
+
+    padding: 80px;
+
+    text-align: center;
+
+    background: #1abc9c;
+
+    color: white;
+
+  }
+
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+  }
+
+  /* Style the navigation bar links */
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+  }
+
+
+  /* Right-aligned link */
+  .navbar a.right {
+    float: right;
+  }
+
+  /* Change color on hover */
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  /* Active/current link */
+  .navbar a.active {
+    background-color: #666;
+    color: white;
+  }
+
+</style>

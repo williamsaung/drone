@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2019_04_17_134659) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +58,15 @@ ActiveRecord::Schema.define(version: 2019_04_17_134659) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mission_records", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "drone_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drone_id"], name: "index_mission_records_on_drone_id"
   end
 
   create_table "missions", force: :cascade do |t|
@@ -127,6 +138,7 @@ ActiveRecord::Schema.define(version: 2019_04_17_134659) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "drones", "users"
+  add_foreign_key "mission_records", "drones"
   add_foreign_key "missions", "drones"
   add_foreign_key "missions", "users"
   add_foreign_key "nav_logs", "drones"
