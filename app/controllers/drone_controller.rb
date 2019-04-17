@@ -45,20 +45,20 @@ class DroneController < ApplicationController
   def drone_tracker
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
-    if @nav_logs.blank?
-      @gps_latitude
-      @gps_longitude
-      @altitude
-      @battery_voltage
-      @battery_level
-      @battery_current
-      @ekf_ok
-      @is_armable
-      @system_status
-      @mode
-      @armed
-
-    else
+    # if @nav_logs.blank?
+    #   @gps_latitude
+    #   @gps_longitude
+    #   @altitude
+    #   @battery_voltage
+    #   @battery_level
+    #   @battery_current
+    #   @ekf_ok
+    #   @is_armable
+    #   @system_status
+    #   @mode
+    #   @armed
+    #
+    # else
       @gps_latitude= @nav_logs.last.gps_latitude
       @gps_longitude= @nav_logs.last.gps_longitude
       @altitude= @nav_logs.last.altitude
@@ -70,7 +70,7 @@ class DroneController < ApplicationController
       @system_status=@nav_logs.last.system_status
       @mode = @nav_logs.last.mode
       @armed = @nav_logs.last.armed
-    end
+
     logger.debug(@drone.name)
   end
 
