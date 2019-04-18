@@ -76,6 +76,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Date</th>
       <th>Name</th>
       <th>Location</th>
       <th>Weight</th>
@@ -88,6 +89,7 @@
   <tbody>
     <% @missions.each do |mission| %>
       <tr>
+        <td><%= mission.created_at.in_time_zone('Asia/Bangkok')  %></td>
         <td><%= mission.name %></td>
         <td><%= mission.location.name %></td>
         <td><%= mission.weight %></td>
@@ -113,7 +115,9 @@
           <td><% if mission.status == "Ongoing" %>
             <%= link_to "Terminate", drone_terminate_mission_path(:id => mission.id, :drone => mission.drone.id, :drone_status => "Available", :mission_status => "Done"), method: :put%></td>
               <%end %>
+            <td><%= link_to 'Destroy', mission, class: "btn btn-danger",method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
+
 
     <% end %>
   </tbody>
