@@ -4,36 +4,81 @@
 </head>
 
 <style>
+  .middle {
+    text-align: center;
+  }
 
+  .temp {
+    margin-left: 10px;
+    font-size: 40px;
+    font-weight: 500;
+  //line-height: 1.7em;
+    color: black;
+  }
+
+  .summary {
+    margin-top: 7px;
+    font-size: 40px;
+    font-weight: 500;
+  //line-height: 1.7em;
+    white-space: pre-line;
+    color: black;
+  }
+
+  .container1 {
+    color: #777;
+    font-weight: normal;
+  }
+
+  .pressure {
+    margin-left: 30px;
+  }
+
+  .humidity {
+    margin-left: 30px;
+  }
+
+  .visibility {
+    margin-left: 30px;
+  }
+
+  .led-green {
+  //margin: 0 auto;
+    width: 10px;
+    height: 10px;
+    background-color: #80ff00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+    display: inline-block;
+  }
 </style>
 
 <body>
-  <img src="/partly_cloudly.png">
   <div class="font_type">
-  <div class="middle">
-    <img src="/partly_cloudly.png"> <span class="temp"><%= @current_weather.temperature %> °F</span>
-    <div class="summary"> <%= @current_weather.summary %></div>
-    <div class="container1">
-      Wind:
-      <%= @current_weather.windSpeed %> mph
+    <div class="middle">
+      <img src="/partly_cloudly.png"> <span class="temp"><%= @current_weather.temperature %> °F</span>
+      <div class="summary"> <%= @current_weather.summary %></div>
+        <div class="container1">
+          Wind:
+          <%= @current_weather.windSpeed %> mph
 
-      <span class="pressure">
+          <span class="pressure">
           Pressure:
-        <%= @current_weather.pressure %> mb
-        </span>
+          <%= @current_weather.pressure %> mb
+          </span>
 
-      <span class="humidity">
+          <span class="humidity">
           Humidity:
-        <%= @current_weather.humidity * 100 %> %
-        </span>
+          <%= @current_weather.humidity * 100 %> %
+          </span>
 
-      <span class="visibility">
+          <span class="visibility">
           Visibility:
-        <%= @current_weather.visibility %> km
-        </span>
+          <%= @current_weather.visibility %> km
+          </span>
+        </div>
     </div>
   </div>
-</div>
 <hr>
 <h1>Available Drones</h1>
 <br>
