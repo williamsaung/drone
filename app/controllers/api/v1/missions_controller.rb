@@ -29,6 +29,7 @@ module Api
 
       def create
         @mission = Mission.new(mission_params)
+        @mission.mission_type = "Delivery"
         if @mission.save
           render json: @mission, status: :created
         else
