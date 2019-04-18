@@ -76,6 +76,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Date</th>
       <th>Name</th>
       <th>Location</th>
       <th>Weight</th>
@@ -88,6 +89,7 @@
   <tbody>
     <% @missions.each do |mission| %>
       <tr>
+        <td><%= mission.created_at.in_time_zone('Asia/Bangkok')  %></td>
         <td><%= mission.name %></td>
         <td><%= mission.location.name %></td>
         <td><%= mission.weight %></td>
