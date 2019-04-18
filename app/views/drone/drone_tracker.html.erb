@@ -321,7 +321,7 @@
 
 <div class="container">
   <h3>Drone Details <%= link_to 'Check Status', drone_check_status_path(drone: @drone.id), class: "btn btn-primary" %></h3>
-  <p><b>Please make sure the drone hardware safety switch is on.</b> Drone will emit a failure to arm sound to confirm connection.</p>
+  <p><b>Please make sure the drone is disarmed (not in flight) and the hardware safety switch is on.</b> Drone will emit a failure to arm sound to confirm connection.</p>
 </div>
 
 <div class="container">
