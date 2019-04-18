@@ -117,6 +117,7 @@ class DroneController < ApplicationController
       Process.detach(child_pid)
     end
 
+    sleep(2)
     redirect_to drone_drone_tracker_path(:drone=>@drone.id)
   end
 
