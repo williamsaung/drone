@@ -115,7 +115,9 @@
           <td><% if mission.status == "Ongoing" %>
             <%= link_to "Terminate", drone_terminate_mission_path(:id => mission.id, :drone => mission.drone.id, :drone_status => "Available", :mission_status => "Done"), method: :put%></td>
               <%end %>
+            <td><%= link_to 'Destroy', mission, class: "btn btn-danger",method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
+
 
     <% end %>
   </tbody>
