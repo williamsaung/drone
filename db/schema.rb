@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_08_114648) do
+ActiveRecord::Schema.define(version: 2019_04_17_134659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2019_04_08_114648) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mission_records", force: :cascade do |t|
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "drone_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drone_id"], name: "index_mission_records_on_drone_id"
+  end
+
   create_table "missions", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -84,11 +93,11 @@ ActiveRecord::Schema.define(version: 2019_04_08_114648) do
     t.float "battery_voltage"
     t.integer "battery_level"
     t.float "battery_current"
-    t.boolean "ekf_ok"
-    t.boolean "is_armable"
+    t.string "ekf_ok"
+    t.string "is_armable"
     t.string "system_status"
     t.string "mode"
-    t.boolean "armed"
+    t.string "armed"
     t.index ["drone_id"], name: "index_nav_logs_on_drone_id"
   end
 
@@ -127,6 +136,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_114648) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "drones", "users"
+  add_foreign_key "mission_records", "drones"
   add_foreign_key "missions", "drones"
   add_foreign_key "missions", "users"
   add_foreign_key "nav_logs", "drones"
