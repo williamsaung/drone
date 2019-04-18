@@ -70,6 +70,7 @@ class DroneController < ApplicationController
       @system_status=@nav_logs.last.system_status
       @mode = @nav_logs.last.mode
       @armed = @nav_logs.last.armed
+      @date = @nav_logs.last.created_at.in_time_zone('Asia/Bangkok')
 
     logger.debug(@drone.name)
   end
@@ -115,6 +116,8 @@ class DroneController < ApplicationController
       # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
       Process.detach(child_pid)
     end
+
+    redirect_to drone_drone_tracker_path(:drone=>@drone.id)
   end
 
   def status_change

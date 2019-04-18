@@ -337,6 +337,11 @@
     </tr>
 
     <tr>
+      <td><strong>Retrieved Date</strong></td>
+      <td><%= @date.blank? ? "Not Available" : @date %> </td>
+    </tr>
+
+    <tr>
       <td><strong>Last Location</strong></td>
       <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> </td>
     </tr>
