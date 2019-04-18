@@ -92,10 +92,17 @@ class MissionsController < ApplicationController
   # DELETE /missions/1
   # DELETE /missions/1.json
   def destroy
+    if current_user.admin
+      @users = User.all
+
     @mission.destroy
     respond_to do |format|
-      format.html { redirect_to missions_url, notice: 'Mission was successfully destroyed.' }
+      format.html { redirect_to missions_path, notice: 'Mission was successfully destroyed.' }
       format.json { head :no_content }
+    end
+
+    else
+      redirect_to missions_path, alert: "You need admin privileges."
     end
   end
 
