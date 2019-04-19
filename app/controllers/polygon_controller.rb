@@ -16,7 +16,7 @@ class PolygonController < ApplicationController
 
     puts coordinate_string
 
-    puts "python ~/drone-comms/drone/thrift/farm.py #{coordinate_string} 10 45 --drone_id #{@drone.id}"
+    puts "python ~/drone-comms/drone/thrift/farm.py '#{coordinate_string}' 10 45 --drone_id #{@drone.id}"
 
     if @drone.simulator?
       child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/farm.py '#{coordinate_string}' 10 45 --drone_id #{@drone.id}")
