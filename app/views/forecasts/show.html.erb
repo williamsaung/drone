@@ -1,182 +1,125 @@
-<!--<div class="center jumbotron">-->
-<!--<style>-->
-<!--  body {-->
-<!--    padding-top: 60px;-->
-<!--  }-->
+<!DOCTYPE html>
+<html>
+<head>
+</head>
 
-<!--  section {-->
-<!--    overflow: auto;-->
-<!--  }-->
+<style>
 
-<!--  textarea {-->
-<!--    resize: vertical;-->
-<!--  }-->
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+  }
 
-<!--  hr {-->
-<!--    display: block;-->
-<!--    margin-top: 0.5em;-->
-<!--    margin-bottom: 0.5em;-->
-<!--    margin-left: auto;-->
-<!--    margin-right: auto;-->
-<!--    border-style: inset;-->
-<!--    border-width: 1px;-->
-<!--  }-->
+  h1 {
+    font-size: 2em;
+    letter-spacing: -2px;
+  }
 
-<!--  .center {-->
-<!--    text-align: center;-->
-<!--  }-->
+  hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
 
-<!--  .center h1 {-->
-<!--    margin-bottom: 10px;-->
-<!--  }-->
+  .container {
+    padding: 10px;
+  }
 
-<!--  /* typography */-->
+  .middle {
+    text-align: center;
+  }
 
-<!--  h1, h2, h3, h4, h5, h6 {-->
-<!--    line-height: 1;-->
-<!--  }-->
+  .temp {
+    margin-left: 10px;
+    font-size: 40px;
+    font-weight: 500;
+    color: black;
+  }
 
-<!--  h1 {-->
-<!--    font-size: 2em;-->
-<!--    letter-spacing: -2px;-->
-<!--  //margin-bottom: 5px;-->
-<!--  //text-align: center;-->
-<!--  }-->
+  .summary {
+    margin-top: 7px;
+    font-size: 40px;
+    font-weight: 500;
+    white-space: pre-line;
+    color: black;
+  }
 
-<!--  h2 {-->
-<!--    font-size: 1.2em;-->
-<!--    letter-spacing: -1px;-->
-<!--    margin-bottom: 30px;-->
-<!--    text-align: center;-->
-<!--    font-weight: normal;-->
-<!--    color: #777;-->
-<!--  }-->
+  .container1 {
+    color: #777;
+    font-weight: normal;
+  }
 
-<!--  //p {-->
-<!--    //  font-size: 1.1em;-->
-<!--    //  line-height: 1.7em;-->
-<!--    //  white-space: pre-line;-->
-<!--    //}-->
+  .pressure {
+    margin-left: 30px;
+  }
 
+  .humidity {
+    margin-left: 30px;
+  }
 
-<!--  footer {-->
-<!--    margin-top: 200px;-->
-<!--    padding-top: 5px;-->
-<!--    border-top: 1px solid #eaeaea;-->
-<!--    color: #777;-->
-<!--  }-->
+  .visibility {
+    margin-left: 30px;
+  }
 
-<!--  footer a {-->
-<!--    color: #555;-->
-<!--  }-->
+  .weather_detail {
+    float: right;
+  }
 
-<!--  footer a:hover {-->
-<!--    color: #222;-->
-<!--  }-->
+  .led-green {
+  //margin: 0 auto;
+    width: 10px;
+    height: 10px;
+    background-color: #80ff00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+    display: inline-block;
+  }
+</style>
 
-<!--  footer small {-->
-<!--    float: left;-->
-<!--  }-->
+<body>
+  <div class="container">
+    <div class="middle">
+      <img src="/partly_cloudly.png" width="120" height="100" alt="weather icon"> <span class="temp"><%= @current_weather.temperature %> °F</span>
+      <div class="summary"> <%= @current_weather.summary %></div>
+        <div class="container1">
+          Wind:
+          <%= @current_weather.windSpeed %> mph
 
-<!--  footer ul {-->
-<!--    float: right;-->
-<!--    list-style: none;-->
-<!--  }-->
+          <span class="pressure">
+            Pressure:
+            <%= @current_weather.pressure %> mb
+          </span>
 
-<!--  footer ul li {-->
-<!--    float: left;-->
-<!--    margin-left: 15px;-->
-<!--  }-->
+          <span class="humidity">
+            Humidity:
+            <%= @current_weather.humidity * 100 %> %
+          </span>
 
-<!--  /*weather*/-->
-<!--  .middle {-->
-<!--    text-align: center;-->
-<!--  }-->
+          <span class="visibility">
+            Visibility:
+            <%= @current_weather.visibility %> km
+          </span>
 
-<!--  .font_type {-->
-<!--    font-family: Times;-->
-<!--  }-->
-
-<!--  .summary {-->
-<!--    margin-top: 7px;-->
-<!--    font-size: 40px;-->
-<!--    font-weight: 500;-->
-<!--  /*//line-height: 1.7em;*/-->
-<!--    white-space: pre-line;-->
-<!--    color: black;-->
-<!--  }-->
-<!--  /*//.container1 {*/-->
-<!--    /*//  font-family: Arial;*/-->
-<!--    /*//}*/-->
-
-<!--  .temp {-->
-<!--    margin-left: 10px;-->
-<!--    font-size: 40px;-->
-<!--    font-weight: 500;-->
-<!--  /*//line-height: 1.7em;*/-->
-<!--    color: black;-->
-<!--  }-->
-
-<!--  .container1 {-->
-<!--    color: #777;-->
-<!--    font-weight: normal;-->
-<!--  }-->
-
-<!--  //.weather_value {-->
-<!--    //  color: #777;-->
-<!--    //  //font-size: 1.1em;-->
-<!--    //  font-weight: normal;-->
-<!--    //}-->
-<!--  //-->
-<!--  //.weather_label {-->
-<!--    //  color: #777;-->
-<!--    //  //font-size: 1.1em;-->
-<!--    //  font-weight: normal;-->
-<!--    //}-->
-
-<!--  .pressure {-->
-<!--    margin-left: 30px;-->
-<!--  }-->
-
-<!--  .humidity {-->
-<!--    margin-left: 30px;-->
-<!--  }-->
-
-<!--  .visibility {-->
-<!--    margin-left: 30px;-->
-<!--  }-->
-
-<!--  .pressure {-->
-<!--    margin-left: 30px;-->
-<!--  }-->
-
-
-<!--</style>-->
-<!--<div class="font_type">-->
-<!--  <div class="middle">-->
-<!--    <%#= image_tag "partly_cloudly.png", :size => "120x100" %> <span class="temp"><%#= @current_weather.temperature %> °F</span>-->
-<!--    <div class="summary"> <%#= @current_weather.summary %></div>-->
-<!--    <div class="container1">-->
-<!--      Wind:-->
-<!--      <%#= @current_weather.windSpeed %> mph-->
-
-<!--      <span class="pressure">-->
-<!--          Pressure:-->
-<!--        <%#= @current_weather.pressure %> mb-->
-<!--        </span>-->
-
-<!--      <span class="humidity">-->
-<!--          Humidity:-->
-<!--        <%#= @current_weather.humidity * 100 %> %-->
-<!--        </span>-->
-
-<!--      <span class="visibility">-->
-<!--          Visibility:-->
-<!--        <%#= @current_weather.visibility %> km-->
-<!--        </span>-->
-<!--    </div>-->
-<!--    <hr>-->
-<!--  </div>-->
-<!--</div>-->
-<%= link_to 'Open Door', base_open_door_path, method: :put %>
-<%= link_to 'Close Door', base_close_door_path, method: :put %>
+          <span class="weather_detail">
+            <%= link_to 'more details', forecasts_details_path, method: :get %>
+          </span>
+        </div>
+    </div>
+    <hr>
+    <h1>Available Drones</h1>
+    <br>
+    <div>
+      <span class="led-green"></span> Drone1 ----- Battery: 80% |
+      <!--  <span class="led-green"></span> Drone2 | Battery: 60%-->
+    </div>
+    <div>
+      <span class="led-green"></span> Drone2 ----- Battery: 60%
+    </div>
+    <%= link_to 'Open Door', base_open_door_path, method: :put %>
+    <%= link_to 'Close Door', base_close_door_path, method: :put %>
+  </div>
+</body>
+</html>
