@@ -4,7 +4,8 @@
 <body onload="initialize()">
 <div id="map-canvas"></div>
 <button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('info').innerHTML)">Copy to Clipboard</button>
-<button id="send-btn" onclick="sendData(coordinates)">Send Data</button>
+<button id="send-btn-sim" onclick="sendData(coordinates, 1)">Send Data to Sim</button>
+<button id="send-btn" onclick="sendData(coordinates, 2)">Send Data</button>
 <textarea id="info" style="width: 327px; height: 131px; position: -ms-device-fixed"></textarea>
 
 <style>
@@ -123,12 +124,12 @@
         document.getElementById("info").innerHTML = coordinates;
     }
 
-    function sendData(array) {
+    function sendData(array,sim) {
         var csrf = $("meta[name='csrf-token']").attr('content');
         $.ajax({
             type: "POST",
-            data: {authenticity_token:csrf, coordinates:array},
-            url: "/polygon/polygon",
+            data: {authenticity_token:csrf, coordinates:array, drone: sim},
+            url: "/polygon/send_coordinates",
             async: false,
             success: function(msg){
                 $('.answer').html(msg);
