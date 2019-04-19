@@ -4,6 +4,7 @@
 <body onload="initialize()">
 <div id="map-canvas"></div>
 <button id="clipboard-btn" onclick="copyToClipboard(document.getElementById('info').innerHTML)">Copy to Clipboard</button>
+<button id="send-btn" onclick="sendData(coordinates)">Send Data</button>
 <textarea id="info" style="width: 327px; height: 131px; position: -ms-device-fixed"></textarea>
 
 <style>
@@ -51,6 +52,7 @@
         async defer>
 </script>
 <script>
+    var coordinates = [];
     //var myPolygon;
     function initialize() {
         // Map Center
@@ -103,27 +105,38 @@
         var len = myPolygon.getPath().getLength();
         var htmlStr = "";
         for (var i = 0; i < len; i++) {
+            coordinates.push(myPolygon
+                .getPath()
+                .getAt(i)
+                .toUrlValue(5));
             htmlStr +=
-                "new google.maps.LatLng(" +
+                `{coordinate${i+1}: ` +
                 myPolygon
                     .getPath()
                     .getAt(i)
                     .toUrlValue(5) +
-                "), ";
+                `}, `;
             //Use this one instead if you want to get rid of the wrap > new google.maps.LatLng(),
             //htmlStr += "" + myPolygon.getPath().getAt(i).toUrlValue(5);
         }
-        document.getElementById("info").innerHTML = htmlStr;
+        console.log(coordinates);
+        document.getElementById("info").innerHTML = coordinates;
     }
 
-    function sendData() {
-       JSON.parse(
-            $.ajax({type: "POST", url: "/polygon", data: htmlStr, async: false}).responseText
-        );
+    function sendData(array) {
+        var csrf = $("meta[name='csrf-token']").attr('content');
+        $.ajax({
+            type: "POST",
+            data: {authenticity_token:csrf, coordinates:array},
+            url: "/polygon/polygon",
+            async: false,
+            success: function(msg){
+                $('.answer').html(msg);
+            }
+        });
 
-        console.log(navlogs);
-
-        return navlogs;
+        // var json_data = JSON.stringify(json_string);
+        // console.log(json_data);
     }
 
     function addhtmlStr(htmlStr) {
@@ -136,6 +149,7 @@
     }
 
     function copyToClipboard(text) {
+        // sendData(text);
         window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
     }
 

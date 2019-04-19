@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'polygon/polygon' => 'polygon#polygon'
 
   post '/auth/login', to: 'api/v1/authentication#login'
 
