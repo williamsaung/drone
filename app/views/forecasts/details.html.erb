@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+</head>
+
 <style>
-  /*pointer hover*/
+  .container {
+    padding: 10px;
+  }
+
+  hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
 
   .pointer {
     cursor: pointer;
-
-  &:hover {
-     color: lightslategray;
-   }
   }
 
-  /*date and day*/
+  .pointer:hover {
+    color: lightslategray;
+  }
 
   .date {
     font-size: 27px;
@@ -25,11 +42,6 @@
   .text_position {
     text-align: center;
     margin-top: 2px;
-  /*//font-size: 35px;*/
-  /*//font-weight: 500;*/
-  /*//line-height: 1.7em;*/
-  /*//white-space: pre-line;*/
-  /*//color: black;*/
   }
 
   .daily_summary {
@@ -37,19 +49,62 @@
     font-weight: 300;
     color: black;
   }
+
+  .container1 {
+    color: #777;
+    font-weight: normal;
+  }
 </style>
 
 <script>
-    function myFunction(number) {
+    function myFunction(number, date) {
         var detail_no = [1, 2, 3, 4, 5, 6, 7];
         var i;
+
+        console.log(date);
+
+        var navlogs = JSON.parse(
+            $.ajax({type: "GET", url: `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/925ddee07107b0b3e46966edd64132b0/14.0754804,100.6100677,${date}`, async: false}).responseText
+        );
+
+        console.log(navlogs);
+
+        var  b = document.getElementById(`holder${number}`).innerHTML;
+        if (b == "") {
+            for ( var i=0; i < 24; i++ ) {
+
+                var convt = navlogs.hourly.data[i].time;
+                var dte = new Date(convt*1000);
+                var hours = dte.getHours();
+                var minutes = "0" + dte.getMinutes();
+
+                var ampm = "am";
+                if( hours >= 12 ) {
+                    hours -= 12;
+                    ampm = "pm";
+                }
+                if( hours === 0) {
+                    hours = 12;
+                }
+
+                var formattedTime = hours + ':' + minutes.substr(-2);
+                document.getElementById(`holder${number}`).innerHTML += formattedTime + ampm + "--->" + " " + "Temp:" + " " + navlogs.hourly.data[i].temperature + "<br>";
+                // holder.innerHTML += "<p>" + navlogs.hourly.data[i].temperature + "</p>";
+            }
+        }
+
 
         var x = document.getElementById(`detail${number}`);
         if (x.style.display === "none") {
             x.style.display = "block";
         }
+
+        var show = document.getElementById(`holder${number}`);
+        if (show.style.display === "none") {
+            show.style.display = "block";
+        }
         // else {
-        //     x.style.display = "none";
+        //     show.style.display = "none";
         // }
 
         for (i = 1; i <= detail_no.length; i++) {
@@ -63,6 +118,8 @@
                 btn.style.color = "black";
                 var y = document.getElementById(`detail${i}`);
                 y.style.display = "none";
+                var temp = document.getElementById(`holder${i}`);
+                temp.style.display = "none";
             }
 
         }
@@ -71,12 +128,12 @@
 </script>
 <body>
 
-<div class="font_type">
+<div class="container">
   <table>
     <tr>
       <% b = 1 %>
       <% @daily_weather.each do |day| %>
-        <td id="btn<%= b %>" class="pointer" onclick="myFunction(<%= b %>)">
+        <td id="btn<%= b %>" class="pointer" onclick="myFunction(<%= b %>, <%= Time.at(day.time).to_i %>)">
           <span class="date"> <%= Time.at(day.time).strftime('%A') %> </span><br>
           <span class="day"> <%= Time.at(day.time).strftime('%D') %> </span>
         </td>
@@ -104,19 +161,14 @@
 
     <% a = a + 1 %>
   <% end %>
-  <% i = 1 %>
-  <%#= Time.now.getlocal('-09:00') %>
-  <% @hourly_weather.each do |hour| %>
-    <%= Time.at(hour.time).strftime("%I:%M %p") %><br>
-    <%= i %>
-    <%= hour.summary %><br>
-    <% i = i + 1 %>
-  <% end %></div>
+
 <br>
-<!--<%#= Time.at(@day.time).strftime('%A') %><br>-->
-
-<!--<p class="pointer" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Click Me!</p>-->
-<!--<p id="demo">JavaScript can change HTML content.</p>-->
-
+<% z = 1 %>
+<% array = [1,2,3,4,5,6,7] %>
+<% array.each do |more| %>
+  <p class="daily_detail" id="holder<%= z %>"></p>
+  <% z = z + 1 %>
+<% end %>
+</div>
 </body>
 </html>

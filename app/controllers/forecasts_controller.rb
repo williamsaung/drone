@@ -7,18 +7,20 @@ class ForecastsController < ApplicationController
     @weather = @forecast.get_weather_data
     @current_weather = @weather.currently
 
+    @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
+    @real_battery = NavLog.where(:drone_id => 2).last.battery_level
   end
 
-  def http
-    require 'net/http'
-    require 'json'
-    url = URI.parse('http://cryptic-cove-44054.herokuapp.com/api/v1/show')
-    req = Net::HTTP::Get.new(url.to_s)
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
-    @aa = JSON.parse(res.body)
-  end
+  # def http
+  #   require 'net/http'
+  #   require 'json'
+  #   url = URI.parse('http://cryptic-cove-44054.herokuapp.com/api/v1/show')
+  #   req = Net::HTTP::Get.new(url.to_s)
+  #   res = Net::HTTP.start(url.host, url.port) {|http|
+  #     http.request(req)
+  #   }
+  #   @aa = JSON.parse(res.body)
+  # end
 
   def details
     @forecast = Forecast.new(:lat => 14.0754804, :lng => 100.6100677)
