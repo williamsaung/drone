@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post 'emergency_mission_sim', to: 'drone#emergency_mission_sim'
 
       resources :drone_availables
+      post 'available', to: 'drone_availables#available'
     end
   end
 

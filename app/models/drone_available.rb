@@ -1,2 +1,3 @@
 class DroneAvailable < ApplicationRecord
+
 end
