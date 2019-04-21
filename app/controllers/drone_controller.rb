@@ -170,7 +170,7 @@ class DroneController < ApplicationController
     @current_weather = @weather.currently.icon
     puts @current_weather
 
-    if @current_weather == "rain"
+    if @current_weather == "clear-day"
       render html: "<script>alert('No users!')</script>".html_safe
     else
       @mission = Mission.find(params[:id])
