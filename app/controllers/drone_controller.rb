@@ -170,41 +170,101 @@ class DroneController < ApplicationController
   end
 
   def mission_status_change
+    @forecast = Forecast.new()
+    @forecast.save
+    @weather = @forecast.get_weather_data
+    @current_weather = @weather.currently.icon
+    puts @current_weather
 
-    @mission = Mission.find(params[:id])
-    gps_latitude = @mission.location.latitude
-    gps_longitude = @mission.location.longitude
-
-    @drone = Drone.find(@mission.drone.id)
-    @drone.status = params[:drone_status]
-    @drone.save
-
-    @mission.status = params[:mission_status]
-    @mission.save
-
-    connection_string = @drone.connection_string
-    puts "Executing command 'python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
-
-    # For simulators
-    if @drone.simulator?
-      child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 10 #{@mission.id} --drone_id #{@drone.id}")
-      # child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
-      # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
-      Process.detach(child_pid)
+    if @current_weather == "rain"
+      render html: "<script>alert('No users!')</script>".html_safe
     else
-      child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 10 #{@mission.id} --drone_id #{@drone.id} --port 9091")
-      # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
-      Process.detach(child_pid)
+      @mission = Mission.find(params[:id])
+      gps_latitude = @mission.location.latitude
+      gps_longitude = @mission.location.longitude
+
+      @drone = Drone.find(@mission.drone.id)
+      @drone.status = params[:drone_status]
+      @drone.save
+
+      @mission.status = params[:mission_status]
+      @mission.save
+
+      connection_string = @drone.connection_string
+      puts "Executing command 'python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
+
+      # For simulators
+      if @drone.simulator?
+        child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 10 #{@mission.id} --drone_id #{@drone.id}")
+        # child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+        # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+        Process.detach(child_pid)
+      else
+        child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 10 #{@mission.id} --drone_id #{@drone.id} --port 9091")
+        # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+        Process.detach(child_pid)
+      end
+
+      respond_to do |format|
+        if @mission.update(drone_params)
+          format.html { redirect_to missions_path, notice: 'Drone status has been updated.' }
+          format.json { render :show, status: :ok, location: @mission }
+        else
+          format.html { render :edit }
+          format.json { render json: @mission.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
-    respond_to do |format|
-      if @mission.update(drone_params)
-        format.html { redirect_to missions_path, notice: 'Drone status has been updated.' }
-        format.json { render :show, status: :ok, location: @mission }
-      else
-        format.html { render :edit }
-        format.json { render json: @mission.errors, status: :unprocessable_entity }
-      end
+    # @mission = Mission.find(params[:id])
+    # gps_latitude = @mission.location.latitude
+    # gps_longitude = @mission.location.longitude
+    #
+    # @drone = Drone.find(@mission.drone.id)
+    # @drone.status = params[:drone_status]
+    # @drone.save
+    #
+    # @mission.status = params[:mission_status]
+    # @mission.save
+    #
+    # connection_string = @drone.connection_string
+    # puts "Executing command 'python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
+    #
+    # # For simulators
+    # if @drone.simulator?
+    #   child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 10 #{@mission.id} --drone_id #{@drone.id}")
+    #   # child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+    #   # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+    #   Process.detach(child_pid)
+    # else
+    #   child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{gps_latitude} #{gps_longitude} 10 #{@mission.id} --drone_id #{@drone.id} --port 9091")
+    #   # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
+    #   Process.detach(child_pid)
+    # end
+
+    # respond_to do |format|
+    #   if @mission.update(drone_params)
+    #     format.html { redirect_to missions_path, notice: 'Drone status has been updated.' }
+    #     format.json { render :show, status: :ok, location: @mission }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @mission.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
+  def weather_check
+    @forecast = Forecast.new()
+    @forecast.save
+    @weather = @forecast.get_weather_data
+    @current_weather = @weather.currently.icon
+    puts @current_weather
+    # render html: @current_weather
+
+    if @current_weather == "clear-day"
+        render html: "<script>alert('No users!')</script>".html_safe
+    else
+      redirect_to drone_mission_status_change_path
     end
   end
 
