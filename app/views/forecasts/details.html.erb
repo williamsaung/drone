@@ -68,35 +68,36 @@
         );
 
         console.log(navlogs);
-        // document.getElementById("1kuku").innerHTML = navlogs.hourly.data[0].temperature;
-        // var holder = document.getElementById("holder");
-        // var day = navlogs.hourly.data[i].temperature
-        for ( var i=0; i < 24; i++ ) {
 
-            var convt = navlogs.hourly.data[i].time;
-            var dte = new Date(convt*1000);
-            var hours = dte.getHours();
-            var minutes = "0" + dte.getMinutes();
+        var  b = document.getElementById(`holder${number}`).innerHTML;
+        if (b == "") {
+            for ( var i=0; i < 24; i++ ) {
 
-            var ampm = "am";
-            if( hours >= 12 ) {
-                hours -= 12;
-                ampm = "pm";
+                var convt = navlogs.hourly.data[i].time;
+                var dte = new Date(convt*1000);
+                var hours = dte.getHours();
+                var minutes = "0" + dte.getMinutes();
+
+                var ampm = "am";
+                if( hours >= 12 ) {
+                    hours -= 12;
+                    ampm = "pm";
+                }
+                if( hours === 0) {
+                    hours = 12;
+                }
+
+                var formattedTime = hours + ':' + minutes.substr(-2);
+                document.getElementById(`holder${number}`).innerHTML += formattedTime + ampm + "--->" + " " + "Temp:" + " " + navlogs.hourly.data[i].temperature + "<br>";
+                // holder.innerHTML += "<p>" + navlogs.hourly.data[i].temperature + "</p>";
             }
-            if( hours === 0) {
-                hours = 12;
-            }
-
-            var formattedTime = hours + ':' + minutes.substr(-2);
-            document.getElementById(`holder${number}`).innerHTML += formattedTime + ampm + "--->" + " " + "Temperature:" + navlogs.hourly.data[i].temperature + "|" + "Wind:" + navlogs.hourly.data[i].windSpeed  + "<br>";
-            // holder.innerHTML += "<p>" + navlogs.hourly.data[i].temperature + "</p>";
         }
+
 
         var x = document.getElementById(`detail${number}`);
         if (x.style.display === "none") {
             x.style.display = "block";
         }
-
 
         var show = document.getElementById(`holder${number}`);
         if (show.style.display === "none") {
@@ -105,8 +106,6 @@
         // else {
         //     show.style.display = "none";
         // }
-
-
 
         for (i = 1; i <= detail_no.length; i++) {
             if (i === number) {
@@ -162,6 +161,7 @@
 
     <% a = a + 1 %>
   <% end %>
+
 <br>
 <% z = 1 %>
 <% array = [1,2,3,4,5,6,7] %>
@@ -170,6 +170,5 @@
   <% z = z + 1 %>
 <% end %>
 </div>
-
 </body>
 </html>

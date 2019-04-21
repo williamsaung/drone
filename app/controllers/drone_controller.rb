@@ -24,6 +24,9 @@ class DroneController < ApplicationController
   end
 
   def terminate_mission
+    if current_user.admin
+
+
     @mission = Mission.find(params[:id])
 
     @drone = Drone.find(@mission.drone.id)
@@ -46,25 +49,16 @@ class DroneController < ApplicationController
     end
 
     redirect_to missions_path
+
+    else
+      redirect_to missions_path, alert: "You need admin privileges."
+    end
   end
 
   def drone_tracker
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
-    # if @nav_logs.blank?
-    #   @gps_latitude
-    #   @gps_longitude
-    #   @altitude
-    #   @battery_voltage
-    #   @battery_level
-    #   @battery_current
-    #   @ekf_ok
-    #   @is_armable
-    #   @system_status
-    #   @mode
-    #   @armed
-    #
-    # else
+
       @gps_latitude= @nav_logs.last.gps_latitude
       @gps_longitude= @nav_logs.last.gps_longitude
       @altitude= @nav_logs.last.altitude

@@ -49,6 +49,8 @@
         <a href="/" class="btn btn-info" role="button">Home</a>
         <a href="https://validator.w3.org" class="btn btn-info" role="button">Validate this Site</a>
         <a href="/posts" class="btn btn-info" role="button">Forum</a>
+        <a href="/forecasts/show" class="btn btn-info" role="button">Weather Forecast</a>
+
         <% if user_signed_in? %>
           <% if current_user.admin %>
             <a href="/drone/users_list" class="btn btn-info" role="button">User Management</a>
