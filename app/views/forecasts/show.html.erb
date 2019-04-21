@@ -87,6 +87,10 @@
     margin-left: 30px;
   }
 
+  .icon {
+    margin-left: 30px;
+  }
+
   .weather_detail {
     float: right;
   }
@@ -194,6 +198,11 @@
           <span class="visibility">
             Visibility:
             <%= @current_weather.visibility %> km
+          </span>
+
+          <span class="icon">
+            Icon:
+            <%= @current_weather.icon %>
           </span>
 
           <span class="weather_detail">

@@ -168,9 +168,9 @@ class DroneController < ApplicationController
     @forecast.save
     @weather = @forecast.get_weather_data
     @current_weather = @weather.currently.icon
-    puts @current_weather
+    # puts @current_weather
 
-    if @current_weather == "rain" || "snow" || "sleet"
+    if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
       redirect_to missions_path, alert: "BAD WEATHER!"
     else
       @mission = Mission.find(params[:id])
@@ -209,6 +209,7 @@ class DroneController < ApplicationController
         end
       end
     end
+  end
 
     # @mission = Mission.find(params[:id])
     # gps_latitude = @mission.location.latitude
@@ -245,7 +246,7 @@ class DroneController < ApplicationController
     #     format.json { render json: @mission.errors, status: :unprocessable_entity }
     #   end
     # end
-  end
+  # end
 
   def weather_check
     @forecast = Forecast.new()
