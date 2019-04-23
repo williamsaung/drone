@@ -72,14 +72,12 @@
       <div class="card bg-light mt-5">
 
         <div class="card-body">
-          <h4 class="card-title">Name :<%= drone.name %> </h4>
-          <p class="font-weight-bold"> Status:<%= drone.status %> </p>
-          <p>Drone ID:<%= drone.id %></p>
-          <p>Connection String:<%= drone.connection_string %></p>
-          <p>Description:<%= drone.description %></p>
-          <p><%= link_to 'Settings', drone_drone_edit_path(drone) %></p>
-
-
+          <h4 class="card-title">Name: <%= drone.name %> </h4>
+          <p class="font-weight-bold"> Status: <%= drone.status %> </p>
+          <p>Drone ID: <%= drone.id %></p>
+          <p>Connection String: <%= drone.connection_string %></p>
+          <p>Description: <%= drone.description %></p>
+          <p><%= link_to 'Edit', drone_drone_edit_path(drone), class: "btn btn-primary" %></p>
         </div>
         <ul class="list-group list-group-flush">
         </ul>

@@ -123,10 +123,10 @@
       <div class="card-body">
         <strong class="card-title">Drone Overview</strong>
         <hr>
-        <p class="card-text">Total Drones: <%= @drone_count%></p>
-        <p class="card-text">Last Created Drone Name: <%= @last_drone.blank? ? "Not Available" : @last_drone%></p>
-        <p class="card-text">Status: <%= @last_status.blank? ? "Not Available" : @last_status%></p>
-        <p class="card-text">Last known Location: Latitude :<%= @last_latitude.blank? ? "Not Available" : @last_latitude %> & Longitude: <%= @last_longitude.blank? ? "Not Available" : @last_longitude  %></p>
+        <h4 class="card-text">Total Drones: <%= @drone_count%></h4>
+        <h4 class="card-text">Last Created Drone Name: <%= @last_drone.blank? ? "Not Available" : @last_drone%></h4>
+        <h4 class="card-text">Status: <%= @last_status.blank? ? "Not Available" : @last_status%></h4>
+        <h4 class="card-text">Last known Location: Latitude :<%= @last_latitude.blank? ? "Not Available" : @last_latitude %> & Longitude: <%= @last_longitude.blank? ? "Not Available" : @last_longitude  %></h4>
         <%= link_to 'Track this drone', drone_drone_tracker_path(drone: Drone.last), class: "btn btn-primary" %>
 
       </div>
@@ -137,9 +137,9 @@
       <div class="card-body">
         <strong class="card-title">Mission Overview</strong>
         <hr>
-        <p class="card-text">Total Missions: <%= @mission_count%></p>
-        <p class="card-text">Last Created Mission Name: <%= @last_mission.blank? ? "Not Available" : @last_mission%></p>
-        <p class="card-text">Last Created Mission Destined Location: <%= @last_location.blank? ? "Not Available" : @last_location%></p>
+        <h4 class="card-text">Total Missions: <%= @mission_count%></h4>
+        <h4 class="card-text">Last Created Mission Name: <%= @last_mission.blank? ? "Not Available" : @last_mission%></h4>
+        <h4 class="card-text">Last Created Mission Destined Location: <%= @last_location.blank? ? "Not Available" : @last_location%></h4>
         <a href="/missions" class="btn btn-primary">Show all mission</a>
       </div>
     </div>
