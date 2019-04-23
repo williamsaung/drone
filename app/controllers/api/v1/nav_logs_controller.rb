@@ -9,9 +9,8 @@ module Api
       end
 
       def last_navlog
-
         @drone= Drone.find(params[:id])
-        @nav_logs = NavLog.where(drone:@drone)
+        @nav_logs = NavLog.where(drone: @drone)
         respond_with @nav_logs.last
       end
 
@@ -33,7 +32,6 @@ module Api
         @nav_log.system_status= params[:system_status]
         @nav_log.mode= params[:mode]
         @nav_log.armed= params[:armed]
-
         @nav_log.drone_id = params[:drone_id]
         @nav_log.save
       end

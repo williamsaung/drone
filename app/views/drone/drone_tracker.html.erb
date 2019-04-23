@@ -334,7 +334,11 @@
 
     <tr>
       <td><strong>Status</strong></td>
-      <td><%= @drone.status %></td>
+      <% if @drone.status != "Available" %>
+        <td><strong><%= @drone.status %></strong></td>
+      <% else %>
+        <td><%= @drone.status %></td>
+      <% end %>
     </tr>
 
     <tr>

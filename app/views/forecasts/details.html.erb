@@ -64,7 +64,7 @@
         console.log(date);
 
         var navlogs = JSON.parse(
-            $.ajax({type: "GET", url: `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/925ddee07107b0b3e46966edd64132b0/14.0754804,100.6100677,${date}`, async: false}).responseText
+            $.ajax({type: "GET", url: `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/925ddee07107b0b3e46966edd64132b0/14.0754804,100.6100677,${date}?exclude=currently, daily, flags`, async: false}).responseText
         );
 
         console.log(navlogs);
@@ -88,7 +88,7 @@
                 }
 
                 var formattedTime = hours + ':' + minutes.substr(-2);
-                document.getElementById(`holder${number}`).innerHTML += formattedTime + ampm + "--->" + " " + "Temp:" + " " + navlogs.hourly.data[i].temperature + "<br>";
+                document.getElementById(`holder${number}`).innerHTML += formattedTime + ampm + " " + "---" + " " + "Temp:" + " " + navlogs.hourly.data[i].temperature + " " + "|" + " " + "Windspeed" + ":" + " " + navlogs.hourly.data[i].windSpeed + " " + "|" + " " + navlogs.hourly.data[i].icon + "<br>" + "<hr>";
                 // holder.innerHTML += "<p>" + navlogs.hourly.data[i].temperature + "</p>";
             }
         }
@@ -98,6 +98,8 @@
         if (x.style.display === "none") {
             x.style.display = "block";
         }
+
+
 
         var show = document.getElementById(`holder${number}`);
         if (show.style.display === "none") {
@@ -128,47 +130,48 @@
 </script>
 <body>
 
-<div class="container">
-  <table>
-    <tr>
-      <% b = 1 %>
-      <% @daily_weather.each do |day| %>
-        <td id="btn<%= b %>" class="pointer" onclick="myFunction(<%= b %>, <%= Time.at(day.time).to_i %>)">
+  <div class="container">
+    <table>
+      <tr>
+        <% b = 1 %>
+        <% @daily_weather.each do |day| %>
+          <td id="btn<%= b %>" class="pointer" onclick="myFunction(<%= b %>, <%= Time.at(day.time).to_i %>)">
           <span class="date"> <%= Time.at(day.time).strftime('%A') %> </span><br>
-          <span class="day"> <%= Time.at(day.time).strftime('%D') %> </span>
-        </td>
-        <% b = b + 1 %>
-      <% end %>
-    </tr>
-  </table>
-  <hr>
-  <br>
+            <span class="day"> <%= Time.at(day.time).strftime('%D') %> </span>
+          </td>
+          <% b = b + 1 %>
+        <% end %>
+      </tr>
+    </table>
+        <hr>
+        <br>
+        <% a = 1 %>
+        <% @daily_weather.each do |day| %>
+          <p class="text_position" id="detail<%= a %>"
+             <% if Time.at(day.time).strftime('%A') == Time.now.strftime('%A') %>
+             style="display: block"
+             <% else %>
+             style="display: none"
+             <% end %>
+             >
 
-  <% a = 1 %>
-  <% @daily_weather.each do |day| %>
-    <p class="text_position" id="detail<%= a %>"
-       <% if Time.at(day.time).strftime('%A') == Time.now.strftime('%A') %>
-       style="display: block"
-       <% else %>
-       style="display: none"
-       <% end %>
-       >
+            <span class="daily_summary"> <%= day.summary %> </span><br>
+            <span class="container1"> High: <%= day.apparentTemperatureMax %> | Low: <%= day.apparentTemperatureMin %><br>
+            Windspeed: <%= day.windSpeed %> </span> <br>
+          </p>
+          <% a = a + 1 %>
+        <% end %>
+        <br>
 
-      <span class="daily_summary"> <%= day.summary %> </span><br>
-      <span class="container1"> High: <%= day.apparentTemperatureMax %> | Low: <%= day.apparentTemperatureMin %><br>
-      Windspeed: <%= day.windSpeed %> </span> <br>
-    </p>
 
-    <% a = a + 1 %>
-  <% end %>
 
-<br>
 <% z = 1 %>
-<% array = [1,2,3,4,5,6,7] %>
-<% array.each do |more| %>
-  <p class="daily_detail" id="holder<%= z %>"></p>
-  <% z = z + 1 %>
-<% end %>
-</div>
+    <% array = [1,2,3,4,5,6,7] %>
+    <% array.each do |more| %>
+       <p class="daily_detail" id="holder<%= z %>"></p>
+      <% z = z + 1 %>
+    <% end %>
+  </div>
+
 </body>
 </html>
