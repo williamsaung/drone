@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :mission_records
   get 'mission_records/index'
   get 'polygon/polygon'
   get 'welcome/index'

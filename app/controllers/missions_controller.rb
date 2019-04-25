@@ -12,6 +12,7 @@ class MissionsController < ApplicationController
     else
       @missions = Mission.where(:user => user)
     end
+
   end
 
   # GET /missions/1
@@ -114,7 +115,7 @@ class MissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mission_params
-      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id, :user_id)
+      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id, :user_id, :lock_version)
     end
 end
 

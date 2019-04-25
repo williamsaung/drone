@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_17_134659) do
+ActiveRecord::Schema.define(version: 2019_04_23_131501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_04_17_134659) do
     t.string "connection_string"
     t.string "description"
     t.boolean "simulator"
+    t.integer "lock_version", default: 0, null: false
     t.index ["user_id"], name: "index_drones_on_user_id"
   end
 
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_04_17_134659) do
     t.integer "mission_id"
     t.bigint "user_id"
     t.string "mission_type"
+    t.integer "lock_version", default: 0, null: false
     t.index ["drone_id"], name: "index_missions_on_drone_id"
     t.index ["user_id"], name: "index_missions_on_user_id"
   end

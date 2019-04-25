@@ -59,6 +59,8 @@ class DroneController < ApplicationController
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
 
+
+
       @gps_latitude= @nav_logs.last.gps_latitude
       @gps_longitude= @nav_logs.last.gps_longitude
       @altitude= @nav_logs.last.altitude
@@ -176,13 +178,12 @@ class DroneController < ApplicationController
       @mission = Mission.find(params[:id])
       gps_latitude = @mission.location.latitude
       gps_longitude = @mission.location.longitude
+      @mission.status = params[:mission_status]
+      @mission.save!
 
       @drone = Drone.find(@mission.drone.id)
       @drone.status = params[:drone_status]
-      @drone.save
-
-      @mission.status = params[:mission_status]
-      @mission.save
+      @drone.save!
 
       connection_string = @drone.connection_string
       puts "Executing command 'python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
@@ -198,6 +199,8 @@ class DroneController < ApplicationController
         # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
         Process.detach(child_pid)
       end
+
+
 
       respond_to do |format|
         if @mission.update(drone_params)
@@ -315,7 +318,7 @@ class DroneController < ApplicationController
   end
 
   def drone_params
-    params.permit(:name, :status, :description, :connection_string )
+    params.permit(:name, :status, :description, :connection_string, :lock_version )
   end
 
   def user_params

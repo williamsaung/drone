@@ -2,7 +2,7 @@ class Mission < ApplicationRecord
   belongs_to :drone
   belongs_to :location
   belongs_to :user
-
+  has_many :mission_records
 
 
   def self.search(params)
