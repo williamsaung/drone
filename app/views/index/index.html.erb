@@ -15,6 +15,69 @@
     height: 70%;
   }
 
+  .container1 {
+    padding: 10px;
+  }
+
+  .led {
+    color: #777;
+    font-weight: normal;
+    float: left;
+  }
+
+  .available {
+    float: right;
+    margin-right: 15px;
+  }
+
+  .not_available {
+    float: right;
+    margin-right: 15px;
+  }
+
+  .led-green {
+    /*margin: 0 auto;*/
+    width: 10px;
+    height: 10px;
+    background-color: #80ff00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+    display: inline-block;
+  }
+
+  .led-red {
+    /*margin: 0 auto;*/
+    width: 10px;
+    height: 10px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #ff0000 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+    display: inline-block;
+  }
+
+  #customers {
+    /*font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;*/
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+  #customers tr:hover {background-color: #ddd;}
+
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
 
 </style>
 </head>
@@ -114,7 +177,40 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
-<hr>
+
+<div class="container1">
+  <hr>
+<h1>Available Drones</h1>
+<span class="led">
+      <span class="available">
+         <span class="led-green"></span> : available
+      </span>
+      <span class="not_available">
+        <span class="led-red"></span> :  not available
+      </span>
+    </span>
+<br>
+<br>
+<table id="customers">
+  <tr>
+    <th>Drone ID and status</th>
+    <th>Battery</th>
+  </tr>
+  <tr>
+    <td><span class="led-red"></span> Drone1 </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><span class="led-red"></span> Drone2 </td>
+    <td><%= @real_battery %></td>
+  </tr>
+  <tr>
+    <td><span class="led-red"></span> Drone3 </td>
+    <td><%= @real_battery %></td>
+  </tr>
+</table>
+  <hr>
+</div>
 
 <div class="container">
 <div class="row">

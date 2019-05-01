@@ -2,6 +2,7 @@ class DroneController < ApplicationController
   before_action :authenticate_user!, only: [:index ,:drone_registration, :drone_list, :drone_create, :users_list, :ban_user, :drone_edit, :drone_update]
   before_action :check_ban
 
+
   def index
 
   end
@@ -164,14 +165,24 @@ class DroneController < ApplicationController
   end
 
   def mission_status_change
+    @missions = Mission.order("drone_id")
     @forecast = Forecast.new()
     @forecast.save
     @weather = @forecast.get_weather_data
     @current_weather = @weather.currently.icon
+    @distance = @missions.location.distance
     # puts @current_weather
+
+    @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
+    @real_battery = NavLog.where(:drone_id => 2).last.battery_level
+
+    @battery_flight_time = @sim_battery * 0.167
+    @distance_flight_time = @distance/0.9
 
     if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
       redirect_to missions_path, alert: "BAD WEATHER!"
+    elsif @battery_flight_time < @distance_flight_time
+      redirect_to missions_path, alert: "Current drone battery level is not enough!"
     else
       @mission = Mission.find(params[:id])
       gps_latitude = @mission.location.latitude
