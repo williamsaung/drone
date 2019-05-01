@@ -3,5 +3,4 @@ class Drone < ApplicationRecord
   has_many :nav_logs
   has_many :missions
 
-
 end

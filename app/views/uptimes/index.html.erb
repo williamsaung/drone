@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Uptimes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Mission</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uptimes.each do |uptime| %>
+      <tr>
+        <td><%= uptime.start_time %></td>
+        <td><%= uptime.end_time %></td>
+        <td><%= uptime.mission %></td>
+        <td><%= link_to 'Show', uptime %></td>
+        <td><%= link_to 'Edit', edit_uptime_path(uptime) %></td>
+        <td><%= link_to 'Destroy', uptime, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Uptime', new_uptime_path %>

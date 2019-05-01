@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @uptime.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @uptime.end_time %>
+</p>
+
+<p>
+  <strong>Mission:</strong>
+  <%= @uptime.mission %>
+</p>
+
+<%= link_to 'Edit', edit_uptime_path(@uptime) %> |
+<%= link_to 'Back', uptimes_path %>

@@ -133,6 +133,7 @@ class DroneController < ApplicationController
     status.time = Time.now
     status.save
 
+
     respond_to do |format|
       if @drone.update(drone_params)
         format.html { redirect_to drone_drone_list_path, notice: 'Drone status has been updated.' }
@@ -165,7 +166,10 @@ class DroneController < ApplicationController
     end
   end
 
+
+
   def mission_status_change
+
     @forecast = Forecast.new()
     @forecast.save
     @weather = @forecast.get_weather_data
@@ -175,15 +179,22 @@ class DroneController < ApplicationController
     if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
       redirect_to missions_path, alert: "BAD WEATHER!"
     else
+
       @mission = Mission.find(params[:id])
+      @uptime = Uptime.new('mission_id' => @mission.id, 'start_time' => Time.now)
+      @uptime.save
+
       gps_latitude = @mission.location.latitude
       gps_longitude = @mission.location.longitude
+
       @mission.status = params[:mission_status]
       @mission.save!
 
       @drone = Drone.find(@mission.drone.id)
       @drone.status = params[:drone_status]
       @drone.save!
+
+
 
       connection_string = @drone.connection_string
       puts "Executing command 'python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
@@ -271,8 +282,10 @@ class DroneController < ApplicationController
   end
 
   def drone_edit
+
     @drone = Drone.find(params[:id])
   end
+
 
   def drone_update
     @drone = Drone.find(params[:id])
@@ -318,7 +331,7 @@ class DroneController < ApplicationController
   end
 
   def drone_params
-    params.permit(:name, :status, :description, :connection_string, :lock_version )
+    params.permit(:name, :status, :description, :connection_string )
   end
 
   def user_params

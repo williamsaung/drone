@@ -7,7 +7,6 @@ class MissionsController < ApplicationController
     @missions = Mission.order("drone_id")
     user = current_user
     if user.admin
-
       @missions = Mission.all
     else
       @missions = Mission.where(:user => user)
@@ -27,6 +26,10 @@ class MissionsController < ApplicationController
 
   # GET /missions/1/edit
   def edit
+  end
+
+  def endtime
+
   end
 
   def search
@@ -88,6 +91,8 @@ class MissionsController < ApplicationController
         format.json { render json: @mission.errors, status: :unprocessable_entity }
       end
     end
+  rescue ActiveRecord::StaleObjectError
+    render :conflict
   end
 
   # DELETE /missions/1

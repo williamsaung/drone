@@ -83,6 +83,7 @@
       <th>Drone</th>
       <th>Status</th>
       <th>Up Time</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -96,11 +97,13 @@
         <td><%= mission.weight %></td>
         <td><%= mission.drone.id %></td>
         <td><%= mission.status %></td>
-        <td><% if mission.status == 'Ongoing' %>
-          <% a = Time.now - mission.updated_at.in_time_zone('Asia/Bangkok')%>
-           <%= Time.at(a).utc.strftime("%H:%M:%S") %>
+        <td>
+          <% if mission.status == 'Ongoing' %>
+          <% a = Time.now - mission.updated_at.in_time_zone('Asia/Bangkok') %>
+           <%= Time.at(a).utc.strftime("%H:%M:%S")%>
           <%end %>
         </td>
+
           <td>
             <% if mission.drone.status == 'Busy' %>
           "Drone is currently on a mission"
