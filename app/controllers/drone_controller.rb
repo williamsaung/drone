@@ -25,14 +25,10 @@ class DroneController < ApplicationController
 
   def terminate_mission
     if current_user.admin
-
-
     @mission = Mission.find(params[:id])
-
     @drone = Drone.find(@mission.drone.id)
     @drone.status = params[:drone_status]
     @drone.save
-
     @mission.status = params[:mission_status]
     @mission.save
 

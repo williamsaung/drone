@@ -82,7 +82,9 @@
       <th>Weight</th>
       <th>Drone</th>
       <th>Status</th>
-      <th>Up Time</th>
+      <th>Uptime</th>
+      <th>Last Start Time</th>
+      <th>Last End Time</th>
 
       <th colspan="3"></th>
     </tr>
@@ -97,11 +99,34 @@
         <td><%= mission.weight %></td>
         <td><%= mission.drone.id %></td>
         <td><%= mission.status %></td>
+       <td>
+         <% if mission.status == 'Ongoing' %>
+         <% a = Time.now - mission.updated_at.in_time_zone('Asia/Bangkok') %>
+         <%= Time.at(a).utc.strftime("%H:%M:%S")%>
+         <%end %>
+       </td>
         <td>
-          <% if mission.status == 'Ongoing' %>
-          <% a = Time.now - mission.updated_at.in_time_zone('Asia/Bangkok') %>
-           <%= Time.at(a).utc.strftime("%H:%M:%S")%>
-          <%end %>
+          <%# if mission.status == 'Ongoing' %>
+          <%# a = Time.now - mission.updated_at.in_time_zone('Asia/Bangkok') %>
+           <%#= Time.at(a).utc.strftime("%H:%M:%S")%>
+          <%#end %>
+            <%if mission.uptimes.last.blank? %>
+            "Not Available"
+            <% else %>
+          <% a = mission.uptimes.last.start_time %>
+            <%= a.strftime("%H:%M:%S") %>
+            <% end %>
+        </td>
+
+
+
+        <td>
+          <%if mission.uptimes.last.blank? %>
+            "Not Available"
+          <% else %>
+            <%= mission.uptimes.last.end_time %>
+
+          <% end %>
         </td>
 
           <td>
@@ -111,10 +136,7 @@
          <%= link_to 'Execute Mission', drone_mission_status_change_path(:id => mission.id, :mission_status => "Ongoing", :drone_status => "Busy"), method: :put  %>
             </td>
         <%end %>
-<!--          <td> <%# if mission.status == "Ongoing" %>-->
-            <%#= link_to "done", drone_done_path(:id => mission.id, :drone_status => "Available", :mission_status => "done" ), method: :put %>
-          <%#end %>
-<!--        </td>-->
+
 
           <td> <% if mission.status == "Ongoing" %>
               <%= link_to "tracking", drone_drone_tracker_path(drone: mission.drone.id) %>
