@@ -126,9 +126,9 @@
         <h4 class="heading"><strong>Drone </strong> Edit <span></span></h4>
         <div class="form">
           <%= form_tag("/drone/#{@drone.id}/drone_edit", method: "patch", class: 'registration_form') do  %>
-              <input type="text" id="name" required="" placeholder="Please input Drone's Name" value="" name="name" class="txt">
-              <input type="text" id="description" required="" placeholder="Please input Drone's Description" value="" name="description" class="txt">
-              <input type="text" id="connection_string" required="" placeholder="Please input Connection String" value="" name="connection_string" class="txt">
+              <input type="text" id="name" required="" placeholder="Drone Name" value="" name="name" class="txt">
+              <input type="text" id="description" required="" placeholder="Drone Description" value="" name="description" class="txt">
+              <input type="text" id="connection_string" required="" placeholder="Connection String" value="" name="connection_string" class="txt">
               <small id="emailHelp" class="form-text text-muted">The connection to use when connecting to the drone instance</small>
               <hr>
               <input type="submit" value="Register" name="commit" class="txt2">

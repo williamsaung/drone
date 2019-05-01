@@ -7,11 +7,11 @@ class MissionsController < ApplicationController
     @missions = Mission.order("drone_id")
     user = current_user
     if user.admin
-
       @missions = Mission.all
     else
       @missions = Mission.where(:user => user)
     end
+
   end
 
   # GET /missions/1
@@ -26,6 +26,10 @@ class MissionsController < ApplicationController
 
   # GET /missions/1/edit
   def edit
+  end
+
+  def endtime
+
   end
 
   def search
@@ -87,6 +91,8 @@ class MissionsController < ApplicationController
         format.json { render json: @mission.errors, status: :unprocessable_entity }
       end
     end
+  rescue ActiveRecord::StaleObjectError
+    render :conflict
   end
 
   # DELETE /missions/1
@@ -114,7 +120,7 @@ class MissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mission_params
-      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id, :user_id)
+      params.require(:mission).permit(:name, :location_id, :weight, :drone_id, :status, :mission_id, :user_id, :lock_version)
     end
 end
 

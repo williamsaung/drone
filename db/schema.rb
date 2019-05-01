@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_05_01_140134) do
+# ActiveRecord::Schema.define(version: 2019_05_01_100348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_140134) do
     t.string "connection_string"
     t.string "description"
     t.boolean "simulator"
+    t.integer "lock_version", default: 0, null: false
     t.index ["user_id"], name: "index_drones_on_user_id"
   end
 
@@ -80,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_140134) do
     t.integer "mission_id"
     t.bigint "user_id"
     t.string "mission_type"
+    t.integer "lock_version", default: 0, null: false
     t.index ["drone_id"], name: "index_missions_on_drone_id"
     t.index ["user_id"], name: "index_missions_on_user_id"
   end
@@ -120,6 +123,15 @@ ActiveRecord::Schema.define(version: 2019_05_01_140134) do
     t.index ["drone_id"], name: "index_status_logs_on_drone_id"
   end
 
+  create_table "uptimes", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.bigint "mission_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_id"], name: "index_uptimes_on_mission_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -143,4 +155,5 @@ ActiveRecord::Schema.define(version: 2019_05_01_140134) do
   add_foreign_key "nav_logs", "drones"
   add_foreign_key "posts", "users"
   add_foreign_key "status_logs", "drones"
+  add_foreign_key "uptimes", "missions"
 end

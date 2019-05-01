@@ -60,6 +60,8 @@ class DroneController < ApplicationController
     @drone = Drone.find(params[:drone])
     @nav_logs = NavLog.where(drone:@drone)
 
+
+
       @gps_latitude= @nav_logs.last.gps_latitude
       @gps_longitude= @nav_logs.last.gps_longitude
       @altitude= @nav_logs.last.altitude
@@ -132,6 +134,7 @@ class DroneController < ApplicationController
     status.time = Time.now
     status.save
 
+
     respond_to do |format|
       if @drone.update(drone_params)
         format.html { redirect_to drone_drone_list_path, notice: 'Drone status has been updated.' }
@@ -164,8 +167,11 @@ class DroneController < ApplicationController
     end
   end
 
+
+
   def mission_status_change
     @missions = Mission.order("drone_id")
+
     @forecast = Forecast.new()
     @forecast.save
     @weather = @forecast.get_weather_data
@@ -184,16 +190,22 @@ class DroneController < ApplicationController
     elsif @battery_flight_time < @distance_flight_time
       redirect_to missions_path, alert: "Current drone battery level is not enough!"
     else
+
       @mission = Mission.find(params[:id])
+      @uptime = Uptime.new('mission_id' => @mission.id, 'start_time' => Time.now)
+      @uptime.save
+
       gps_latitude = @mission.location.latitude
       gps_longitude = @mission.location.longitude
 
+      @mission.status = params[:mission_status]
+      @mission.save!
+
       @drone = Drone.find(@mission.drone.id)
       @drone.status = params[:drone_status]
-      @drone.save
+      @drone.save!
 
-      @mission.status = params[:mission_status]
-      @mission.save
+
 
       connection_string = @drone.connection_string
       puts "Executing command 'python ~/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude}'"
@@ -209,6 +221,8 @@ class DroneController < ApplicationController
         # child_pid = spawn({"PATH" => "/home/adam/.pyenv/shims:/home/adam/.pyenv/bin:/home/adam/.rbenv/plugins/ruby-build/bin:/home/adam/.rbenv/shims:/home/adam/.rbenv/bin:/home/adam/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/adam/.local/bin"}, "python ~/drone/drone-comms/drone/mission.py #{connection_string} #{gps_latitude} #{gps_longitude} #{@mission.id} --drone_id #{@drone.id}")
         Process.detach(child_pid)
       end
+
+
 
       respond_to do |format|
         if @mission.update(drone_params)
@@ -279,8 +293,10 @@ class DroneController < ApplicationController
   end
 
   def drone_edit
+
     @drone = Drone.find(params[:id])
   end
+
 
   def drone_update
     @drone = Drone.find(params[:id])

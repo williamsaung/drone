@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MissionRecordTest < ActiveSupport::TestCase
+class UptimeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

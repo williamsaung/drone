@@ -1,0 +1,32 @@
+<%= form_with(model: uptime, local: true) do |form| %>
+  <% if uptime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(uptime.errors.count, "error") %> prohibited this uptime from being saved:</h2>
+
+      <ul>
+      <% uptime.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mission_id %>
+    <%= form.text_field :mission_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :mission_records
+  resources :uptimes
   get 'mission_records/index'
   get 'polygon/polygon'
   get 'welcome/index'
