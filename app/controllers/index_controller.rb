@@ -32,6 +32,8 @@ class IndexController < ApplicationController
       @last_location = last_mission.location.name
     end
 
-    end
+    @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
+    @real_battery = NavLog.where(:drone_id => 2).last.battery_level
+  end
   end
 
