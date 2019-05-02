@@ -184,7 +184,7 @@ class DroneController < ApplicationController
 
     # if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
     #   redirect_to missions_path, alert: "BAD WEATHER!"
-    if @battery_flight_time < @distance_flight_time
+    if @battery_flight_time > @distance_flight_time
       redirect_to missions_path, alert: "Current drone battery level is not enough!"
     else
 
