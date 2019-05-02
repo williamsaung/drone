@@ -178,7 +178,7 @@ class DroneController < ApplicationController
     @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
     @real_battery = NavLog.where(:drone_id => 2).last.battery_level
 
-    @battery_flight_time = @sim_battery * 0.17647
+    @battery_flight_time = (@sim_battery-20) * 0.17647
     @distance_flight_time = @distance/120
 
 
