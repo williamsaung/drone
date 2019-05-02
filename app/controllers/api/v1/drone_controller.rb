@@ -78,16 +78,12 @@ module Api
         safe = true
 
         if emergency_missions.any?
-          if emergency_missions.last.status == "Ongoing"
-            safe = false
+          emergency_missions.each do |emergency_mission|
+            if emergency_mission.status == "Ongoing"
+              safe = false
+            end
           end
         end
-
-        # emergency_missions.each do |emergency_mission|
-        #   if emergency_mission.status == "Ongoing"
-        #     safe = false
-        #   end
-        # end
 
         if safe
           child_pid = spawn({"PATH" => "/home/ubuntu/.pyenv/shims:/home/ubuntu/.pyenv/bin:/home/ubuntu/.rbenv/plugins/ruby-build/bin:/home/ubuntu/.rbenv/shims:/home/ubuntu/.rbenv/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.local/bin"}, "python ~/drone-comms/drone/thrift/delivery.py #{params[:latitude]} #{params[:longitude]} 20 #{@mission.id} --drone_id #{@drone.id}")
