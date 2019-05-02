@@ -28,11 +28,13 @@ Rails.application.routes.draw do
       resources :users
       resources :drone
       patch 'mission_status_change', to: 'drone#mission_status_change'
+      patch 'terminate_mission', to: 'drone#terminate_mission'
       resources :missions
       get 'users_mission', to: 'missions#users_mission'
       get 'users_mission_last', to: 'missions#users_mission_last'
       get 'ongoing_mission', to: 'missions#ongoing_mission'
       post 'emergency_mission_sim', to: 'drone#emergency_mission_sim'
+      post 'execute_emergency_mission', to: 'drone#execute_emergency_mission'
 
       resources :drone_availables
       post 'available', to: 'drone_availables#available'

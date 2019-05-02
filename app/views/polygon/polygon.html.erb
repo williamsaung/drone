@@ -103,6 +103,7 @@
 
     //Display Coordinates below map
     function getPolygonCoords() {
+        coordinates = [];
         var len = myPolygon.getPath().getLength();
         var htmlStr = "";
         for (var i = 0; i < len; i++) {
@@ -143,7 +144,7 @@
     function addhtmlStr(htmlStr) {
         console.log(JSON.stringify(htmlStr));
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "<%= Rails.application.routes.url_helpers.mission_records_path %>", true);
+        xhr.open("POST", "<%= Rails.application.routes.url_helpers.mission_records_index_path %>", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         xhr.setRequestHeader("X-CSRF-Token", CSRF.token());
         xhr.send("place=" + JSON.stringify(htmlStr));
