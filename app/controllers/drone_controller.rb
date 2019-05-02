@@ -172,14 +172,14 @@ class DroneController < ApplicationController
     @forecast.save
     @weather = @forecast.get_weather_data
     @current_weather = @weather.currently.icon
-    @distance = @missions_distance.location.distance
+    # @distance = @missions_distance.location.distance
     # puts @distance
 
     @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
     @real_battery = NavLog.where(:drone_id => 2).last.battery_level
 
-    @battery_flight_time = @sim_battery * 0.167
-    @distance_flight_time = @distance/0.9
+    # @battery_flight_time = @sim_battery * 0.167
+    # @distance_flight_time = @distance/0.9
 
 
     if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
