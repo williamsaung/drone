@@ -167,8 +167,7 @@ class DroneController < ApplicationController
 
   def mission_status_change
     # @missions = Mission.order("drone_id")
-    redirect_to missions_path, alert: "Current drone battery level is not enough!"
-    @mission_distance = Mission.find(params[:id])
+    # @mission_distance = Mission.find(params[:id])
     @forecast = Forecast.new()
     @forecast.save
     @weather = @forecast.get_weather_data
@@ -183,10 +182,10 @@ class DroneController < ApplicationController
     @distance_flight_time = @distance/0.9
 
 
-    # if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
-    #   redirect_to missions_path, alert: "BAD WEATHER!"
-    if @battery_flight_time < @distance_flight_time
-      redirect_to missions_path, alert: "Current drone battery level is not enough!"
+    if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
+      redirect_to missions_path, alert: "BAD WEATHER!"
+    # elsif @battery_flight_time < @distance_flight_time
+    #   redirect_to missions_path, alert: "Current drone battery level is not enough!"
     else
 
       @mission = Mission.find(params[:id])
