@@ -167,13 +167,14 @@ class DroneController < ApplicationController
 
   def mission_status_change
     # @missions = Mission.order("drone_id")
+    redirect_to missions_path, alert: "Current drone battery level is not enough!"
     @mission_distance = Mission.find(params[:id])
     @forecast = Forecast.new()
     @forecast.save
     @weather = @forecast.get_weather_data
     @current_weather = @weather.currently.icon
     @distance = @missions_distance.location.distance
-    puts @distance
+    # puts @distance
 
     @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
     @real_battery = NavLog.where(:drone_id => 2).last.battery_level
