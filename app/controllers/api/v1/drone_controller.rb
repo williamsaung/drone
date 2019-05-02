@@ -77,8 +77,10 @@ module Api
 
         safe = true
 
-        if emergency_missions.last.status == "Ongoing"
-          safe = false
+        if emergency_missions.any?
+          if emergency_missions.last.status == "Ongoing"
+            safe = false
+          end
         end
 
         # emergency_missions.each do |emergency_mission|
