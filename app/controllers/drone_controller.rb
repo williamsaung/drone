@@ -178,13 +178,13 @@ class DroneController < ApplicationController
     @sim_battery = NavLog.where(:drone_id => 1).last.battery_level
     @real_battery = NavLog.where(:drone_id => 2).last.battery_level
 
-    @battery_flight_time = (@sim_battery-20) * 0.17647
+    @battery_flight_time = @sim_battery * 0.17647
     @distance_flight_time = @distance/120
 
 
-    # if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
-    #   redirect_to missions_path, alert: "BAD WEATHER!"
-    if @battery_flight_time > @distance_flight_time
+    if @current_weather == "rain" || @current_weather == "snow" || @current_weather == "sleet"
+      redirect_to missions_path, alert: "BAD WEATHER!"
+    elsif @battery_flight_time < @distance_flight_time
       redirect_to missions_path, alert: "Current drone battery level is not enough!"
     else
 
