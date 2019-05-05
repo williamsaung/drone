@@ -321,7 +321,7 @@
 <hr>
 
 <div class="container">
-  <h3>Drone Details <%= link_to 'Check Status', drone_check_status_path(drone: @drone.id), class: "btn btn-primary" %></h3>
+  <h3>Drone Details <%= link_to 'Check Status', drone_check_status_path(drone: @drone.id), class: "btn btn-primary" %> <button class='btn btn-primary' onclick="loadDoc()">Request lastest data</button></h3>
   <p><b>Please make sure the drone is disarmed (not in flight) and the hardware safety switch is on.</b> Drone will emit a failure to arm sound to confirm connection.</p>
 </div>
 
@@ -348,76 +348,88 @@
 
     <tr>
       <td><strong>Last Location</strong></td>
-      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> </td>
+      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> <p id="demo3"></p>,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> <p id="demo3"></td>
     </tr>
 
     <tr>
       <td><strong>Alititude (Metre)</strong></td>
-      <td><%= @altitude.blank? ? "Not Available" : @altitude %> </td>
+      <td><%= @altitude.blank? ? "Not Available" : @altitude %><p id="demo2"></p> </td>
     </tr>
 
     <tr>
       <td><strong>Battery Voltage (Volt)</strong></td>
-      <td><%= @battery_voltage.blank? ? "Not Available" : @battery_voltage %> </td>
+      <td><%= @battery_voltage.blank? ? "Not Available" : @battery_voltage %><p id="demo5"></p> </td>
     </tr>
 
     <tr>
       <td><strong>Battery Level (Percentage)</strong></td>
-      <td><%= @battery_level.blank? ? "Not Available" : @battery_level %> </td>
+      <td><%= @battery_level.blank? ? "Not Available" : @battery_level %> <p id="demo6"></p></td>
     </tr>
 
     <tr>
       <td><strong>Battery Current (Ampere)</strong></td>
-      <td><%= @battery_current.blank? ? "Not Available" : @battery_current %> </td>
+      <td><%= @battery_current.blank? ? "Not Available" : @battery_current %> <p id="demo7"></p></td>
     </tr>
 
     <tr>
       <td><strong>EKF</strong></td>
-      <td><%= @ekf_ok.blank? ? "Not Available" : @ekf_ok %> </td>
+      <td><%= @ekf_ok.blank? ? "Not Available" : @ekf_ok %><p id="demo8"></p> </td>
     </tr>
 
     <tr>
       <td><strong>Armable?</strong></td>
-      <td><%= @is_armable.blank? ? "Not Available" : @is_armable %> </td>
+      <td><%= @is_armable.blank? ? "Not Available" : @is_armable %><p id="demo9"></p> </td>
     </tr>
 
     <tr>
       <td><strong>System Status</strong></td>
-      <td><%= @system_status.blank? ? "Not Available" : @system_status %> </td>
+      <td><%= @system_status.blank? ? "Not Available" : @system_status %><p id="demo10"></p> </td>
     </tr>
 
     <tr>
       <td><strong>Mode</strong></td>
-      <td><%= @mode.blank? ? "Not Available" : @mode %> </td>
+      <td><%= @mode.blank? ? "Not Available" : @mode %><p id="demo11"></p>  </td>
     </tr>
 
     <tr>
       <td><strong>Armed</strong></td>
-      <td><%= @armed.blank? ? "Not Available" : @armed %> </td>
+      <td><%= @armed.blank? ? "Not Available" : @armed %><p id="demo12"></p>   </td>
     </tr>
   </table>
 </div>
 <html>
 <body>
 
-<!--<h2>The XMLHttpRequest Object</h2>-->
 
-<!--<button class='btn btn-primary' onclick="loadDoc()">Request data</button>-->
 
-<!--<p id="demo"></p>-->
 
-<!--<script>-->
-<!--    function loadDoc() {-->
-<!--        var xhttp = new XMLHttpRequest();-->
-<!--        xhttp.onreadystatechange = function() {-->
-<!--            if (this.readyState == 4 && this.status == 200) {-->
-<!--                document.getElementById("demo").innerHTML = this.responseText;-->
-<!--            }-->
-<!--        };-->
-<!--        xhttp.open("GET", "/drone/nav_logs_json?drone=<%= @drone.id %>", true);-->
-<!--        xhttp.send();-->
-<!--    }-->
-<!--</script>-->
+
+
+
+<script>
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               var smth= document.getElementById("demo").innerHTML = this.responseText;
+               var obj = JSON.parse(smth)
+                 document.getElementById("demo2").innerHTML = obj.altitude;
+                 document.getElementById("demo3").innerHTML = obj.gps_latitude;
+                document.getElementById("demo4").innerHTML = obj.gps_longitude;
+                document.getElementById("demo5").innerHTML = obj.battery_voltage;
+                document.getElementById("demo6").innerHTML = obj.battery_level;
+                document.getElementById("demo7").innerHTML = obj.battery_current;
+                document.getElementById("demo8").innerHTML = obj.ekf_ok;
+                document.getElementById("demo9").innerHTML = obj.is_armable;
+                document.getElementById("demo10").innerHTML = obj.system_status;
+                document.getElementById("demo11").innerHTML = obj.mode;
+                document.getElementById("demo12").innerHTML = obj.armed;
+            }
+        };
+        xhttp.open("GET", "/drone/nav_logs_json?drone=<%= @drone.id%>", true);
+        xhttp.send();
+    }
+</script>
 
 </body>
 </html>
