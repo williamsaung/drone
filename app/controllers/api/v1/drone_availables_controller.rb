@@ -7,6 +7,7 @@ module Api
       def available
         @available = DroneAvailable.new
         @available.status = params[:status]
+        @available.save
       end
     end
   end
