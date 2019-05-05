@@ -354,8 +354,8 @@
     </tr>
 
     <tr>
-      <td><strong>Last Location</strong></td>
-      <td><strong>LATITUDE: </strong>  <p id="demo3">, <strong>LONGITUDE:</strong>  <p id="demo4"></td>
+      <td><strong>Last Location (Latitude & Longitude)</strong></td>
+      <td> <p id="demo3">,  <p id="demo4"></td>
     </tr>
 
     <tr>
@@ -390,7 +390,7 @@
 
     <tr>
       <td><strong>System Status</strong></td>
-      <td><<p id="demo10"></p> </td>
+      <td><p id="demo10"></p> </td>
     </tr>
 
     <tr>
@@ -408,32 +408,13 @@
 <body>
 
 
-<!--<h2>The XMLHttpRequest Object</h2>-->
+<div style="display:none;" id="demo13"></div>
 
-<!--<button type="button" onclick="loadDoc()">Request data</button>-->
 
-<p id="demo13"></p>
 
-<!--<p id="demo2"></p>-->
+<!--<p id="demo13"></p>-->
 
-<!--<p id="demo3"></p>-->
 
-<!--<p id="demo4"></p>-->
-
-<!--<p id="demo5"></p>-->
-
-<!--<p id="demo6"></p>-->
-<!--<p id="demo7"></p>-->
-
-<!--<p id="demo8"></p>-->
-
-<!--<p id="demo9"></p>-->
-
-<!--<p id="demo10"></p>-->
-
-<!--<p id="demo11"></p>-->
-
-<!--<p id="demo12"></p>-->
 <script>
     function loadDoc() {
         var xhttp = new XMLHttpRequest();
@@ -452,8 +433,7 @@
                 document.getElementById("demo10").innerHTML = obj.system_status;
                 document.getElementById("demo11").innerHTML = obj.mode;
                 document.getElementById("demo12").innerHTML = obj.armed;
-               var aaa= document.getElementById("demo").innerHTML = obj.drone_id;
-               console.log(aaa)
+
             }
         };
         xhttp.open("GET", "/drone/nav_logs_json?drone=<%= @drone.id%>", true);
