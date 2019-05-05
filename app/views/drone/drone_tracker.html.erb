@@ -323,6 +323,8 @@
 <div class="container">
 
   <h3>Drone Details <%= link_to 'Check Status', drone_check_status_path(drone: @drone.id), class: "btn btn-primary" %> <button class='btn btn-primary' onclick="loadDoc()">Request lastest data</button></h3>
+
+
     <%= link_to 'Release Servo', drone_release_servo_path(drone: @drone.id), class: "btn btn-primary" %>
     <%= link_to 'Lock Servo', drone_lock_servo_path(drone: @drone.id), class: "btn btn-primary" %>
   </h3>
@@ -358,7 +360,7 @@
 
     <tr>
       <td><strong>Alititude (Metre)</strong></td>
-      <td><%= @altitude.blank? ? "Not Available" : @altitude %><p id="demo2"></p> </td>
+      <td><%= @altitude.blank? ? "Not Available" : @altitude %> </td>
     </tr>
 
     <tr>
@@ -406,8 +408,13 @@
 <body>
 
 
+<h2>The XMLHttpRequest Object</h2>
 
+<button type="button" onclick="loadDoc()">Request data</button>
 
+<p id="demo"></p>
+
+<p id="demo2"></p>
 
 
 
@@ -416,19 +423,21 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               var smth= document.getElementById("demo").innerHTML = this.responseText;
+               var smth= document.getElementById("demo2").innerHTML = this.responseText;
                var obj = JSON.parse(smth)
-                 document.getElementById("demo2").innerHTML = obj.altitude;
-                 document.getElementById("demo3").innerHTML = obj.gps_latitude;
-                document.getElementById("demo4").innerHTML = obj.gps_longitude;
-                document.getElementById("demo5").innerHTML = obj.battery_voltage;
-                document.getElementById("demo6").innerHTML = obj.battery_level;
-                document.getElementById("demo7").innerHTML = obj.battery_current;
-                document.getElementById("demo8").innerHTML = obj.ekf_ok;
-                document.getElementById("demo9").innerHTML = obj.is_armable;
-                document.getElementById("demo10").innerHTML = obj.system_status;
-                document.getElementById("demo11").innerHTML = obj.mode;
-                document.getElementById("demo12").innerHTML = obj.armed;
+                //  document.getElementById("demo2").innerHTML = obj.altitude;
+                //  document.getElementById("demo3").innerHTML = obj.gps_latitude;
+                // document.getElementById("demo4").innerHTML = obj.gps_longitude;
+                // document.getElementById("demo5").innerHTML = obj.battery_voltage;
+                // document.getElementById("demo6").innerHTML = obj.battery_level;
+                // document.getElementById("demo7").innerHTML = obj.battery_current;
+                // document.getElementById("demo8").innerHTML = obj.ekf_ok;
+                // document.getElementById("demo9").innerHTML = obj.is_armable;
+                // document.getElementById("demo10").innerHTML = obj.system_status;
+                // document.getElementById("demo11").innerHTML = obj.mode;
+                // document.getElementById("demo12").innerHTML = obj.armed;
+               var aaa= document.getElementById("demo").innerHTML = obj.drone_id;
+               console.log(aaa)
             }
         };
         xhttp.open("GET", "/drone/nav_logs_json?drone=<%= @drone.id%>", true);
