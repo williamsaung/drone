@@ -355,7 +355,7 @@
 
     <tr>
       <td><strong>Last Location</strong></td>
-      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> <p id="demo3"></p>,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> <p id="demo3"></td>
+      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> <p id="demo3"></td>
     </tr>
 
     <tr>
@@ -416,7 +416,7 @@
 
 <p id="demo2"></p>
 
-
+<p id="demo3"></p>
 
 <script>
     function loadDoc() {
@@ -426,16 +426,16 @@
                var smth= document.getElementById("demo2").innerHTML = this.responseText;
                var obj = JSON.parse(smth)
                 //  document.getElementById("demo2").innerHTML = obj.altitude;
-                //  document.getElementById("demo3").innerHTML = obj.gps_latitude;
-                // document.getElementById("demo4").innerHTML = obj.gps_longitude;
-                // document.getElementById("demo5").innerHTML = obj.battery_voltage;
-                // document.getElementById("demo6").innerHTML = obj.battery_level;
-                // document.getElementById("demo7").innerHTML = obj.battery_current;
-                // document.getElementById("demo8").innerHTML = obj.ekf_ok;
-                // document.getElementById("demo9").innerHTML = obj.is_armable;
-                // document.getElementById("demo10").innerHTML = obj.system_status;
-                // document.getElementById("demo11").innerHTML = obj.mode;
-                // document.getElementById("demo12").innerHTML = obj.armed;
+                 document.getElementById("demo3").innerHTML = obj.gps_latitude;
+                document.getElementById("demo4").innerHTML = obj.gps_longitude;
+                document.getElementById("demo5").innerHTML = obj.battery_voltage;
+                document.getElementById("demo6").innerHTML = obj.battery_level;
+                document.getElementById("demo7").innerHTML = obj.battery_current;
+                document.getElementById("demo8").innerHTML = obj.ekf_ok;
+                document.getElementById("demo9").innerHTML = obj.is_armable;
+                document.getElementById("demo10").innerHTML = obj.system_status;
+                document.getElementById("demo11").innerHTML = obj.mode;
+                document.getElementById("demo12").innerHTML = obj.armed;
                var aaa= document.getElementById("demo").innerHTML = obj.drone_id;
                console.log(aaa)
             }
