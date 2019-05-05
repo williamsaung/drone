@@ -321,7 +321,12 @@
 <hr>
 
 <div class="container">
+
   <h3>Drone Details <%= link_to 'Check Status', drone_check_status_path(drone: @drone.id), class: "btn btn-primary" %> <button class='btn btn-primary' onclick="loadDoc()">Request lastest data</button></h3>
+    <%= link_to 'Release Servo', drone_release_servo_path(drone: @drone.id), class: "btn btn-primary" %>
+    <%= link_to 'Lock Servo', drone_lock_servo_path(drone: @drone.id), class: "btn btn-primary" %>
+  </h3>
+
   <p><b>Please make sure the drone is disarmed (not in flight) and the hardware safety switch is on.</b> Drone will emit a failure to arm sound to confirm connection.</p>
 </div>
 

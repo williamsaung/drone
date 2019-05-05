@@ -65,6 +65,8 @@ Rails.application.routes.draw do
 
   get 'drone/drone_tracker' => 'drone#check_status'
   put 'drone/terminate_mission'
+  get 'drone/release_servo'
+  get 'drone/lock_servo'
 
   put 'drone/mission_status_change'
   put 'drone/check_status'
