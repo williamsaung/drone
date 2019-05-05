@@ -355,11 +355,11 @@
 
     <tr>
       <td><strong>Last Location</strong></td>
-      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> ,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> <p id="demo3"></td>
+      <td><strong>LATITUDE: </strong> <%= @gps_latitude.blank? ? "Not Available" : @gps_latitude %> <p id="demo3">,<strong>LONGITUDE:</strong>  <%= @gps_longitude.blank? ? "Not Available" : @gps_longitude %> <p id="demo4"></td>
     </tr>
 
     <tr>
-      <td><strong>Alititude (Metre)</strong></td>
+      <td><strong>Alititude (Metre)</strong><p id="demo2"></p></td>
       <td><%= @altitude.blank? ? "Not Available" : @altitude %> </td>
     </tr>
 
@@ -414,34 +414,34 @@
 
 <!--<p id="demo"></p>-->
 
-<!--<p id="demo2"></p>-->
+<p id="demo2"></p>
 
-<!--<p id="demo3"></p>-->
+<p id="demo3"></p>
 
-<!--<p id="demo4"></p>-->
+<p id="demo4"></p>
 
-<!--<p id="demo5"></p>-->
+<p id="demo5"></p>
 
-<!--<p id="demo6"></p>-->
-<!--<p id="demo7"></p>-->
+<p id="demo6"></p>
+<p id="demo7"></p>
 
-<!--<p id="demo8"></p>-->
+<p id="demo8"></p>
 
-<!--<p id="demo9"></p>-->
+<p id="demo9"></p>
 
-<!--<p id="demo10"></p>-->
+<p id="demo10"></p>
 
-<!--<p id="demo11"></p>-->
+<p id="demo11"></p>
 
-<!--<p id="demo12"></p>-->
+<p id="demo12"></p>
 <script>
     function loadDoc() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               var smth= document.getElementById("demo2").innerHTML = this.responseText;
+               var smth= document.getElementById("demo13").innerHTML = this.responseText;
                var obj = JSON.parse(smth)
-                //  document.getElementById("demo2").innerHTML = obj.altitude;
+                 document.getElementById("demo2").innerHTML = obj.altitude;
                  document.getElementById("demo3").innerHTML = obj.gps_latitude;
                 document.getElementById("demo4").innerHTML = obj.gps_longitude;
                 document.getElementById("demo5").innerHTML = obj.battery_voltage;
